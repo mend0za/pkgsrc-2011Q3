@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2011/09/04 06:11:30 obache Exp $
+
+SHA1 (msgpack-python-0.1.10.tar.gz) = 099f48d5debb89e6811f7570b39954f512169866
+RMD160 (msgpack-python-0.1.10.tar.gz) = c4816c25dbb41d282fd5854692d7659373d131b4
+Size (msgpack-python-0.1.10.tar.gz) = 48917 bytes

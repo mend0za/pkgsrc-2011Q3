@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.24 2010/08/06 20:49:23 bad Exp $
+
+SHA1 (dcraw-9.04.tar.gz) = c65a0c7bb52ccdd05c2adccf4b343f4d0caab40e
+RMD160 (dcraw-9.04.tar.gz) = 6eae28242abc3aa0b222f227fb05ff6b8ff84022
+Size (dcraw-9.04.tar.gz) = 160533 bytes
+SHA1 (patch-aa) = 218fad02e1d1b2ddf89d4382b7d45504af1e8aed

@@ -1,0 +1,28 @@
+$NetBSD: patch-ab,v 1.5 2010/11/05 08:32:19 ghen Exp $
+
+--- dd_rescue.c.orig	2010-10-11 09:50:32.000000000 +0000
++++ dd_rescue.c
+@@ -87,6 +87,9 @@ _syscall6(long, splice, int, fdin, loff_
+ # endif
+ #endif
+ 
++#ifdef __DragonFly__
++#undef O_DIRECT
++#endif
+ 
+ int softbs, hardbs, syncfreq;
+ int maxerr, nrerr, reverse, dotrunc, abwrerr, sparse, nosparse;
+@@ -1127,7 +1130,12 @@ int main(int argc, char* argv[])
+ 		ipos = 0;
+ 
+ #ifdef O_DIRECT
+-	if (posix_memalign(mp, sysconf(_SC_PAGESIZE), softbs)) {
++#ifdef linux
++#define my_valloc(a, b, c)	posix_memalign((a), (b), (c))
++#else
++#define my_valloc(a, b, c)	!(*(a) = valloc((c)))
++#endif
++	if (my_valloc(mp, sysconf(_SC_PAGESIZE), softbs)) {
+ 		fplog(stderr, "dd_rescue: (fatal): allocation of aligned buffer failed!\n");
+ 		cleanup(); exit(18);
+ 	}

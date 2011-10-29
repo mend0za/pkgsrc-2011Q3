@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.3 2010/12/04 01:27:52 gdt Exp $
+
+SHA1 (bzr-gtk-0.98.0.tar.gz) = 3b1a2f3e5dbc45763ab4a69b4b4ca84bdc49a836
+RMD160 (bzr-gtk-0.98.0.tar.gz) = 5a890f24a0de55092d6892872b5ae6fec3e68165
+Size (bzr-gtk-0.98.0.tar.gz) = 243271 bytes

@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.4 2009/09/30 09:00:33 drochner Exp $
+bin/clawsker
+share/locale/es/LC_MESSAGES/clawsker.mo
+share/locale/id/LC_MESSAGES/clawsker.mo
+share/locale/it/LC_MESSAGES/clawsker.mo
+share/locale/sr/LC_MESSAGES/clawsker.mo
+share/locale/fr/LC_MESSAGES/clawsker.mo
+share/locale/sr@latin/LC_MESSAGES/clawsker.mo
+man/man1/clawsker.1

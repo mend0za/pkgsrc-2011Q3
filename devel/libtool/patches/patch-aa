@@ -1,0 +1,22 @@
+$NetBSD: patch-aa,v 1.36 2009/12/15 17:35:37 joerg Exp $
+
+--- Makefile.in.orig	2009-09-11 03:13:51.000000000 +0200
++++ Makefile.in
+@@ -1594,7 +1594,7 @@ all-am: Makefile $(INFO_DEPS) $(LTLIBRAR
+ 		config.h all-local
+ installdirs: installdirs-recursive
+ installdirs-am:
+-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(infodir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(ltdlincludedir)"; do \
++	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(ltdlincludedir)"; do \
+ 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+ 	done
+ install: $(BUILT_SOURCES)
+@@ -1658,7 +1658,7 @@ info: info-recursive
+ info-am: $(INFO_DEPS)
+ 
+ install-data-am: install-data-local install-includeHEADERS \
+-	install-info-am install-ltdlincludeHEADERS
++	install-ltdlincludeHEADERS
+ 
+ install-dvi: install-dvi-recursive
+ 

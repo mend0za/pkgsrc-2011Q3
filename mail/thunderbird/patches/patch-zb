@@ -1,0 +1,15 @@
+$NetBSD: patch-zb,v 1.2 2011/08/19 14:39:10 tnn Exp $
+
+--- mail/app/Makefile.in.orig	2011-08-12 13:52:04.000000000 +0000
++++ mail/app/Makefile.in
+@@ -117,6 +117,10 @@ TK_LIBS := -framework SystemConfiguratio
+ endif
+ endif
+ 
++ifeq ($(OS_ARCH),NetBSD)
++LIBS += -lossaudio
++endif
++
+ APP_XPCOM_LIBS = $(XPCOM_GLUE_LDOPTS)
+ 
+ LIBS += \

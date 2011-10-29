@@ -1,0 +1,42 @@
+$NetBSD: patch-aq,v 1.5 2011/06/09 09:17:27 jnemeth Exp $
+
+--- configure.orig	2011-01-27 17:03:01.000000000 +0000
++++ configure
+@@ -16429,6 +16429,17 @@ fi
+ 
+ 
+ 
++ac_fn_c_check_header_mongrel "$LINENO" "sys/atomic.h" "ac_cv_header_sys_atomic_h" "$ac_includes_default"
++if test "x$ac_cv_header_sys_atomic_h" = x""yes; then :
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_SYS_ATOMIC_H 1
++_ACEOF
++
++fi
++
++
++
+ # The cast to long int works around a bug in the HP C Compiler
+ # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
+ # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
+@@ -17540,6 +17551,8 @@ $as_echo_n "checking if \"struct ifaddrs
+ 
+ 	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
++ #include <sys/types.h>
++ #include <sys/socket.h>
+  #include <ifaddrs.h>
+ int
+ main ()
+@@ -28885,9 +28898,8 @@ if test "x$ac_cv_file__sbin_launchd" = x
+ 
+ $as_echo "#define HAVE_SBIN_LAUNCHD 1" >>confdefs.h
+ 
++PBX_LAUNCHD=1
+ fi
+-
+-  PBX_LAUNCHD=1
+ fi
+ 
+ 

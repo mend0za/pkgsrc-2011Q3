@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.20 2011/08/15 04:22:56 obache Exp $
+
+SHA1 (Module-Build-0.3800.tar.gz) = b5da5631b3ae8afaf558caa2afec1a85da6d20dc
+RMD160 (Module-Build-0.3800.tar.gz) = c520ecd73e378600f5d9d9206d9203efc9245849
+Size (Module-Build-0.3800.tar.gz) = 305459 bytes

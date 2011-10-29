@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.10 2009/11/10 11:15:12 wiz Exp $
+
+SHA1 (ptlib-2.6.5.tar.bz2) = 919487aee09d5a1ea5c4f0abdc01bc49d9dcb596
+RMD160 (ptlib-2.6.5.tar.bz2) = ab2f8897b64ab7b1eb9fecc35470ce09af42bcf2
+Size (ptlib-2.6.5.tar.bz2) = 3302864 bytes

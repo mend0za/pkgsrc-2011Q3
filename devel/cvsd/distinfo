@@ -1,0 +1,9 @@
+$NetBSD: distinfo,v 1.5 2009/11/19 17:13:24 schnoebe Exp $
+
+SHA1 (cvsd-1.0.16.tar.gz) = 69f7dbee69eaab61cea232e0f01cf5a87b8e518f
+RMD160 (cvsd-1.0.16.tar.gz) = 08b8d5bf626a95f3465083c6b9e5f10f2763071d
+Size (cvsd-1.0.16.tar.gz) = 234898 bytes
+SHA1 (patch-aa) = 8cef69eb184abdbea08314243c124ef0715bb275
+SHA1 (patch-ab) = 5a6c8046234edff271d521912eadf8bc8ebd294e
+SHA1 (patch-ac) = edfc916c6e475ecdb37ef59494d69cbd0d3df34c
+SHA1 (patch-ad) = 6a60053187293687214d3565c5a6e1d373e5862f

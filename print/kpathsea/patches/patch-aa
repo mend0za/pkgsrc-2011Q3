@@ -1,0 +1,50 @@
+$NetBSD: patch-aa,v 1.8 2011/07/28 04:25:06 minskim Exp $
+
+Set paths to texmf trees for pkgsrc.
+
+--- texmf.cnf.orig	2011-06-18 22:10:46.000000000 +0000
++++ texmf.cnf
+@@ -49,7 +49,7 @@
+ % (http://tug.org/tds), or files may not be found.
+ %
+ % Redistributors will probably want $SELFAUTODIR/share, i.e., /usr/share.
+-TEXMFROOT = $SELFAUTOPARENT
++TEXMFROOT = $SELFAUTODIR/share
+ 
+ % The tree containing runtime files related to the specific
+ % distribution and version.
+@@ -59,13 +59,13 @@ TEXMFMAIN = $TEXMFROOT/texmf
+ TEXMFDIST = $TEXMFROOT/texmf-dist
+ 
+ % Local additions to the distribution trees.
+-TEXMFLOCAL = $TEXMFROOT/../texmf-local
++TEXMFLOCAL = @TEXMFLOCAL@
+ 
+ % TEXMFSYSVAR, where *-sys store cached runtime data.
+-TEXMFSYSVAR = $TEXMFROOT/texmf-var
++TEXMFSYSVAR = @VARBASE@/lib/texmf
+ 
+ % TEXMFSYSCONFIG, where *-sys store configuration data.
+-TEXMFSYSCONFIG = $TEXMFROOT/texmf-config
++TEXMFSYSCONFIG = @PKG_SYSCONFDIR@
+ 
+ % Per-user texmf tree(s) -- organized per the TDS, as usual.  To define
+ % more than one per-user tree, set this to a list of directories in
+@@ -111,7 +111,7 @@ SYSTEXMF = $TEXMFSYSVAR;$TEXMFMAIN;$TEXM
+ % Where generated fonts may be written.  This tree is used when the sources
+ % were found in a system tree and either that tree wasn't writable, or the
+ % varfonts feature was enabled in MT_FEATURES in mktex.cnf.
+-VARTEXFONTS = $TEXMFVAR/fonts
++VARTEXFONTS = $TEXMFSYSVAR/fonts
+ 
+ % On some systems, there will be a system tree which contains all the font
+ % files that may be created as well as the formats.  For example
+@@ -442,7 +442,7 @@ RUBYINPUTS   = .;$TEXMF/scripts/{$progna
+ % 
+ % For security reasons, it is better not to include . in this path.
+ %
+-TEXMFCNF = {$SELFAUTOLOC,$SELFAUTODIR,$SELFAUTOPARENT}{,{/share,}/texmf{-local,}/web2c}
++TEXMFCNF = @PKG_SYSCONFDIR@
+ 
+ % kpathsea 3.5.3 and later sets these at runtime. To avoid empty
+ % expansions from binaries linked against an earlier version of the

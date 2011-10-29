@@ -1,0 +1,17 @@
+$NetBSD: patch-aa,v 1.2 2010/06/02 12:39:44 adam Exp $
+
+--- configure.orig	2010-04-13 01:23:37.000000000 +0000
++++ configure
+@@ -23861,9 +23861,9 @@ test -z "${with_db+set}" && with_db=yes
+ 
+ { $as_echo "$as_me:$LINENO: checking for BerkeleyDB library" >&5
+ $as_echo_n "checking for BerkeleyDB library... " >&6; }
+-if test "$DB_DIR" -a "$with_db" = yes; then
+-    CPPFLAGS="$CPPFLAGS "'-I$(top_builddir)/'"$DB_DIR/dist"
+-    DB_LIB='$(top_builddir)/'"$DB_DIR/dist/.libs/libdb-*.a"
++if true; then
++    DB_DIR="${prefix}"
++    DB_LIB="-l${BDB_TYPE}"
+     { $as_echo "$as_me:$LINENO: result: using distribution in $DB_DIR subdirectory" >&5
+ $as_echo "using distribution in $DB_DIR subdirectory" >&6; }
+ elif test x"$with_db" != xno; then

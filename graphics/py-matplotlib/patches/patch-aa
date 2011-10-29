@@ -1,0 +1,18 @@
+$NetBSD: patch-aa,v 1.8 2011/02/17 10:33:37 markd Exp $
+
+--- setupext.py.orig	2010-07-07 01:41:55.000000000 +0000
++++ setupext.py
+@@ -344,11 +344,8 @@ def check_for_libpng():
+     return True
+ 
+ def add_base_flags(module):
+-    incdirs = filter(os.path.exists,
+-                     [os.path.join(p, 'include') for p in basedirlist ])
+-    libdirs = filter(os.path.exists,
+-                     [os.path.join(p, 'lib')     for p in basedirlist ]+
+-                     [os.path.join(p, 'lib64')     for p in basedirlist ] )
++    incdirs = [os.path.join(os.environ['LOCALBASE'], 'include')]
++    libdirs = [os.path.join(os.environ['LOCALBASE'], 'lib')]
+ 
+     module.include_dirs.extend(incdirs)
+     module.include_dirs.append('.')

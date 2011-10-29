@@ -1,0 +1,75 @@
+$NetBSD: patch-ab,v 1.27 2011/04/25 14:01:40 kefren Exp $
+--- configure.orig	2011-02-23 21:34:00.000000000 +0200
++++ configure	2011-04-25 12:37:59.000000000 +0300
+@@ -3123,7 +3123,7 @@
+ 		host_win32=yes
+ 		if test "x$cross_compiling" = "xno"; then
+ 			target_win32=yes
+-			if test "x$host" == "x$build"; then
++			if test "x$host" = "x$build"; then
+ 
+ cat >>confdefs.h <<\_ACEOF
+ #define TARGET_WIN32 1
+@@ -3171,12 +3171,15 @@
+ 		CPPFLAGS="$CPPFLAGS -DPLATFORM_BSD"
+ 		libmono_ldflags="-pthread"
+ 		need_link_unlink=yes
+-		libdl="-ldl"
++		libdl="-ldl /libexec/ld.elf_so"
+ 		libgc_threads=pthreads
+ 		with_sigaltstack=no
+ 		use_sigposix=yes
++		cat >>confdefs.h <<\_ACEOF
++#define PTHREAD_POINTER_ID 1
++_ACEOF
+ 		;;
+-	*-*-*freebsd*)
++	*-*-*freebsd* | *-*-*dragonfly*)
+ 		host_win32=no
+ 		if test "x$PTHREAD_CFLAGS" = "x"; then
+ 			CPPFLAGS="$CPPFLAGS -DGC_FREEBSD_THREADS"
+@@ -3192,7 +3195,8 @@
+ 			LDFLAGS="$LDFLAGS $PTHREAD_LIBS"
+ 			libmono_ldflags="$PTHREAD_LIBS"
+ 		fi
+-		CPPFLAGS="$CPPFLAGS -DPLATFORM_BSD"
++		CPPFLAGS="$CPPFLAGS -DPLATFORM_BSD -DPLATFORM_BSD6 -D_GNU_SOURCE -D_REENTRANT -DUSE_MMAP -DUSE_MUNMAP"
++		libmono_cflags="$libmono_cflags -D_REENTRANT"
+ 		need_link_unlink=yes
+ 
+ cat >>confdefs.h <<\_ACEOF
+@@ -28838,6 +28842,9 @@
+ /* end confdefs.h.  */
+ $ac_includes_default
+ #include <$ac_header>
++#ifdef __DragonFly__
++#error extattr
++#endif
+ _ACEOF
+ rm -f conftest.$ac_objext
+ if { (ac_try="$ac_compile"
+@@ -39018,7 +39025,7 @@
+ INTL="libc.so.6"
+ SQLITE="libsqlite.so.0"
+ SQLITE3="libsqlite3.so.0"
+-X11="libX11.so"
++X11="@X11BASE@/lib/libX11.so"
+ 
+ sizeof_register="SIZEOF_VOID_P"
+ 
+@@ -39646,10 +39653,12 @@
+ 	X11="libX11.dylib"
+ 	;;
+      *-*-*netbsd*)
+-	LIBC="libc.so.12"
+-	INTL="libintl.so.0"
++	LIBC="libc.so"
++	INTL="libintl.so"
++	SQLITE="libsqlite.so"
++	SQLITE3="libsqlite3.so"
+ 	;;
+-    *-*-*freebsd*)
++    *-*-*freebsd* | *-*-*dragonfly*)
+     	LIBC="libc.so"
+ 	INTL="libintl.so"
+ 	SQLITE="libsqlite.so"

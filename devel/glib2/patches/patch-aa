@@ -1,0 +1,244 @@
+$NetBSD: patch-aa,v 1.50 2010/11/02 14:52:24 drochner Exp $
+
+--- configure.orig	2010-09-27 16:10:14.000000000 +0000
++++ configure
+@@ -828,6 +828,7 @@ GIO
+ GSPAWN
+ GLIB_DEBUG_FLAGS
+ G_MODULE_NEED_USCORE
++G_MODULE_BROKEN_DLOPEN_NULL
+ G_MODULE_BROKEN_RTLD_GLOBAL
+ G_MODULE_HAVE_DLERROR
+ G_MODULE_LDFLAGS
+@@ -21584,8 +21585,8 @@ else
+ fi
+ 
+ 
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler" >&5
+-$as_echo_n "checking whether using Sun Studio C compiler... " >&6; }
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler visibilily" >&5
++$as_echo_n "checking whether using Sun Studio C compiler visibilily... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #if defined(__SUNPRO_C) || (__SUNPRO_C >= 0x550)
+@@ -22829,16 +22830,48 @@ fi
+ 
+ case $host in
+   *-*-solaris* )
++    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler with C99" >&5
++$as_echo_n "checking whether using Sun Studio C compiler with C99... " >&6; }
++    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++#if defined(__STDC_VERSION__) || (__STDC_VERSION__ - 0 >= 199901L)
++#else
++# include "error: this is STD C99."
++#endif
++
++int
++main ()
++{
++
++  ;
++  return 0;
++}
++_ACEOF
++if ac_fn_c_try_compile "$LINENO"; then :
++   g_have_sunstudio_c99=yes
++else
++   g_have_sunstudio_c99=no
++fi
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $g_have_sunstudio_c99" >&5
++$as_echo "$g_have_sunstudio_c99" >&6; }
++    if test $g_have_sunstudio_c99 = yes; then
++
++$as_echo "#define _XOPEN_SOURCE 600" >>confdefs.h
++
++    else
+ 
+ $as_echo "#define _XOPEN_SOURCE_EXTENDED 1" >>confdefs.h
+ 
+ 
+ $as_echo "#define _XOPEN_SOURCE 2" >>confdefs.h
+ 
++    fi
++
+ 
+ $as_echo "#define __EXTENSIONS__ 1" >>confdefs.h
+ 
+-     ;;
++    ;;
+ esac
+ 
+ if test "$ac_cv_func_statfs" = yes ; then
+@@ -23844,10 +23877,11 @@ if test x"$glib_native_win32" = xyes; th
+     G_MODULE_LDFLAGS=
+ else
+   export SED
+-  G_MODULE_LDFLAGS=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
++  G_MODULE_LDFLAGS=`(libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
+ fi
+ G_MODULE_NEED_USCORE=0
+ G_MODULE_BROKEN_RTLD_GLOBAL=0
++G_MODULE_BROKEN_DLOPEN_NULL=0
+ G_MODULE_HAVE_DLERROR=0
+ if test -z "$G_MODULE_IMPL"; then
+   case "$host" in
+@@ -24054,7 +24088,7 @@ if test "$G_MODULE_IMPL" = "G_MODULE_IMP
+ 	LIBS="$G_MODULE_LIBS $LIBS"
+ 	LDFLAGS="$LDFLAGS $G_MODULE_LDFLAGS"
+ 	echo "void glib_plugin_test(void) { }" > plugin.c
+-	${SHELL} ./libtool --mode=compile ${CC} -shared \
++	${SHELL} libtool --mode=compile ${CC} -shared \
+ 		-export-dynamic -o plugin.o plugin.c 2>&1 >/dev/null
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for RTLD_GLOBAL brokenness" >&5
+ $as_echo_n "checking for RTLD_GLOBAL brokenness... " >&6; }
+@@ -24164,6 +24198,56 @@ fi
+ 
+ 	LIBS="$LIBS_orig"
+ fi
++	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen(NULL, 0) brokenness" >&5
++$as_echo_n "checking for dlopen(NULL, 0) brokenness... " >&6; }
++if test "${glib_cv_dlopennull_broken+set}" = set; then :
++  $as_echo_n "(cached) " >&6
++else
++
++		if test "$cross_compiling" = yes; then :
++  glib_cv_dlopennull_broken=no
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
++#include <stdio.h>
++#include <dlfcn.h>
++#ifndef RTLD_GLOBAL
++#  define RTLD_GLOBAL 0
++#endif
++#ifndef RTLD_LAZY
++#  define RTLD_LAZY 0
++#endif
++int gettext;
++int main () {
++    void *handle;
++    handle = dlopen ("libm.so", RTLD_GLOBAL | RTLD_LAZY);
++    if (!handle) return 0;
++    handle = dlopen (NULL, 0);
++    if (!handle) return 0;
++    handle = dlsym (handle, "sin");
++    return handle == NULL;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  glib_cv_dlopennull_broken=no
++else
++  glib_cv_dlopennull_broken=yes
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++
++fi
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $glib_cv_dlopennull_broken" >&5
++$as_echo "$glib_cv_dlopennull_broken" >&6; }
++	if test "x$glib_cv_dlopennull_broken" = "xyes"; then
++		G_MODULE_BROKEN_DLOPEN_NULL=1
++	else
++		G_MODULE_BROKEN_DLOPEN_NULL=0
++	fi
+ if test -z "$G_MODULE_IMPL"; then
+ 	G_MODULE_IMPL=0
+         G_MODULE_SUPPORTED=false
+@@ -24174,7 +24258,7 @@ fi
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for the suffix of module shared libraries" >&5
+ $as_echo_n "checking for the suffix of module shared libraries... " >&6; }
+ export SED
+-shrext_cmds=`./libtool --config | grep '^shrext_cmds='`
++shrext_cmds=`libtool --config | grep '^shrext_cmds='`
+ eval $shrext_cmds
+ module=yes eval std_shrext=$shrext_cmds
+ # chop the initial dot
+@@ -24198,6 +24282,8 @@ fi
+ 
+ 
+ 
++
++
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for gspawn implementation" >&5
+ $as_echo_n "checking for gspawn implementation... " >&6; }
+ case "$host" in
+@@ -24946,62 +25032,8 @@ if test x"$have_threads" != xno; then
+         G_THREAD_LIBS="-lpthread -lthread"
+         ;;
+       *)
+-        for flag in pthread pthreads mt; do
+-          glib_save_CFLAGS="$CFLAGS"
+-          CFLAGS="$CFLAGS -$flag"
+-          if test "$cross_compiling" = yes; then :
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-#include <pthread.h>
+-int check_me = 0;
+-void* func(void* data) {check_me = 42; return &check_me;}
+-int main()
+- { pthread_t t;
+-   void *ret;
+-   pthread_create (&t, 0, func, 0);
+-   pthread_join (t, &ret);
+-   return (check_me != 42 || ret != &check_me);
+-}
+-_ACEOF
+-if ac_fn_c_try_link "$LINENO"; then :
+-  glib_flag_works=yes
+-else
+-  glib_flag_works=no
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext conftest.$ac_ext
+-else
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-#include <pthread.h>
+-int check_me = 0;
+-void* func(void* data) {check_me = 42; return &check_me;}
+-int main()
+- { pthread_t t;
+-   void *ret;
+-   pthread_create (&t, 0, func, 0);
+-   pthread_join (t, &ret);
+-   return (check_me != 42 || ret != &check_me);
+-}
+-_ACEOF
+-if ac_fn_c_try_run "$LINENO"; then :
+-  glib_flag_works=yes
+-else
+-  glib_flag_works=no
+-fi
+-rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+-  conftest.$ac_objext conftest.beam conftest.$ac_ext
+-fi
+-
+-          CFLAGS="$glib_save_CFLAGS"
+-          if test $glib_flag_works = yes ; then
+-             G_THREAD_CFLAGS=-$flag
+-	     G_THREAD_LIBS=-$flag
+-	     break;
+-          fi
+-        done
++	G_THREAD_LIBS="${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}"
++	G_THREAD_CFLAGS="${PTHREAD_CFLAGS}"
+          ;;
+     esac
+   fi
+@@ -27599,7 +27631,7 @@ rm -f core conftest.err conftest.$ac_obj
+ fi
+ 
+ 
+-if test "x${enable_Bsymbolic}" == "xyes"; then
++if test "x${enable_Bsymbolic}" = "xyes"; then
+   GLIB_LINK_FLAGS=-Wl,-Bsymbolic-functions
+ fi
+ 

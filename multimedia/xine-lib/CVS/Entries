@@ -1,0 +1,16 @@
+/DESCR/1.1.1.1/Mon Jan 26 13:03:38 2004//Tpkgsrc-2011Q3
+/MESSAGE.i386/1.2/Tue Oct 17 22:45:03 2006//Tpkgsrc-2011Q3
+/Makefile/1.87/Tue Sep 20 16:47:57 2011//Tpkgsrc-2011Q3
+/Makefile.common/1.67/Sun Jul 10 16:52:24 2011//Tpkgsrc-2011Q3
+/PLIST.DragonFly/1.5/Thu Apr 24 12:32:22 2008//Tpkgsrc-2011Q3
+/PLIST.FreeBSD/1.6/Thu Apr 24 12:32:22 2008//Tpkgsrc-2011Q3
+/PLIST.Linux/1.14/Fri Jun 25 22:05:53 2010//Tpkgsrc-2011Q3
+/PLIST.NetBSD/1.10/Thu Apr 24 12:32:22 2008//Tpkgsrc-2011Q3
+/PLIST.SunOS/1.7/Wed Sep 14 17:25:32 2011//Tpkgsrc-2011Q3
+/PLIST.common/1.31/Thu Dec 23 10:46:05 2010//Tpkgsrc-2011Q3
+/PLIST.common_end/1.13/Sun Jun 14 20:53:26 2009//Tpkgsrc-2011Q3
+/PLIST.i386/1.8/Thu Apr 24 12:32:22 2008//Tpkgsrc-2011Q3
+/buildlink3.mk/1.22/Fri Mar 20 19:25:06 2009//Tpkgsrc-2011Q3
+/distinfo/1.73/Sun Sep  4 14:34:52 2011//Tpkgsrc-2011Q3
+D/patches////
+D

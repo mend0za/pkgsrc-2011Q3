@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.6 2011/04/15 16:32:33 drochner Exp $
+
+SHA1 (lyx-1.6.9.tar.bz2) = a1acacc8a26546542e32977ae222e811c98b1ca4
+RMD160 (lyx-1.6.9.tar.bz2) = 30e37efc4c9cf3d335e78a1a1940dba2a0df1645
+Size (lyx-1.6.9.tar.bz2) = 12560174 bytes
+SHA1 (patch-development_MacOSX_Makefile.in) = ae9e51e3458f8986ae392b146f8684305b7fe25b

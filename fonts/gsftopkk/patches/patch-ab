@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.2 2010/09/13 04:21:26 minskim Exp $
+
+--- Makefile.in.orig	2010-02-22 12:09:38.000000000 +0000
++++ Makefile.in
+@@ -258,7 +258,7 @@ gsftopk_SOURCES = \
+ DISTCLEANFILES = gsftopk.1 sedscript
+ LDADD = $(KPATHSEA_LIBS)
+ dist_gsftopkpsheader_DATA = render.ps
+-gsftopkpsheaderdir = ${prefix}/texmf/dvips/gsftopk
++gsftopkpsheaderdir = ${prefix}/share/texmf/dvips/gsftopk
+ nodist_man1_MANS = gsftopk.1
+ EXTRA_DIST = gsftopk1.sed mksedscript
+ all: c-auto.h

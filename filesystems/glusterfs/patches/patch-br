@@ -1,0 +1,50 @@
+--- xlators/storage/posix/src/posix.c.orig	2011-08-23 14:31:42.000000000 +0200
++++ xlators/storage/posix/src/posix.c	2011-09-17 15:45:30.000000000 +0200
+@@ -36,8 +36,12 @@
+ #ifndef GF_BSD_HOST_OS
+ #include <alloca.h>
+ #endif /* GF_BSD_HOST_OS */
+ 
++#ifdef HAVE_LINKAT
++#include <fcntl.h>
++#endif /* HAVE_LINKAT */
++
+ #include "glusterfs.h"
+ #include "md5.h"
+ #include "checksum.h"
+ #include "dict.h"
+@@ -1232,8 +1236,13 @@
+                         loc->path, strerror (op_errno));
+                 goto out;
+         }
+ 
++#ifdef __NetBSD__
++	if (S_ISFIFO(mode))
++		op_ret = mkfifo (real_path, mode);
++	else
++#endif /* __NetBSD__ */
+         op_ret = mknod (real_path, mode, dev);
+ 
+         if (op_ret == -1) {
+                 op_errno = errno;
+@@ -2125,9 +2134,20 @@
+                         newparentpath, strerror (op_errno));
+                 goto out;
+         }
+ 
++#ifdef HAVE_LINKAT
++	/*
++	 * On most systems (Linux being the notable exception), link(2)
++	 * first resolves symlinks. If the target is a directory or
++	 * is nonexistent, it will fail. linkat(2) operates on the 
++	 * symlink instead of its target when the AT_SYMLINK_FOLLOW
++	 * flag is not supplied.
++	 */
++        op_ret = linkat (AT_FDCWD, real_oldpath, AT_FDCWD, real_newpath, 0);
++#else
+         op_ret = link (real_oldpath, real_newpath);
++#endif
+         if (op_ret == -1) {
+                 op_errno = errno;
+                 gf_log (this->name, GF_LOG_ERROR,
+                         "link %s to %s failed: %s",

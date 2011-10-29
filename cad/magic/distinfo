@@ -1,0 +1,16 @@
+$NetBSD: distinfo,v 1.13 2010/12/23 07:47:18 obache Exp $
+
+SHA1 (magic-7.5.188.tgz) = f7a8dfb90f1d1416bdaf4b056972bc6d406c75d4
+RMD160 (magic-7.5.188.tgz) = b677df676ba2aa9f9e9b211445d577a85a309e27
+Size (magic-7.5.188.tgz) = 3691582 bytes
+SHA1 (patch-aa) = 689d451b1322ebeffb604e8d336c2a559359a97b
+SHA1 (patch-ab) = d63a0c36bdaa81979f2ec58ab459fdd900aa2a14
+SHA1 (patch-ac) = 133d924663b0866c011ae98e7c54c0587723f167
+SHA1 (patch-ad) = a6882499d36a5171dc30274bd2e3e2cd2683e005
+SHA1 (patch-ae) = a07c2f7600e93abc133847d614be27e674f4a54f
+SHA1 (patch-af) = e014e55c6e716faa850bcad02c3b51edfef3bfc5
+SHA1 (patch-ag) = a720eb0140b387cde6091a9596742b8fd51c7d0f
+SHA1 (patch-ah) = adabd09e0baddbb73b747d6824112129807ce957
+SHA1 (patch-ai) = cf2be159436739ca1216f2b8f7e32f514f87576d
+SHA1 (patch-aj) = b5ce9aab892ec639fac5d006aa0bd3127a1a623c
+SHA1 (patch-ak) = 730d99368d05cd48a3d698e51de3a64f874ea294

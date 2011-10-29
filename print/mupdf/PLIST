@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.2 2010/09/15 13:15:29 joerg Exp $
+bin/mupdf
+bin/pdfclean
+bin/pdfdraw
+bin/pdfextract
+bin/mupdf-pdfinfo
+bin/pdfshow
+include/fitz.h
+include/mupdf.h
+lib/libmupdf.la
+lib/pkgconfig/mupdf.pc

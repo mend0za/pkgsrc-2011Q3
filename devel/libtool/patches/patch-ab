@@ -1,0 +1,1324 @@
+$NetBSD: patch-ab,v 1.72 2011/09/16 15:08:27 joerg Exp $
+
+The last two chunks work around bugs in ksh on NetBSD.
+The problem manifests with wl and no_builtin_flag containing newlines.
+
+--- configure.orig	2011-04-14 15:39:05.000000000 +0000
++++ configure
+@@ -5293,13 +5293,20 @@ else
+     lt_cv_sys_max_cmd_len=8192;
+     ;;
+ 
++  mint*)
++    # On MiNT we can support fairly large cmd lengths, but it takes
++    # a while to run the tests, so let's restrict it to something
++    # reasonable.
++    lt_cv_sys_max_cmd_len=8192;
++    ;;
++
+   amigaos*)
+     # On AmigaOS with pdksh, this test takes hours, literally.
+     # So we just punt and use a minimum line length of 8192.
+     lt_cv_sys_max_cmd_len=8192;
+     ;;
+ 
+-  netbsd* | freebsd* | openbsd* | darwin* | dragonfly*)
++  netbsd* | freebsd* | openbsd* | mirbsd* | darwin* | dragonfly*)
+     # This has been around since 386BSD, at least.  Likely further.
+     if test -x /sbin/sysctl; then
+       lt_cv_sys_max_cmd_len=`/sbin/sysctl -n kern.argmax`
+@@ -5665,6 +5672,10 @@ gnu*)
+   lt_cv_deplibs_check_method=pass_all
+   ;;
+ 
++haiku*)
++  lt_cv_deplibs_check_method=pass_all
++  ;;
++
+ hpux10.20* | hpux11*)
+   lt_cv_file_magic_cmd=/usr/bin/file
+   case $host_cpu in
+@@ -5703,6 +5714,17 @@ linux* | k*bsd*-gnu)
+   lt_cv_deplibs_check_method=pass_all
+   ;;
+ 
++midnightbsd*)
++  # might to use match_pattern like MirBSD, but there is no well-defined
++  # naming scheme for libraries yet, as the current one is deprecated, and
++  # the new one in a state of flux especially between mports and MirPorts
++  lt_cv_deplibs_check_method=pass_all
++  ;;
++
++mirbsd*)
++  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|\.so|_pic\.a)$'
++  ;;
++
+ netbsd*)
+   if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
+     lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|_pic\.a)$'
+@@ -5718,7 +5740,7 @@ newos6*)
+   ;;
+ 
+ *nto* | *qnx*)
+-  lt_cv_deplibs_check_method=pass_all
++  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so|S\.a)$'
+   ;;
+ 
+ openbsd*)
+@@ -7900,7 +7922,10 @@ for cc_temp in $compiler""; do
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+ 
+ # Only perform the check for file, if the check method requires it
+@@ -8210,9 +8235,17 @@ $as_echo_n "checking for $compiler optio
+       ;;
+ 
+     darwin* | rhapsody*)
+-      # PIC is the default on this platform
++      # PIC is the default on this platform, and static linking of
++      # binaries generally doesn't work
+       # Common symbols not allowed in MH_DYLIB files
+       lt_prog_compiler_pic='-fno-common'
++      lt_prog_compiler_static=''
++      ;;
++
++    haiku*)
++      # PIC is the default for Haiku.
++      # The "-static" flag exists, but is broken.
++      lt_prog_compiler_static=
+       ;;
+ 
+     hpux*)
+@@ -8234,6 +8267,13 @@ $as_echo_n "checking for $compiler optio
+       # Instead, we relocate shared libraries at runtime.
+       ;;
+ 
++    mint*)
++      # Just because we use GCC doesn't mean we suddenly get shared libraries
++      # on systems that don't support them.
++      lt_prog_compiler_can_build_shared=no
++      enable_shared=no
++      ;;
++
+     msdosdjgpp*)
+       # Just because we use GCC doesn't mean we suddenly get shared libraries
+       # on systems that don't support them.
+@@ -8431,6 +8471,9 @@ $as_echo_n "checking for $compiler optio
+ 
+ case $host_os in
+   # For platforms which do not support PIC, -DPIC is meaningless:
++  mint*)
++    lt_prog_compiler_pic=
++    ;;
+   *djgpp*)
+     lt_prog_compiler_pic=
+     ;;
+@@ -8844,6 +8887,11 @@ _LT_EOF
+       fi
+       ;;
+ 
++    haiku*)
++      archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      link_all_deplibs=yes
++      ;;
++
+     interix[3-9]*)
+       hardcode_direct=no
+       hardcode_shlibpath_var=no
+@@ -8930,7 +8978,7 @@ _LT_EOF
+       ;;
+ 
+     netbsd*)
+-      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
+ 	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
+@@ -9317,6 +9365,11 @@ if test -z "$aix_libpath"; then aix_libp
+       hardcode_shlibpath_var=no
+       ;;
+ 
++      haiku*)
++        archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        link_all_deplibs=yes
++        ;;
++
+     hpux9*)
+       if test "$GCC" = yes; then
+ 	archive_cmds='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
+@@ -9430,6 +9483,20 @@ rm -f core conftest.err conftest.$ac_obj
+       link_all_deplibs=yes
+       ;;
+ 
++    mirbsd*)
++      if test -f /usr/libexec/ld.so; then
++	hardcode_direct=yes
++	hardcode_shlibpath_var=no
++	hardcode_direct_absolute=yes
++	archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
++	archive_expsym_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
++	hardcode_libdir_flag_spec='${wl}-rpath,$libdir'
++	export_dynamic_flag_spec='${wl}-E'
++      else
++	ld_shlibs=no
++      fi
++      ;;
++
+     netbsd*)
+       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+ 	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
+@@ -9450,6 +9517,8 @@ rm -f core conftest.err conftest.$ac_obj
+       ;;
+ 
+     *nto* | *qnx*)
++      archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+       ;;
+ 
+     openbsd*)
+@@ -10064,6 +10133,7 @@ beos*)
+ bsdi[45]*)
+   version_type=linux
+   need_version=no
++  need_lib_prefix=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+@@ -10165,9 +10235,7 @@ freebsd1*)
+   dynamic_linker=no
+   ;;
+ 
+-freebsd* | dragonfly*)
+-  # DragonFly does not have aout.  When/if they implement a new
+-  # versioning mechanism, adjust this.
++freebsd*)
+   if test -x /usr/bin/objformat; then
+     objformat=`/usr/bin/objformat`
+   else
+@@ -10179,7 +10247,7 @@ freebsd* | dragonfly*)
+   version_type=freebsd-$objformat
+   case $version_type in
+     freebsd-elf*)
+-      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext} $libname${shared_ext}'
++      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+       need_version=no
+       need_lib_prefix=no
+       ;;
+@@ -10202,13 +10270,24 @@ freebsd* | dragonfly*)
+     shlibpath_overrides_runpath=no
+     hardcode_into_libs=yes
+     ;;
+-  *) # from 4.6 on, and DragonFly
++  *) # from 4.6 on
+     shlibpath_overrides_runpath=yes
+     hardcode_into_libs=yes
+     ;;
+   esac
+   ;;
+ 
++dragonfly*)
++  version_type=linux
++  need_version=no
++  need_lib_prefix=no
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=no
++  hardcode_into_libs=yes
++  ;;
++
+ gnu*)
+   version_type=linux
+   need_lib_prefix=no
+@@ -10219,6 +10298,19 @@ gnu*)
+   hardcode_into_libs=yes
+   ;;
+ 
++haiku*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  dynamic_linker="$host_os runtime_loader"
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  sys_lib_dlsearch_path_spec='/boot/home/config/lib /boot/common/lib /boot/system/lib'
++  hardcode_into_libs=yes
++  ;;
++
+ hpux9* | hpux10* | hpux11*)
+   # Give a soname corresponding to the major version so that dld.sl refuses to
+   # link against other versions.
+@@ -10280,12 +10372,7 @@ interix[3-9]*)
+ irix5* | irix6* | nonstopux*)
+   case $host_os in
+     nonstopux*) version_type=nonstopux ;;
+-    *)
+-	if test "$lt_cv_prog_gnu_ld" = yes; then
+-		version_type=linux
+-	else
+-		version_type=irix
+-	fi ;;
++    *) version_type=irix ;;
+   esac
+   need_lib_prefix=no
+   need_version=no
+@@ -10375,16 +10462,38 @@ rm -f core conftest.err conftest.$ac_obj
+   dynamic_linker='GNU/Linux ld.so'
+   ;;
+ 
++midnightbsd*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  hardcode_into_libs=yes
++  ;;
++
++mirbsd*)
++  version_type=linux
++  sys_lib_search_path_spec="/usr/lib"
++  sys_lib_dlsearch_path_spec="/usr/lib"
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  ;;
++
+ netbsd*)
+-  version_type=sunos
++  version_type=linux
+   need_lib_prefix=no
+   need_version=no
+-  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | $GREP __G95__ >/dev/null; then
+     finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+     dynamic_linker='NetBSD (a.out) ld.so'
+   else
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+     soname_spec='${libname}${release}${shared_ext}$major'
+     dynamic_linker='NetBSD ld.elf_so'
+   fi
+@@ -10413,7 +10522,7 @@ newsos6)
+   ;;
+ 
+ openbsd*)
+-  version_type=sunos
++  version_type=linux
+   sys_lib_dlsearch_path_spec="/usr/lib"
+   need_lib_prefix=no
+   # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
+@@ -10421,7 +10530,7 @@ openbsd*)
+     openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
+     *)				need_version=no  ;;
+   esac
+-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
+@@ -11910,6 +12019,9 @@ else
+     # at 6.2 and later dlopen does load deplibs.
+     lt_cv_sys_dlopen_deplibs=yes
+     ;;
++  mirbsd*)
++    lt_cv_sys_dlopen_deplibs=yes
++    ;;
+   netbsd*)
+     lt_cv_sys_dlopen_deplibs=yes
+     ;;
+@@ -12587,9 +12699,7 @@ else
+ fi
+ 
+ 
+-if test -n "$CXX" && ( test "X$CXX" != "Xno" &&
+-    ( (test "X$CXX" = "Xg++" && `g++ -v >/dev/null 2>&1` ) ||
+-    (test "X$CXX" != "Xg++"))) ; then
++if test -n "$CXX" && test "X$CXX" != "Xno" ; then
+   ac_ext=cpp
+ ac_cpp='$CXXCPP $CPPFLAGS'
+ ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+@@ -12836,7 +12946,10 @@ $RM -r conftest*
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+ 
+   if test -n "$compiler"; then
+@@ -13613,6 +13726,22 @@ if test -z "$aix_libpath"; then aix_libp
+         ld_shlibs_CXX=no
+ 	;;
+ 
++      mirbsd*)
++	if test -f /usr/libexec/ld.so; then
++	  hardcode_direct_CXX=yes
++	  hardcode_shlibpath_var_CXX=no
++	  hardcode_direct_absolute_CXX=yes
++	  archive_cmds_CXX='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags -o $lib'
++	  archive_expsym_cmds_CXX='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-retain-symbols-file,$export_symbols -o $lib'
++	  hardcode_libdir_flag_spec_CXX='${wl}-rpath,$libdir'
++	  export_dynamic_flag_spec_CXX='${wl}-E'
++	  whole_archive_flag_spec_CXX="$wlarc"'--whole-archive$convenience '"$wlarc"'--no-whole-archive'
++	  output_verbose_link_cmd='echo'
++	else
++	  ld_shlibs_CXX=no
++	fi
++	;;
++
+       mvs*)
+         case $cc_basename in
+           cxx*)
+@@ -13628,18 +13757,37 @@ if test -z "$aix_libpath"; then aix_libp
+ 
+       netbsd*)
+         if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
++          # a.out is quite broken and goes directly to ld
+ 	  archive_cmds_CXX='$LD -Bshareable  -o $lib $predep_objects $libobjs $deplibs $postdep_objects $linker_flags'
+ 	  wlarc=
++          # Determine if we need to override the c++rt0 that is
++          # picked up by analysing output_verbose_link_cmds
++          if test -f ${PREFIX}/lib/c++rt0/c++rt0.o.PIC; then
++            cpprt0_file="${PREFIX}/lib/c++rt0/c++rt0.o.PIC"
++          else
++            cpprt0_file=
++          fi
+ 	  hardcode_libdir_flag_spec_CXX='-R$libdir'
+ 	  hardcode_direct_CXX=yes
+ 	  hardcode_shlibpath_var_CXX=no
+-	fi
+-	# Workaround some broken pre-1.5 toolchains
+-	output_verbose_link_cmd='$CC -shared $CFLAGS -v conftest.$objext 2>&1 | $GREP conftest.$objext | $SED -e "s:-lgcc -lc -lgcc::"'
++        elif $CC -dumpspecs | grep -- '-lgcc -lc -lgcc' >/dev/null; then
++          # Workaround some broken pre-1.5 ELF toolchains
++          output_verbose_link_cmd='$CC -shared $CFLAGS -v conftest.$objext 2>&1 | grep conftest.$objext | $SED -e "s:-lgcc -lc -lgcc::"'
++        else
++          # Modern ELF works sanely as-is
++          archive_cmds_CXX='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++          archive_expsym_cmds_CXX='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
++          output_verbose_link_cmd='echo'
++        fi
+ 	;;
+ 
+       *nto* | *qnx*)
+-        ld_shlibs_CXX=yes
++        archive_cmds_CXX='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        archive_expsym_cmds_CXX='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
++        hardcode_libdir_flag_spec_CXX='-R$libdir'
++        hardcode_direct_CXX=yes
++        hardcode_shlibpath_var_CXX=no
++        output_verbose_link_cmd='echo'
+ 	;;
+ 
+       openbsd2*)
+@@ -14036,6 +14184,11 @@ $RM -f confest.$objext
+ 
+ # PORTME: override above test on systems where it is broken
+ case $host_os in
++netbsd*)
++  if test -n "$cpprt0_file"; then
++    predep_objects_CXX=`eval echo $predep_objects_CXX | sed -e 's:/usr/lib/c++rt0.o:$cpprt0_file:'`
++  fi
++   ;;
+ interix[3-9]*)
+   # Interix 3.5 installs completely hosed .la files for C++, so rather than
+   # hack all around it, let's just trust "g++" to DTRT.
+@@ -14176,14 +14329,25 @@ $as_echo_n "checking for $compiler optio
+       lt_prog_compiler_pic_CXX='-DDLL_EXPORT'
+       ;;
+     darwin* | rhapsody*)
+-      # PIC is the default on this platform
++      # PIC is the default on this platform, and static linking of
++      # binaries generally doesn't work
+       # Common symbols not allowed in MH_DYLIB files
+       lt_prog_compiler_pic_CXX='-fno-common'
++      lt_prog_compiler_static_CXX=''
++      ;;
++    *mint*)
++      # FreeMiNT does not support shared libraries at all
++      lt_prog_compiler_pic_CXX=
+       ;;
+     *djgpp*)
+       # DJGPP does not support shared libraries at all
+       lt_prog_compiler_pic_CXX=
+       ;;
++    haiku*)
++      # PIC is the default for Haiku.
++      # The "-static" flag exists, but is broken.
++      lt_prog_compiler_static_CXX=
++      ;;
+     interix[3-9]*)
+       # Interix 3.x gcc -fpic/-fPIC options generate broken code.
+       # Instead, we relocate shared libraries at runtime.
+@@ -14246,6 +14410,9 @@ $as_echo_n "checking for $compiler optio
+ 	    ;;
+ 	esac
+ 	;;
++      mint*)
++	# FreeMiNT uses GNU C++
++	;;
+       freebsd* | dragonfly*)
+ 	# FreeBSD uses GNU C++
+ 	;;
+@@ -14443,6 +14610,9 @@ $as_echo_n "checking for $compiler optio
+ 
+ case $host_os in
+   # For platforms which do not support PIC, -DPIC is meaningless:
++  mint*)
++    lt_prog_compiler_pic_CXX=
++    ;;
+   *djgpp*)
+     lt_prog_compiler_pic_CXX=
+     ;;
+@@ -14948,6 +15118,7 @@ beos*)
+ bsdi[45]*)
+   version_type=linux
+   need_version=no
++  need_lib_prefix=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+@@ -15048,9 +15219,7 @@ freebsd1*)
+   dynamic_linker=no
+   ;;
+ 
+-freebsd* | dragonfly*)
+-  # DragonFly does not have aout.  When/if they implement a new
+-  # versioning mechanism, adjust this.
++freebsd*)
+   if test -x /usr/bin/objformat; then
+     objformat=`/usr/bin/objformat`
+   else
+@@ -15062,7 +15231,7 @@ freebsd* | dragonfly*)
+   version_type=freebsd-$objformat
+   case $version_type in
+     freebsd-elf*)
+-      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext} $libname${shared_ext}'
++      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+       need_version=no
+       need_lib_prefix=no
+       ;;
+@@ -15085,13 +15254,24 @@ freebsd* | dragonfly*)
+     shlibpath_overrides_runpath=no
+     hardcode_into_libs=yes
+     ;;
+-  *) # from 4.6 on, and DragonFly
++  *) # from 4.6 on
+     shlibpath_overrides_runpath=yes
+     hardcode_into_libs=yes
+     ;;
+   esac
+   ;;
+ 
++dragonfly*)
++  version_type=linux
++  need_version=no
++  need_lib_prefix=no
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=no
++  hardcode_into_libs=yes
++  ;;
++
+ gnu*)
+   version_type=linux
+   need_lib_prefix=no
+@@ -15102,6 +15282,19 @@ gnu*)
+   hardcode_into_libs=yes
+   ;;
+ 
++haiku*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  dynamic_linker="$host_os runtime_loader"
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  sys_lib_dlsearch_path_spec='/boot/home/config/lib /boot/common/lib /boot/system/lib'
++  hardcode_into_libs=yes
++  ;;
++
+ hpux9* | hpux10* | hpux11*)
+   # Give a soname corresponding to the major version so that dld.sl refuses to
+   # link against other versions.
+@@ -15163,12 +15356,7 @@ interix[3-9]*)
+ irix5* | irix6* | nonstopux*)
+   case $host_os in
+     nonstopux*) version_type=nonstopux ;;
+-    *)
+-	if test "$lt_cv_prog_gnu_ld" = yes; then
+-		version_type=linux
+-	else
+-		version_type=irix
+-	fi ;;
++    *) version_type=irix ;;
+   esac
+   need_lib_prefix=no
+   need_version=no
+@@ -15258,16 +15446,38 @@ rm -f core conftest.err conftest.$ac_obj
+   dynamic_linker='GNU/Linux ld.so'
+   ;;
+ 
++midnightbsd*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  hardcode_into_libs=yes
++  ;;
++
++mirbsd*)
++  version_type=linux
++  sys_lib_search_path_spec="/usr/lib"
++  sys_lib_dlsearch_path_spec="/usr/lib"
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  ;;
++
+ netbsd*)
+-  version_type=sunos
++  version_type=linux
+   need_lib_prefix=no
+   need_version=no
+-  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | $GREP __G95__ >/dev/null; then
+     finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+     dynamic_linker='NetBSD (a.out) ld.so'
+   else
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+     soname_spec='${libname}${release}${shared_ext}$major'
+     dynamic_linker='NetBSD ld.elf_so'
+   fi
+@@ -15296,7 +15506,7 @@ newsos6)
+   ;;
+ 
+ openbsd*)
+-  version_type=sunos
++  version_type=linux
+   sys_lib_dlsearch_path_spec="/usr/lib"
+   need_lib_prefix=no
+   # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
+@@ -15304,7 +15514,7 @@ openbsd*)
+     openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
+     *)				need_version=no  ;;
+   esac
+-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
+@@ -15877,7 +16087,10 @@ $RM -r conftest*
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+   GCC=$G77
+   if test -n "$compiler"; then
+@@ -15971,9 +16184,17 @@ $as_echo_n "checking for $compiler optio
+       ;;
+ 
+     darwin* | rhapsody*)
+-      # PIC is the default on this platform
++      # PIC is the default on this platform, and static linking of
++      # binaries generally doesn't work
+       # Common symbols not allowed in MH_DYLIB files
+       lt_prog_compiler_pic_F77='-fno-common'
++      lt_prog_compiler_static_F77=''
++      ;;
++
++    haiku*)
++      # PIC is the default for Haiku.
++      # The "-static" flag exists, but is broken.
++      lt_prog_compiler_static_F77=
+       ;;
+ 
+     hpux*)
+@@ -15995,6 +16216,13 @@ $as_echo_n "checking for $compiler optio
+       # Instead, we relocate shared libraries at runtime.
+       ;;
+ 
++    mint*)
++      # Just because we use GCC doesn't mean we suddenly get shared libraries
++      # on systems that don't support them.
++      lt_prog_compiler_can_build_shared_F77=no
++      enable_shared=no
++      ;;
++
+     msdosdjgpp*)
+       # Just because we use GCC doesn't mean we suddenly get shared libraries
+       # on systems that don't support them.
+@@ -16192,6 +16420,9 @@ $as_echo_n "checking for $compiler optio
+ 
+ case $host_os in
+   # For platforms which do not support PIC, -DPIC is meaningless:
++  mint*)
++    lt_prog_compiler_pic_F77=
++    ;;
+   *djgpp*)
+     lt_prog_compiler_pic_F77=
+     ;;
+@@ -16590,6 +16821,11 @@ _LT_EOF
+       fi
+       ;;
+ 
++    haiku*)
++      archive_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      link_all_deplibs_F77=yes
++      ;;
++
+     interix[3-9]*)
+       hardcode_direct_F77=no
+       hardcode_shlibpath_var_F77=no
+@@ -16676,7 +16912,7 @@ _LT_EOF
+       ;;
+ 
+     netbsd*)
+-      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
+ 	archive_cmds_F77='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
+@@ -17051,6 +17287,11 @@ if test -z "$aix_libpath"; then aix_libp
+       hardcode_shlibpath_var_F77=no
+       ;;
+ 
++      haiku*)
++        archive_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        link_all_deplibs_F77=yes
++        ;;
++
+     hpux9*)
+       if test "$GCC" = yes; then
+ 	archive_cmds_F77='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
+@@ -17163,6 +17404,20 @@ rm -f core conftest.err conftest.$ac_obj
+       link_all_deplibs_F77=yes
+       ;;
+ 
++    mirbsd*)
++      if test -f /usr/libexec/ld.so; then
++	hardcode_direct_F77=yes
++	hardcode_shlibpath_var_F77=no
++	hardcode_direct_absolute_F77=yes
++	archive_cmds_F77='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
++	archive_expsym_cmds_F77='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
++	hardcode_libdir_flag_spec_F77='${wl}-rpath,$libdir'
++	export_dynamic_flag_spec_F77='${wl}-E'
++      else
++	ld_shlibs_F77=no
++      fi
++      ;;
++
+     netbsd*)
+       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+ 	archive_cmds_F77='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
+@@ -17183,6 +17438,8 @@ rm -f core conftest.err conftest.$ac_obj
+       ;;
+ 
+     *nto* | *qnx*)
++      archive_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      archive_expsym_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+       ;;
+ 
+     openbsd*)
+@@ -17644,6 +17901,7 @@ beos*)
+ bsdi[45]*)
+   version_type=linux
+   need_version=no
++  need_lib_prefix=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+@@ -17744,9 +18002,7 @@ freebsd1*)
+   dynamic_linker=no
+   ;;
+ 
+-freebsd* | dragonfly*)
+-  # DragonFly does not have aout.  When/if they implement a new
+-  # versioning mechanism, adjust this.
++freebsd*)
+   if test -x /usr/bin/objformat; then
+     objformat=`/usr/bin/objformat`
+   else
+@@ -17758,7 +18014,7 @@ freebsd* | dragonfly*)
+   version_type=freebsd-$objformat
+   case $version_type in
+     freebsd-elf*)
+-      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext} $libname${shared_ext}'
++      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+       need_version=no
+       need_lib_prefix=no
+       ;;
+@@ -17781,13 +18037,24 @@ freebsd* | dragonfly*)
+     shlibpath_overrides_runpath=no
+     hardcode_into_libs=yes
+     ;;
+-  *) # from 4.6 on, and DragonFly
++  *) # from 4.6 on
+     shlibpath_overrides_runpath=yes
+     hardcode_into_libs=yes
+     ;;
+   esac
+   ;;
+ 
++dragonfly*)
++  version_type=linux
++  need_version=no
++  need_lib_prefix=no
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=no
++  hardcode_into_libs=yes
++  ;;
++
+ gnu*)
+   version_type=linux
+   need_lib_prefix=no
+@@ -17798,6 +18065,19 @@ gnu*)
+   hardcode_into_libs=yes
+   ;;
+ 
++haiku*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  dynamic_linker="$host_os runtime_loader"
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  sys_lib_dlsearch_path_spec='/boot/home/config/lib /boot/common/lib /boot/system/lib'
++  hardcode_into_libs=yes
++  ;;
++
+ hpux9* | hpux10* | hpux11*)
+   # Give a soname corresponding to the major version so that dld.sl refuses to
+   # link against other versions.
+@@ -17859,12 +18139,7 @@ interix[3-9]*)
+ irix5* | irix6* | nonstopux*)
+   case $host_os in
+     nonstopux*) version_type=nonstopux ;;
+-    *)
+-	if test "$lt_cv_prog_gnu_ld" = yes; then
+-		version_type=linux
+-	else
+-		version_type=irix
+-	fi ;;
++    *) version_type=irix ;;
+   esac
+   need_lib_prefix=no
+   need_version=no
+@@ -17948,16 +18223,38 @@ rm -f core conftest.err conftest.$ac_obj
+   dynamic_linker='GNU/Linux ld.so'
+   ;;
+ 
++midnightbsd*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  hardcode_into_libs=yes
++  ;;
++
++mirbsd*)
++  version_type=linux
++  sys_lib_search_path_spec="/usr/lib"
++  sys_lib_dlsearch_path_spec="/usr/lib"
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  ;;
++
+ netbsd*)
+-  version_type=sunos
++  version_type=linux
+   need_lib_prefix=no
+   need_version=no
+-  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | $GREP __G95__ >/dev/null; then
+     finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+     dynamic_linker='NetBSD (a.out) ld.so'
+   else
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+     soname_spec='${libname}${release}${shared_ext}$major'
+     dynamic_linker='NetBSD ld.elf_so'
+   fi
+@@ -17986,7 +18283,7 @@ newsos6)
+   ;;
+ 
+ openbsd*)
+-  version_type=sunos
++  version_type=linux
+   sys_lib_dlsearch_path_spec="/usr/lib"
+   need_lib_prefix=no
+   # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
+@@ -17994,7 +18291,7 @@ openbsd*)
+     openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
+     *)				need_version=no  ;;
+   esac
+-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
+@@ -18557,7 +18854,10 @@ $RM -r conftest*
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+ 
+   if test -n "$compiler"; then
+@@ -18776,9 +19076,17 @@ $as_echo_n "checking for $compiler optio
+       ;;
+ 
+     darwin* | rhapsody*)
+-      # PIC is the default on this platform
++      # PIC is the default on this platform, and static linking of
++      # binaries generally doesn't work
+       # Common symbols not allowed in MH_DYLIB files
+       lt_prog_compiler_pic_FC='-fno-common'
++      lt_prog_compiler_static_FC=''
++      ;;
++
++    haiku*)
++      # PIC is the default for Haiku.
++      # The "-static" flag exists, but is broken.
++      lt_prog_compiler_static_FC=
+       ;;
+ 
+     hpux*)
+@@ -18800,6 +19108,13 @@ $as_echo_n "checking for $compiler optio
+       # Instead, we relocate shared libraries at runtime.
+       ;;
+ 
++    mint*)
++      # Just because we use GCC doesn't mean we suddenly get shared libraries
++      # on systems that don't support them.
++      lt_prog_compiler_can_build_shared_FC=no
++      enable_shared=no
++      ;;
++
+     msdosdjgpp*)
+       # Just because we use GCC doesn't mean we suddenly get shared libraries
+       # on systems that don't support them.
+@@ -18997,6 +19312,9 @@ $as_echo_n "checking for $compiler optio
+ 
+ case $host_os in
+   # For platforms which do not support PIC, -DPIC is meaningless:
++  mint*)
++    lt_prog_compiler_pic_FC=
++    ;;
+   *djgpp*)
+     lt_prog_compiler_pic_FC=
+     ;;
+@@ -19395,6 +19713,11 @@ _LT_EOF
+       fi
+       ;;
+ 
++    haiku*)
++      archive_cmds_FC='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      link_all_deplibs_FC=yes
++      ;;
++
+     interix[3-9]*)
+       hardcode_direct_FC=no
+       hardcode_shlibpath_var_FC=no
+@@ -19481,7 +19804,7 @@ _LT_EOF
+       ;;
+ 
+     netbsd*)
+-      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
+ 	archive_cmds_FC='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
+@@ -19856,6 +20179,11 @@ if test -z "$aix_libpath"; then aix_libp
+       hardcode_shlibpath_var_FC=no
+       ;;
+ 
++      haiku*)
++        archive_cmds_FC='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        link_all_deplibs_FC=yes
++        ;;
++
+     hpux9*)
+       if test "$GCC" = yes; then
+ 	archive_cmds_FC='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
+@@ -19968,6 +20296,20 @@ rm -f core conftest.err conftest.$ac_obj
+       link_all_deplibs_FC=yes
+       ;;
+ 
++    mirbsd*)
++      if test -f /usr/libexec/ld.so; then
++	hardcode_direct_FC=yes
++	hardcode_shlibpath_var_FC=no
++	hardcode_direct_absolute_FC=yes
++	archive_cmds_FC='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
++	archive_expsym_cmds_FC='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
++	hardcode_libdir_flag_spec_FC='${wl}-rpath,$libdir'
++	export_dynamic_flag_spec_FC='${wl}-E'
++      else
++	ld_shlibs_FC=no
++      fi
++      ;;
++
+     netbsd*)
+       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+ 	archive_cmds_FC='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
+@@ -19988,6 +20330,8 @@ rm -f core conftest.err conftest.$ac_obj
+       ;;
+ 
+     *nto* | *qnx*)
++      archive_cmds_FC='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      archive_expsym_cmds_FC='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+       ;;
+ 
+     openbsd*)
+@@ -20449,6 +20793,7 @@ beos*)
+ bsdi[45]*)
+   version_type=linux
+   need_version=no
++  need_lib_prefix=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+@@ -20549,9 +20894,7 @@ freebsd1*)
+   dynamic_linker=no
+   ;;
+ 
+-freebsd* | dragonfly*)
+-  # DragonFly does not have aout.  When/if they implement a new
+-  # versioning mechanism, adjust this.
++freebsd*)
+   if test -x /usr/bin/objformat; then
+     objformat=`/usr/bin/objformat`
+   else
+@@ -20563,7 +20906,7 @@ freebsd* | dragonfly*)
+   version_type=freebsd-$objformat
+   case $version_type in
+     freebsd-elf*)
+-      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext} $libname${shared_ext}'
++      library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+       need_version=no
+       need_lib_prefix=no
+       ;;
+@@ -20586,13 +20929,24 @@ freebsd* | dragonfly*)
+     shlibpath_overrides_runpath=no
+     hardcode_into_libs=yes
+     ;;
+-  *) # from 4.6 on, and DragonFly
++  *) # from 4.6 on
+     shlibpath_overrides_runpath=yes
+     hardcode_into_libs=yes
+     ;;
+   esac
+   ;;
+ 
++dragonfly*)
++  version_type=linux
++  need_version=no
++  need_lib_prefix=no
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=no
++  hardcode_into_libs=yes
++  ;;
++
+ gnu*)
+   version_type=linux
+   need_lib_prefix=no
+@@ -20603,6 +20957,19 @@ gnu*)
+   hardcode_into_libs=yes
+   ;;
+ 
++haiku*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  dynamic_linker="$host_os runtime_loader"
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
++  soname_spec='${libname}${release}${shared_ext}$major'
++  shlibpath_var=LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  sys_lib_dlsearch_path_spec='/boot/home/config/lib /boot/common/lib /boot/system/lib'
++  hardcode_into_libs=yes
++  ;;
++
+ hpux9* | hpux10* | hpux11*)
+   # Give a soname corresponding to the major version so that dld.sl refuses to
+   # link against other versions.
+@@ -20664,12 +21031,7 @@ interix[3-9]*)
+ irix5* | irix6* | nonstopux*)
+   case $host_os in
+     nonstopux*) version_type=nonstopux ;;
+-    *)
+-	if test "$lt_cv_prog_gnu_ld" = yes; then
+-		version_type=linux
+-	else
+-		version_type=irix
+-	fi ;;
++    *) version_type=irix ;;
+   esac
+   need_lib_prefix=no
+   need_version=no
+@@ -20753,16 +21115,38 @@ rm -f core conftest.err conftest.$ac_obj
+   dynamic_linker='GNU/Linux ld.so'
+   ;;
+ 
++midnightbsd*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  hardcode_into_libs=yes
++  ;;
++
++mirbsd*)
++  version_type=linux
++  sys_lib_search_path_spec="/usr/lib"
++  sys_lib_dlsearch_path_spec="/usr/lib"
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  ;;
++
+ netbsd*)
+-  version_type=sunos
++  version_type=linux
+   need_lib_prefix=no
+   need_version=no
+-  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | $GREP __G95__ >/dev/null; then
+     finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+     dynamic_linker='NetBSD (a.out) ld.so'
+   else
+-    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+     soname_spec='${libname}${release}${shared_ext}$major'
+     dynamic_linker='NetBSD ld.elf_so'
+   fi
+@@ -20791,7 +21175,7 @@ newsos6)
+   ;;
+ 
+ openbsd*)
+-  version_type=sunos
++  version_type=linux
+   sys_lib_dlsearch_path_spec="/usr/lib"
+   need_lib_prefix=no
+   # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
+@@ -20799,7 +21183,7 @@ openbsd*)
+     openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
+     *)				need_version=no  ;;
+   esac
+-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+   if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
+@@ -21205,7 +21589,10 @@ for cc_temp in $compiler""; do
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+ 
+ # GCJ did not exist at the time GCC didn't implicitly link libc in.
+@@ -21320,9 +21707,17 @@ $as_echo_n "checking for $compiler optio
+       ;;
+ 
+     darwin* | rhapsody*)
+-      # PIC is the default on this platform
++      # PIC is the default on this platform, and static linking of
++      # binaries generally doesn't work
+       # Common symbols not allowed in MH_DYLIB files
+       lt_prog_compiler_pic_GCJ='-fno-common'
++      lt_prog_compiler_static_GCJ=''
++      ;;
++
++    haiku*)
++      # PIC is the default for Haiku.
++      # The "-static" flag exists, but is broken.
++      lt_prog_compiler_static_GCJ=
+       ;;
+ 
+     hpux*)
+@@ -21344,6 +21739,13 @@ $as_echo_n "checking for $compiler optio
+       # Instead, we relocate shared libraries at runtime.
+       ;;
+ 
++    mint*)
++      # Just because we use GCC doesn't mean we suddenly get shared libraries
++      # on systems that don't support them.
++      lt_prog_compiler_can_build_shared_GCJ=no
++      enable_shared=no
++      ;;
++
+     msdosdjgpp*)
+       # Just because we use GCC doesn't mean we suddenly get shared libraries
+       # on systems that don't support them.
+@@ -21541,6 +21943,9 @@ $as_echo_n "checking for $compiler optio
+ 
+ case $host_os in
+   # For platforms which do not support PIC, -DPIC is meaningless:
++  mint*)
++    lt_prog_compiler_pic_GCJ=
++    ;;
+   *djgpp*)
+     lt_prog_compiler_pic_GCJ=
+     ;;
+@@ -21939,6 +22344,11 @@ _LT_EOF
+       fi
+       ;;
+ 
++    haiku*)
++      archive_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      link_all_deplibs_GCJ=yes
++      ;;
++
+     interix[3-9]*)
+       hardcode_direct_GCJ=no
+       hardcode_shlibpath_var_GCJ=no
+@@ -22025,7 +22435,7 @@ _LT_EOF
+       ;;
+ 
+     netbsd*)
+-      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
+ 	archive_cmds_GCJ='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
+@@ -22412,6 +22822,11 @@ if test -z "$aix_libpath"; then aix_libp
+       hardcode_shlibpath_var_GCJ=no
+       ;;
+ 
++      haiku*)
++        archive_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        link_all_deplibs_GCJ=yes
++        ;;
++
+     hpux9*)
+       if test "$GCC" = yes; then
+ 	archive_cmds_GCJ='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
+@@ -22525,6 +22940,20 @@ rm -f core conftest.err conftest.$ac_obj
+       link_all_deplibs_GCJ=yes
+       ;;
+ 
++    mirbsd*)
++      if test -f /usr/libexec/ld.so; then
++	hardcode_direct_GCJ=yes
++	hardcode_shlibpath_var_GCJ=no
++	hardcode_direct_absolute_GCJ=yes
++	archive_cmds_GCJ='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
++	archive_expsym_cmds_GCJ='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
++	hardcode_libdir_flag_spec_GCJ='${wl}-rpath,$libdir'
++	export_dynamic_flag_spec_GCJ='${wl}-E'
++      else
++	ld_shlibs_GCJ=no
++      fi
++      ;;
++
+     netbsd*)
+       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+ 	archive_cmds_GCJ='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
+@@ -22545,6 +22974,8 @@ rm -f core conftest.err conftest.$ac_obj
+       ;;
+ 
+     *nto* | *qnx*)
++      archive_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++      archive_expsym_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+       ;;
+ 
+     openbsd*)
+@@ -23115,7 +23546,10 @@ for cc_temp in $compiler""; do
+     *) break;;
+   esac
+ done
+-cc_basename=`$ECHO "X$cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
++# Return the actual command name, not our pkgsrc wrapper name because several
++# decisions are made only based on compiler names
++if test -n "$cc_temp" && new_cc_temp=`$cc_temp --wrappee-name 2>/dev/null`; then :; else new_cc_temp="$cc_temp"; fi
++cc_basename=`$ECHO "X$new_cc_temp" | $Xsed -e 's%.*/%%' -e "s%^$host_alias-%%"`
+ 
+ lt_cv_prog_compiler_c_o_RC=yes
+ 
+@@ -24296,6 +24730,9 @@ LTCC='$LTCC'
+ LTCFLAGS='$LTCFLAGS'
+ compiler='$compiler_DEFAULT'
+ 
++printf "%s" "$lt_prog_compiler_wl" > /dev/null
++printf "%s" "$lt_prog_compiler_no_builtin_flag" > /dev/null
++
+ # Quote evaled strings.
+ for var in SED \
+ GREP \
+@@ -24580,6 +25017,9 @@ case \$lt_ECHO in
+   ;;
+ esac
+ 
++printf "%s" "$lt_prog_compiler_wl" > /dev/null
++printf "%s" "$lt_prog_compiler_no_builtin_flag" > /dev/null
++
+ ac_aux_dir='$ac_aux_dir'
+ xsi_shell='$xsi_shell'
+ lt_shell_append='$lt_shell_append'

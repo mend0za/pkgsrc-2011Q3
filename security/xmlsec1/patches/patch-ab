@@ -1,0 +1,42 @@
+$NetBSD: patch-ab,v 1.4 2010/12/25 11:35:06 obache Exp $
+
+* portability fix
+* DragonFly also not require extra libs for OpenSSL.
+
+--- configure.orig	2010-05-25 21:53:07.000000000 +0000
++++ configure
+@@ -10988,7 +10988,7 @@ CC="$lt_save_CC"
+ 
+ 
+ 
+-if test "z$RM" == "z" ; then
++if test "z$RM" = "z" ; then
+     # Extract the first word of "rm", so it can be a program name with args.
+ set dummy rm; ac_word=$2
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+@@ -11703,7 +11703,7 @@ else
+ fi
+ 
+ 
+-if test "z$shrext" == "z" ; then
++if test "z$shrext" = "z" ; then
+     shrext=$shrext_cmds
+ fi
+ 
+@@ -12366,6 +12366,7 @@ elif test "z$with_openssl" != "z" ; then
+ 	*-*-osf5*) openssl_exlibs=;;
+ 	*-*-openbsd*) openssl_exlibs=;;
+ 	*-*-netbsd*) openssl_exlibs=;;
++	*-*-dragonfly*) openssl_exlibs=;;
+ 	#FIXME: check if lib "dl" is required
+ 	*)          openssl_exlibs=-ldl;;
+     esac
+@@ -12771,7 +12772,7 @@ else
+     XMLSEC_CRYPTO_DISABLED_LIST="$XMLSEC_CRYPTO_DISABLED_LIST openssl"
+ fi
+ 
+- if test "z$XMLSEC_NO_OPENSSL" == "z1"; then
++ if test "z$XMLSEC_NO_OPENSSL" = "z1"; then
+   XMLSEC_NO_OPENSSL_TRUE=
+   XMLSEC_NO_OPENSSL_FALSE='#'
+ else

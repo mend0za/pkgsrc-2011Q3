@@ -1,0 +1,171 @@
+$NetBSD: patch-at,v 1.23 2011/07/26 21:00:24 abs Exp $
+
+. Include CFLAGS in bytecccompopts and LDFLAGS in bytecclinkopts.
+. Add cases for dragonfly support.
+. Use the portable `test x = y', not `test x == y' GNUism.
+. Enable native dynamic loading on NetBSD/i386 and NetBSD/amd64.
+. Fix pattern to match Solaris versions.
+. Add cases for interix support.
+. Add cases for NetBSD/arm support.
+. Update Darwin patterns to match versions >=10.
+. Enable profiling support on BSD/powerpc.
+. Skip X11 library and header file checks when X11 support is disabled.
+. Frobnicate dbm detection.
+
+--- configure.orig	2010-07-28 13:18:22.000000000 +0000
++++ configure
+@@ -328,6 +328,8 @@ case "$bytecc,$host" in
+   gcc*)
+     bytecccompopts="-fno-defer-pop $gcc_warnings";;
+ esac
++bytecccompopts="$bytecccompopts $CFLAGS"
++bytecclinkopts="$bytecclinkopts $LDFLAGS"
+ 
+ # Configure compiler to use in further tests
+ 
+@@ -520,7 +522,7 @@ if test $withsharedlibs = "yes"; then
+       mksharedlib="$flexlink"
+       mkmaindll="$flexlink -maindll"
+       shared_libraries_supported=true;;
+-    *-*-linux-gnu|*-*-linux|*-*-freebsd[3-9]*|*-*-openbsd*|*-*-netbsd*|*-*-gnu*)
++    *-*-linux-gnu|*-*-linux|*-*-freebsd[3-9]*|*-*-openbsd*|*-*-netbsd*|*-*-gnu*|*-*-dragonfly)
+       sharedcccompopts="-fPIC"
+       mksharedlib="$bytecc -shared"
+       bytecclinkopts="$bytecclinkopts -Wl,-E"
+@@ -620,7 +622,7 @@ if test $withsharedlibs = "yes"; then
+     i[3456]86-*-linux*)           natdynlink=true;;
+     x86_64-*-linux*)              natdynlink=true;;
+     i[3456]86-*-darwin10.*)
+-      if test $arch64 == true; then
++      if test $arch64 = true; then
+         natdynlink=true
+       fi;;
+     i[3456]86-*-darwin[89]*)      natdynlink=true;;
+@@ -629,6 +631,8 @@ if test $withsharedlibs = "yes"; then
+     i686-*-kfreebsd*)             natdynlink=true;;
+     x86_64-*-kfreebsd*)           natdynlink=true;;
+     i386-*-gnu0.3)                natdynlink=true;;
++    i[3456]86-*-netbsdelf)        natdynlink=true;;
++    x86_64-*-netbsd)              natdynlink=true;;
+   esac
+ fi
+ 
+@@ -653,12 +657,13 @@ case "$host" in
+   alpha*-*-netbsd*)             arch=alpha; system=netbsd;;
+   alpha*-*-openbsd*)            arch=alpha; system=openbsd;;
+   sparc*-*-sunos4.*)            arch=sparc; system=sunos;;
+-  sparc*-*-solaris2.*)          arch=sparc; system=solaris;;
++  sparc*-*-solaris2*)           arch=sparc; system=solaris;;
+   sparc*-*-*bsd*)               arch=sparc; system=bsd;;
+   sparc*-*-linux*)              arch=sparc; system=linux;;
+   sparc*-*-gnu*)                arch=sparc; system=gnu;;
+   i[3456]86-*-linux*)           arch=i386; system=linux_`sh ./runtest elf.c`;;
+   i[3456]86-*-*bsd*)            arch=i386; system=bsd_`sh ./runtest elf.c`;;
++  i[3456]86-*-dragonfly*)       arch=i386; system=bsd_`sh ./runtest elf.c`;;
+   i[3456]86-*-nextstep*)        arch=i386; system=nextstep;;
+   i[3456]86-*-solaris*)         if $arch64; then
+                                   arch=amd64; system=solaris
+@@ -667,6 +672,7 @@ case "$host" in
+                                 fi;;
+   i[3456]86-*-beos*)            arch=i386; system=beos;;
+   i[3456]86-*-cygwin*)          arch=i386; system=cygwin;;
++  i[3456]86-*-interix3*)        arch=i386; system=interix3;;
+   i[3456]86-*-darwin*)          if $arch64; then
+                                   arch=amd64; system=macosx
+                                 else
+@@ -683,6 +689,7 @@ case "$host" in
+   powerpc-*-rhapsody*)          arch=power; model=ppc; system=rhapsody;;
+   powerpc-*-darwin*)            arch=power; system=rhapsody
+                                 if $arch64; then model=ppc64; else model=ppc; fi;;
++  arm*-*-netbsd*)               arch=arm; system=netbsd;;
+   arm*-*-linux*)                arch=arm; system=linux;;
+   arm*-*-gnu*)                  arch=arm; system=gnu;;
+   ia64-*-linux*)                arch=ia64; system=linux;;
+@@ -693,7 +700,9 @@ case "$host" in
+   x86_64-*-freebsd*)            arch=amd64; system=freebsd;;
+   x86_64-*-netbsd*)             arch=amd64; system=netbsd;;
+   x86_64-*-openbsd*)            arch=amd64; system=openbsd;;
++  x86_64-*-solaris*)            arch=amd64; system=solaris;;
+   x86_64-*-darwin9.5)           arch=amd64; system=macosx;;
++  x86_64-*-darwin1[0-9]*)       arch=amd64; system=macosx;;
+ esac
+ 
+ # Some platforms exist both in 32-bit and 64-bit variants, not distinguished
+@@ -794,6 +803,7 @@ case "$arch,$model,$system" in
+     case "$nativecc" in gcc*) ;; *) cc_profile='-xpg';; esac;;
+   amd64,*,linux) profiling='prof';;
+   amd64,*,gnu) profiling='prof';;
++  power,*,bsd) profiling='prof';;
+   *) profiling='noprof';;
+ esac
+ 
+@@ -1198,6 +1208,8 @@ if test "$pthread_wanted" = "yes"; then
+                    pthread_caml_link="-cclib -lpthread -cclib -lposix4";;
+     *-*-freebsd*)  pthread_link="-pthread"
+                    pthread_caml_link="-cclib -pthread";;
++    *-*-dragonfly*) pthread_link="-pthread"
++                   pthread_caml_link="-cclib -pthread";;
+     *-*-openbsd*)  pthread_link="-pthread"
+                    pthread_caml_link="-cclib -pthread";;
+     *)             pthread_link="-lpthread"
+@@ -1249,6 +1261,7 @@ fi
+ x11_include="not found"
+ x11_link="not found"
+ 
++if test "$disable_x11" != "yes"; then
+ for dir in \
+     $x11_include_dir          \
+                               \
+@@ -1301,6 +1314,7 @@ do
+     break
+   fi
+ done
++fi
+ 
+ if test "$x11_include" = "not found"; then
+   x11_try_lib_dir=''
+@@ -1395,31 +1409,8 @@ dbm_include="not found"
+ dbm_link="not found"
+ use_gdbm_ndbm=no
+ 
+-for dir in /usr/include /usr/include/db1 /usr/include/gdbm; do
+-  if test -f $dir/ndbm.h; then
+-    dbm_include=$dir
+-    if sh ./hasgot dbm_open; then
+-      dbm_link=""
+-    elif sh ./hasgot -lndbm dbm_open; then
+-      dbm_link="-lndbm"
+-    elif sh ./hasgot -ldb1 dbm_open; then
+-      dbm_link="-ldb1"
+-    elif sh ./hasgot -lgdbm dbm_open; then
+-      dbm_link="-lgdbm"
+-    elif sh ./hasgot -lgdbm_compat -lgdbm dbm_open; then
+-      dbm_link="-lgdbm_compat -lgdbm"
+-    fi
+-    break
+-  fi
+-  if test -f $dir/gdbm-ndbm.h; then
+-    dbm_include=$dir
+-    use_gdbm_ndbm=yes
+-    if sh ./hasgot -lgdbm_compat -lgdbm dbm_open; then
+-      dbm_link="-lgdbm_compat -lgdbm"
+-    fi
+-    break
+-  fi
+-done
++dbm_include=/usr/include
++dbm_link=${BDB_LIBS}
+ if test "$dbm_include" = "not found" || test "$dbm_link" = "not found"; then
+   echo "NDBM not found, the \"dbm\" library will not be supported."
+ else
+@@ -1429,8 +1420,8 @@ else
+   else
+     dbm_include="-I$dbm_include"
+   fi
+-  if test "$use_gdbm_ndbm" = "yes"; then
+-    echo "#define DBM_USES_GDBM_NDBM" >> s.h
++  if test ${BDB_BUILTIN} = "yes"; then
++    echo "#define DBM_USES_DB" >> s.h
+   fi
+   otherlibraries="$otherlibraries dbm"
+ fi

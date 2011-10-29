@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.4 2010/10/16 10:15:57 adam Exp $
+
+--- makefile.orig	2010-10-14 09:16:46.000000000 +0000
++++ makefile
+@@ -20,8 +20,6 @@
+ #
+ ########################################################################
+ 
+-CC         = cc
+-CFLAGS     = -O -g
+ SRC        = ./src
+ 
+ # For MPI, mpicc will set up the proper include and library paths

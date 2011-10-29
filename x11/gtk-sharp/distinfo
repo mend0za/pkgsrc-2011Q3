@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.10 2010/03/16 19:33:37 wiz Exp $
+
+SHA1 (gtk-sharp-2.12.10.tar.bz2) = 10cef6b1bb9a8a33f9cc32ffeb7b34577c90b393
+RMD160 (gtk-sharp-2.12.10.tar.bz2) = 8eed70310b961d823cf9c7766aa3a5fdfd5e5d05
+Size (gtk-sharp-2.12.10.tar.bz2) = 1638263 bytes

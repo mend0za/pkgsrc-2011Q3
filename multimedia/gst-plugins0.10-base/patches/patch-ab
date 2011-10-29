@@ -1,0 +1,15 @@
+$NetBSD: patch-ab,v 1.7 2010/12/03 18:15:44 drochner Exp $
+
+--- ext/alsa/gstalsasink.c.orig	2010-11-29 12:19:06.000000000 +0000
++++ ext/alsa/gstalsasink.c
+@@ -53,6 +53,10 @@
+ 
+ #include <gst/gst-i18n-plugin.h>
+ 
++#ifndef ESTRPIPE
++#define ESTRPIPE EPIPE
++#endif
++
+ #define DEFAULT_DEVICE		"default"
+ #define DEFAULT_DEVICE_NAME	""
+ #define DEFAULT_CARD_NAME	""

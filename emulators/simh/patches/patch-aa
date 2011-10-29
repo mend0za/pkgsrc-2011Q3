@@ -1,0 +1,29 @@
+$NetBSD: patch-aa,v 1.9 2010/05/28 13:21:26 tsutsui Exp $
+
+--- makefile.orig	2008-11-19 12:53:48.000000000 +0000
++++ makefile
+@@ -5,17 +5,17 @@
+   #Unix Environments
+   ifneq (,$(findstring solaris,$(OSTYPE)))
+     OS_CCDEFS = -lm -lsocket -lnsl -lrt -lpthread -D_GNU_SOURCE
++  else ifneq (,$(findstring darwin,$(OSTYPE)))
++    OS_CCDEFS = -D_GNU_SOURCE
++  else ifneq (,$(findstring linux,$(OSTYPE)))
++    OS_CCDEFS = -lrt -lm -D_GNU_SOURCE
+   else
+-    ifneq (,$(findstring darwin,$(OSTYPE)))
+-      OS_CCDEFS = -D_GNU_SOURCE
+-    else
+-      OS_CCDEFS = -lrt -lm -D_GNU_SOURCE
+-    endif
++    OS_CCDEFS = -lm -D_GNU_SOURCE
+   endif
+-  CC = gcc -std=c99 -U__STRICT_ANSI__ -g $(OS_CCDEFS) -I .
++  CC = gcc -std=c99 -U__STRICT_ANSI__ -g -O2 $(OS_CCDEFS) -I .
+   ifeq ($(USE_NETWORK),)
+   else
+-    NETWORK_OPT = -DUSE_NETWORK -isystem /usr/local/include /usr/local/lib/libpcap.a
++    NETWORK_OPT = -DUSE_NETWORK -lpcap
+   endif
+ else
+   #Win32 Environments

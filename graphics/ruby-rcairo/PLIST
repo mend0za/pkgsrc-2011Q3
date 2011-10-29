@@ -1,0 +1,18 @@
+@comment $NetBSD: PLIST,v 1.12 2010/05/25 04:39:46 obache Exp $
+${RUBY_VENDORLIB}/cairo.rb
+${RUBY_VENDORLIB}/cairo/color.rb
+${RUBY_VENDORLIB}/cairo/colors.rb
+${RUBY_VENDORLIB}/cairo/constants.rb
+${RUBY_VENDORLIB}/cairo/context.rb
+${RUBY_VENDORLIB}/cairo/context/blur.rb
+${RUBY_VENDORLIB}/cairo/context/circle.rb
+${RUBY_VENDORLIB}/cairo/context/color.rb
+${RUBY_VENDORLIB}/cairo/context/path.rb
+${RUBY_VENDORLIB}/cairo/context/rectangle.rb
+${RUBY_VENDORLIB}/cairo/context/triangle.rb
+${RUBY_VENDORLIB}/cairo/paper.rb
+${RUBY_VENDORLIB}/cairo/papers.rb
+${RUBY_VENDORLIB}/cairo/path.rb
+${RUBY_VENDORLIB}/cairo/point.rb
+${RUBY_VENDORARCHLIB}/cairo.${RUBY_DLEXT}
+${RUBY_VENDORARCHLIB}/rb_cairo.h

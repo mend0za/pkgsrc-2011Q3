@@ -1,0 +1,12 @@
+$NetBSD: patch-ee,v 1.2 2009/12/10 20:35:58 abs Exp $
+
+--- lib/libxview/sel/seln.c.orig	1993-06-29 05:15:22.000000000 +0000
++++ lib/libxview/sel/seln.c
+@@ -69,7 +69,6 @@ selection_get(sel_read, window)
+     FILE           *file;
+     int             c;
+     int             n;
+-    extern          errno;
+ 
+     *sel = selnull;
+     (void) win_lockdata(window);

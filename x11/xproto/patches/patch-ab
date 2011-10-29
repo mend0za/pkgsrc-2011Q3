@@ -1,0 +1,27 @@
+$NetBSD: patch-ab,v 1.4 2010/09/10 20:07:29 joerg Exp $
+
+--- configure.ac.orig	2010-08-10 14:19:17.000000000 +0000
++++ configure.ac
+@@ -11,6 +11,7 @@ XORG_DEFAULT_OPTIONS
+ 
+ AC_CONFIG_HEADER([do-not-use-config.h])
+ AC_CONFIG_HEADER([Xfuncproto.h])
++AC_CONFIG_HEADER([Xos_r.h])
+ 
+ AC_CANONICAL_HOST
+ 
+@@ -203,6 +204,14 @@ if test "x$WIDEPROTO" = xno; then
+ 	AC_DEFINE(NARROWPROTO, [], [Narrow prototypes])
+ fi
+ 
++# Handle Xos_r.h
++AC_CHECK_FUNC(readdir_r, [AC_DEFINE(_XOS_R_H_MTSAFE_DIRENTAPI,[],[Assume has readdir_r and friends from dirent.h])],)
++AC_CHECK_FUNC(getgrgid_r, [AC_DEFINE(_XOS_R_H_MTSAFE_GRPAPI,[],[Assume has getgrgid_r and friends from grp.h])],)
++AC_CHECK_FUNC(getpwuid_r, [AC_DEFINE(_XOS_R_H_MTSAFE_PWDAPI,[],[Assume has getpwuid_r and friends from pwd.h])],)
++AC_CHECK_FUNC(gethostbyname_r, [AC_DEFINE(_XOS_R_H_MTSAFE_NETDBAPI,[],[Assume has gethostbyname_r and friends from netdb.h])],)
++AC_CHECK_FUNC(strtok_r, [AC_DEFINE(_XOS_R_H_MTSAFE_STRINGAPI,[],[Assume has strtok_r from string.h])],)
++AC_CHECK_FUNC(gmtime_r, [AC_DEFINE(_XOS_R_H_MTSAFE_TIMEAPI,[],[Assume has gmtime_r and friends from time.h])],)
++AC_CHECK_FUNC(ttyname_r, [AC_DEFINE(_XOS_R_H_MTSAFE_UNISTDAPI,[],[Assume has ttyname_r and friends from unistd.h])],)
+ 
+ AC_OUTPUT([Makefile
+            Xpoll.h

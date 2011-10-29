@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.7 2010/12/02 15:39:17 wiz Exp $
+
+SHA1 (libxml++-2.32.0.tar.bz2) = ac4b3a03cd1d5ab3d4ce35486a1c9ee771f7ad4a
+RMD160 (libxml++-2.32.0.tar.bz2) = 5f4662c7c83d3892f04fd35c53f609e06b194ef7
+Size (libxml++-2.32.0.tar.bz2) = 831918 bytes

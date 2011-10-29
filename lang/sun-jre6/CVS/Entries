@@ -1,0 +1,14 @@
+/DEINSTALL/1.2/Tue Jul 31 20:04:17 2007//Tpkgsrc-2011Q3
+/DESCR/1.2/Sun Jan 20 02:31:47 2008//Tpkgsrc-2011Q3
+/INSTALL/1.1/Sun Jul 29 05:19:32 2007//Tpkgsrc-2011Q3
+/MESSAGE.NetBSD/1.2/Wed Aug 22 14:49:24 2007//Tpkgsrc-2011Q3
+/Makefile/1.32/Sat Sep 10 14:09:49 2011//Tpkgsrc-2011Q3
+/Makefile.common/1.16/Thu Aug 25 10:32:52 2011//Tpkgsrc-2011Q3
+/PLIST.linux-i386/1.22/Thu Jun  9 09:08:17 2011//Tpkgsrc-2011Q3
+/PLIST.linux-x86_64/1.4/Mon Sep 26 13:06:52 2011//Tpkgsrc-2011Q3
+/buildlink3.mk/1.5/Fri Mar 20 19:24:52 2009//Tpkgsrc-2011Q3
+/builtin.mk/1.4/Wed Feb 11 21:20:46 2009//Tpkgsrc-2011Q3
+/distinfo/1.18/Sat Sep 10 14:09:49 2011//Tpkgsrc-2011Q3
+/sfiles-i386.mk/1.5/Thu Jun  9 09:08:17 2011//Tpkgsrc-2011Q3
+/sfiles-x86_64.mk/1.1/Wed Aug 24 04:01:27 2011//Tpkgsrc-2011Q3
+D

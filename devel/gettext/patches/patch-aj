@@ -1,0 +1,22 @@
+$NetBSD: patch-aj,v 1.5 2011/04/12 17:41:28 adam Exp $
+
+--- gettext-runtime/Makefile.in.orig	2010-06-06 20:11:38.000000000 +0000
++++ gettext-runtime/Makefile.in
+@@ -943,7 +943,7 @@ ACLOCAL_AMFLAGS = -I m4 -I ../m4 -I gnul
+ # The list of subdirectories depends on whether --disable-libasprintf was
+ # specified.
+ @ENABLE_LIBASPRINTF_TRUE@SUBDIR_libasprintf = libasprintf
+-SUBDIRS = doc intl intl-java intl-csharp gnulib-lib $(SUBDIR_libasprintf) src po man m4 tests
++SUBDIRS = doc gnulib-lib src po man m4 tests
+ 
+ # Allow users to use "gnulib-tool --update".
+ 
+@@ -1410,7 +1410,7 @@ info: info-recursive
+ 
+ info-am:
+ 
+-install-data-am: install-gettextsrcDATA
++install-data-am:
+ 
+ install-dvi: install-dvi-recursive
+ 

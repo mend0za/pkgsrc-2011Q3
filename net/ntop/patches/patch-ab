@@ -1,0 +1,53 @@
+$NetBSD: patch-ab,v 1.20 2011/02/11 11:12:15 adam Exp $
+
+--- configure.in.orig	2010-10-24 10:01:01.000000000 +0000
++++ configure.in
+@@ -437,6 +437,19 @@ case "${target}:${CC}" in
+         echo "* This appears to be ${DEFINEOS} (release not checked)"
+       ;;
+ 
++    *-*-netbsd*:* )
++	DEFINEOS="NETBSD"
++        echo "* This appears to be ${DEFINEOS}"
++      ;;
++    *-*-openbsd*:* )
++	DEFINEOS="OPENBSD"
++        echo "* This appears to be ${DEFINEOS}"
++      ;;
++    *-*-dragonfly*:* )
++	DEFINEOS="DRAGONFLY"
++        echo "* This appears to be ${DEFINEOS}"
++      ;;
++
+     * )
+         echo "* ${target} is an unknown/unsupported OS"
+         echo "*"
+@@ -596,8 +609,8 @@ if test ".${PCAPRING_DIR}" != .; then
+ else
+ if test ".${PCAP_ROOT}" != .; then
+   if test -d $PCAP_ROOT &&
+-     test -r $PCAP_ROOT/libpcap.a &&
+-     test -r $PCAP_ROOT/pcap.h; then
++     test -r $PCAP_ROOT/lib/libpcap.a -o -r $PCAP_ROOT/lib/libpcap.dylib &&
++     test -r $PCAP_ROOT/include/pcap.h; then
+        PCAP_ROOT=`cd ${PCAP_ROOT} && pwd`
+        CORELIBS="${CORELIBS} -L$PCAP_ROOT -lpcap"
+        INCS="${INCS} -I$PCAP_ROOT"
+@@ -1829,8 +1842,6 @@ if test -f "GeoLiteCity.dat"; then
+ else
+    if test -f "3rd_party/GeoLiteCity.dat.gz"; then
+      cp 3rd_party/GeoLiteCity.dat.gz .
+-   else
+-     wget http://www.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+    fi
+ 
+    gunzip GeoLiteCity.dat.gz
+@@ -1843,8 +1852,6 @@ if test -f "GeoIPASNum.dat"; then
+ else
+    if test -f "3rd_party/GeoIPASNum.dat.gz"; then
+      cp 3rd_party/GeoIPASNum.dat.gz .
+-   else
+-     wget http://www.maxmind.com/download/geoip/database/asnum/GeoIPASNum.dat.gz
+    fi
+ 
+    gunzip GeoIPASNum.dat.gz

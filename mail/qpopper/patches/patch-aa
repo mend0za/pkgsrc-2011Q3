@@ -1,0 +1,26 @@
+$NetBSD: patch-aa,v 1.10 2009/12/27 14:17:38 obache Exp $
+
+--- configure.orig	2009-12-27 12:17:33.000000000 +0000
++++ configure
+@@ -3023,13 +3023,6 @@ fi
+ 
+ 
+ 
+-if test -r /usr/local/include/gdbm.h -a "$GCC" = yes
+-then
+-    CFLAGS="$CFLAGS -idirafter /usr/local/include"
+-    CPPFLAGS="$CPPFLAGS -idirafter /usr/local/include"
+-fi
+-
+-
+ if test "$GCC" = yes
+ then
+         echo "$as_me:$LINENO: checking for gcc version 2.7.2.3" >&5
+@@ -5132,6 +5125,7 @@ fi
+       ipv6_cv_iruserok_sa=no
+       :
+     fi
++fi
+ 
+ 
+ USE_REG_STRUCT_RET="default"

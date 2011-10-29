@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.52 2011/04/12 08:57:57 wiz Exp $
+
+SHA1 (tiff-3.9.5.tar.gz) = f40aab20fb2f609b5cbc1171c40b66a1445e3773
+RMD160 (tiff-3.9.5.tar.gz) = c67742bf6b9b10ca0700e69ce575007d40c4f89c
+Size (tiff-3.9.5.tar.gz) = 1455502 bytes

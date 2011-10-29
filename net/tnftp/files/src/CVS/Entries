@@ -1,0 +1,18 @@
+/Makefile.in/1.6/Thu Mar  6 04:45:58 2008//Tpkgsrc-2011Q3
+/cmds.c/1.9/Tue Sep 22 20:39:18 2009//Tpkgsrc-2011Q3
+/cmdtab.c/1.6/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/complete.c/1.5/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/domacro.c/1.5/Tue Aug  7 02:07:02 2007//Tpkgsrc-2011Q3
+/extern.h/1.7/Tue Sep 22 20:39:18 2009//Tpkgsrc-2011Q3
+/fetch.c/1.8/Tue Sep 22 20:39:18 2009//Tpkgsrc-2011Q3
+/ftp.1/1.4/Tue Aug  7 02:07:02 2007//Tpkgsrc-2011Q3
+/ftp.c/1.9/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/ftp.cat1/1.4/Tue Aug  7 02:07:02 2007//Tpkgsrc-2011Q3
+/ftp_var.h/1.6/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/main.c/1.9/Tue Sep 22 20:39:18 2009//Tpkgsrc-2011Q3
+/progressbar.c/1.7/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/progressbar.h/1.5/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/ruserpass.c/1.5/Tue Aug  7 02:07:02 2007//Tpkgsrc-2011Q3
+/util.c/1.9/Tue Sep 22 20:39:18 2009//Tpkgsrc-2011Q3
+/version.h/1.7/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+D

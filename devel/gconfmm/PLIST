@@ -1,0 +1,20 @@
+@comment $NetBSD: PLIST,v 1.7 2011/05/11 15:26:18 drochner Exp $
+include/gconfmm-2.6/gconfmm.h
+include/gconfmm-2.6/gconfmm/callback.h
+include/gconfmm-2.6/gconfmm/changeset.h
+include/gconfmm-2.6/gconfmm/client.h
+include/gconfmm-2.6/gconfmm/entry.h
+include/gconfmm-2.6/gconfmm/init.h
+include/gconfmm-2.6/gconfmm/private/changeset_p.h
+include/gconfmm-2.6/gconfmm/private/client_p.h
+include/gconfmm-2.6/gconfmm/private/entry_p.h
+include/gconfmm-2.6/gconfmm/private/schema_p.h
+include/gconfmm-2.6/gconfmm/private/value_p.h
+include/gconfmm-2.6/gconfmm/schema.h
+include/gconfmm-2.6/gconfmm/setinterface.h
+include/gconfmm-2.6/gconfmm/value.h
+include/gconfmm-2.6/gconfmm/value_listhelpers.h
+include/gconfmm-2.6/gconfmm/wrap_init.h
+lib/gconfmm-2.6/include/gconfmmconfig.h
+lib/libgconfmm-2.6.la
+lib/pkgconfig/gconfmm-2.6.pc

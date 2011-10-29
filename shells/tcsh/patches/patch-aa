@@ -1,0 +1,33 @@
+$NetBSD: patch-aa,v 1.11 2010/03/14 14:06:09 adam Exp $
+
+--- Makefile.in.orig	2009-06-24 22:09:05.000000000 +0000
++++ Makefile.in
+@@ -278,7 +278,7 @@ P=
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ bindir=@bindir@
+-mandir=@datarootdir@/man
++mandir=@mandir@
+ MANSECT=1
+ DESTBIN=${DESTDIR}${bindir}
+ DESTMAN=${DESTDIR}${mandir}/man${MANSECT}
+@@ -512,17 +512,10 @@ vgrind:
+ install-strip: install
+ 
+ install: tcsh$(EXEEXT) 
+-	-mkdir -p ${DESTBIN}
+-	-mv -f ${DESTBIN}/tcsh$(EXEEXT)  ${DESTBIN}/tcsh.old
+-	cp tcsh$(EXEEXT) ${DESTBIN}/tcsh$(EXEEXT)
+-	-strip ${DESTBIN}/tcsh$(EXEEXT)
+-	chmod 755 ${DESTBIN}/tcsh$(EXEEXT)
++	${BSD_INSTALL_PROGRAM} tcsh${EXEEXT} ${DESTBIN}/tcsh${EXEEXT}
+ 
+ install.man: tcsh.man
+-	-mkdir -p ${DESTMAN}
+-	-rm -f ${DESTMAN}/tcsh.${MANSECT}
+-	cp $(srcdir)/tcsh.man ${DESTMAN}/tcsh.${MANSECT}
+-	chmod 444 ${DESTMAN}/tcsh.${MANSECT}
++	${BSD_INSTALL_MAN} tcsh.man ${DESTMAN}/tcsh.${MANSECT}
+ 
+ install.cygwin: install install.man
+ 	-mkdir -p ${DESTDIR}${prefix}/share/doc/tcsh

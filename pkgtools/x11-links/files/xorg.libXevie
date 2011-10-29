@@ -1,0 +1,13 @@
+# $NetBSD: xorg.libXevie,v 1.4 2010/05/31 21:20:02 wiz Exp $
+#
+include/X11/extensions/Xevie.h
+lib/libXevie.1.0.0.dylib
+lib/libXevie.1.dylib
+lib/libXevie.dylib
+lib/libXevie.a
+lib/libXevie.so
+lib/libXevie.so.1
+lib/libXevie.so.1.0
+lib/libXevie.so.2
+lib/libXevie.so.2.0
+lib/pkgconfig/xevie.pc

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.25 2011/05/25 20:13:59 gls Exp $
+
+SHA1 (CGI.pm-3.54.tar.gz) = 6024cf9ac3d151ff7f4db0afa19c642f04c09dbc
+RMD160 (CGI.pm-3.54.tar.gz) = 1b56886be2a22eebc797d3e658ba9efc4cc3367b
+Size (CGI.pm-3.54.tar.gz) = 242967 bytes

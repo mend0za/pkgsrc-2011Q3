@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.12 2010/08/18 04:36:13 obache Exp $
+
+SHA1 (check-0.9.8.tar.gz) = a75cc89411e24b5d39b7869f8233e19f210de555
+RMD160 (check-0.9.8.tar.gz) = 75e0d1981109086ac597e57655ba9561f1b79211
+Size (check-0.9.8.tar.gz) = 558943 bytes

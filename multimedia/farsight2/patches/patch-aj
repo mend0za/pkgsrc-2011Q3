@@ -1,0 +1,12 @@
+$NetBSD: patch-aj,v 1.2 2010/08/05 18:55:18 drochner Exp $
+
+--- gst-libs/gst/farsight/fs-interfaces.c.orig	2010-05-31 19:20:03.000000000 +0000
++++ gst-libs/gst/farsight/fs-interfaces.c
+@@ -44,6 +44,7 @@
+  #include <sys/socket.h>
+  #include <ifaddrs.h>
+ #endif
++#include <netinet/in.h>
+ 
+ #include <gst/gst.h>
+ 

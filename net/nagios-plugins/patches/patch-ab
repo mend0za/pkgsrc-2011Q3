@@ -1,0 +1,85 @@
+$NetBSD: patch-ab,v 1.7 2011/04/08 22:56:12 morr Exp $
+
+--- configure.orig	2010-07-27 20:48:13.000000000 +0000
++++ configure
+@@ -14688,7 +14688,7 @@ _ACEOF
+ 
+ fi
+ 
+-if test "$ac_cv_lib_radiusclient_rc_read_config" = "yes"; then
++if false; then
+   EXTRAS="$EXTRAS check_radius"
+ 	RADIUSLIBS="-lradiusclient"
+ 
+@@ -14843,7 +14843,7 @@ _ACEOF
+ 
+ fi
+ 
+-if test "$ac_cv_lib_ldap_main" = "yes"; then
++if false; then
+   LDAPLIBS="-lldap -llber"\
+   LDAPINCLUDE="-I/usr/include/ldap"
+ 
+@@ -19037,7 +19037,7 @@ fi
+ 	then
+ 		{ echo "$as_me:$LINENO: checking for nslookup syntax" >&5
+ echo $ECHO_N "checking for nslookup syntax... $ECHO_C" >&6; }
+-		if $PATH_TO_NSLOOKUP -sil 127.0.0.1 2>&1 | grep "Invalid option: sil" >/dev/null
++		if $PATH_TO_NSLOOKUP -sil 127.0.0.1 2>&1 | fgrep "Invalid option: sil" >/dev/null
+ 		then
+ 			ac_cv_nslookup_command="$PATH_TO_NSLOOKUP"
+ 			{ echo "$as_me:$LINENO: result: $ac_cv_nslookup_command" >&5
+@@ -19260,7 +19260,7 @@ echo "${ECHO_T}no" >&6; }
+ fi
+ 
+ 
+-if test -x "$PATH_TO_LMSTAT"
++if false
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -19431,7 +19431,7 @@ if test "${with_snmpget_command+set}" = 
+   withval=$with_snmpget_command; PATH_TO_SNMPGET=$withval
+ fi
+ 
+-if test -n "$PATH_TO_SNMPGET"
++if test -n "$PATH_TO_SNMPGET" -a "$PATH_TO_SNMPGET" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -19490,7 +19490,7 @@ if test "${with_snmpgetnext_command+set}
+   withval=$with_snmpgetnext_command; PATH_TO_SNMPGETNEXT=$withval
+ fi
+ 
+-if test -n "$PATH_TO_SNMPGETNEXT"
++if test -n "$PATH_TO_SNMPGETNEXT" -a "$PATH_TO_SNMPGETNEXT" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -19499,7 +19499,7 @@ _ACEOF
+ 
+ fi
+ 
+-if ( $PERL -M"Net::SNMP 3.6" -e 'exit' 2>/dev/null  )
++if false
+ then
+ 	{ echo "$as_me:$LINENO: checking for Net::SNMP perl module" >&5
+ echo $ECHO_N "checking for Net::SNMP perl module... $ECHO_C" >&6; }
+@@ -19666,7 +19666,7 @@ if test "${with_fping_command+set}" = se
+   withval=$with_fping_command; PATH_TO_FPING=$withval
+ fi
+ 
+-if test -n "$PATH_TO_FPING"
++if test -n "$PATH_TO_FPING" -a "$PATH_TO_FPING" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -20882,7 +20882,7 @@ if test -n "$PATH_TO_APTGET" ; then
+ fi
+ 
+ 
+-if test -f $srcdir/plugins/check_nt.c ; then
++if false ; then
+   EXTRAS="$EXTRAS check_nt"
+ fi
+ 

@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.6 2010/02/24 18:43:34 drochner Exp $
+bin/pymetar${PYVERSSUFFIX}
+${PYSITELIB}/pymetar.py
+${PYSITELIB}/pymetar.pyc
+${PYSITELIB}/pymetar.pyo
+share/doc/pymetar-${PYVERSSUFFIX}-${PKGVERSION}/COPYING
+share/doc/pymetar-${PYVERSSUFFIX}-${PKGVERSION}/README
+share/doc/pymetar-${PYVERSSUFFIX}-${PKGVERSION}/THANKS
+share/doc/pymetar-${PYVERSSUFFIX}-${PKGVERSION}/librarydoc.txt

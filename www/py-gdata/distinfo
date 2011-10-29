@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.3 2010/04/17 13:29:54 obache Exp $
+
+SHA1 (gdata-2.0.9.tar.gz) = 99d5aefce33b4ec73961aeb33eb49ab37709e8bb
+RMD160 (gdata-2.0.9.tar.gz) = bf6bf42a98acc7c77c2e59dabce29680557ac767
+Size (gdata-2.0.9.tar.gz) = 1618078 bytes

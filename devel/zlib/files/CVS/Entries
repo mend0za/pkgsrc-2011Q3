@@ -1,0 +1,27 @@
+/ChangeLog/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+/Makefile/1.2/Thu Aug  2 15:07:27 2007//Tpkgsrc-2011Q3
+/README/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+/adler32.c/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/compress.c/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/crc32.c/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/crc32.h/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/deflate.c/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/deflate.h/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/gzio.c/1.1.1.1/Thu Aug  2 13:19:52 2007//Tpkgsrc-2011Q3
+/infback.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inffast.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inffast.h/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inffixed.h/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+/inflate.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inflate.h/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inftrees.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/inftrees.h/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/trees.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/trees.h/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/uncompr.c/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/zconf.h/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/zlib.3/1.1.1.1/Thu Aug  2 13:19:53 2007//Tpkgsrc-2011Q3
+/zlib.h/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+/zutil.c/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+/zutil.h/1.1.1.1/Thu Aug  2 13:19:54 2007//Tpkgsrc-2011Q3
+D

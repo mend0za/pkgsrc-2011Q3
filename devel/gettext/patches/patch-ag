@@ -1,0 +1,36 @@
+$NetBSD: patch-ag,v 1.8 2011/04/12 17:41:28 adam Exp $
+
+--- gettext-tools/gnulib-lib/Makefile.in.orig	2010-06-06 20:12:29.000000000 +0000
++++ gettext-tools/gnulib-lib/Makefile.in
+@@ -3034,7 +3034,7 @@ check: $(BUILT_SOURCES)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-am
+ all-am: Makefile $(LTLIBRARIES) $(DATA) all-local
+ installdirs:
+-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(gettextsrcdir)" "$(DESTDIR)$(pkgdatadir)"; do \
++	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(gettextsrcdir)"; do \
+ 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+ 	done
+ install: $(BUILT_SOURCES)
+@@ -3100,7 +3100,7 @@ info: info-am
+ 
+ info-am:
+ 
+-install-data-am: install-gettextsrcDATA install-pkgdataDATA
++install-data-am:
+ 
+ install-dvi: install-dvi-am
+ 
+@@ -3366,13 +3366,6 @@ getopt.h: getopt.in.h $(ARG_NONNULL_H)
+ 	} > $@-t && \
+ 	mv -f $@-t $@
+ 
+-# No need to install libgettextlib.a, except on AIX.
+-install-exec-local: install-libLTLIBRARIES install-exec-clean
+-install-exec-clean:
+-	case "@host_os@" in \
+-	  aix*) ;; \
+-	  *) rm -f $(DESTDIR)$(libdir)/libgettextlib.a ;; \
+-	esac
+ # This is a Makefile rule that generates multiple files at once; see the
+ # automake documentation, node "Multiple Outputs", for details.
+ html-ostream.h : $(top_srcdir)/../build-aux/moopp html-ostream.oo.h html-ostream.oo.c ostream.oo.h

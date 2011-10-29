@@ -1,0 +1,25 @@
+$NetBSD: patch-ac,v 1.6 2011/07/14 08:15:35 ryoon Exp $
+
+--- zfuncs.h.orig	2011-07-01 17:05:59.000000000 +0000
++++ zfuncs.h
+@@ -22,6 +22,7 @@
+ 
+ //     zfuncs.h   version  v.4.4
+ 
++#include <sys/param.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+@@ -34,9 +35,10 @@
+ #include <pthread.h>
+ #include <errno.h>
+ #include <signal.h>
+-#include <execinfo.h>
++//#include <execinfo.h>
++#include <sys/wait.h>
+ #include <locale.h>
+-#include <sys/inotify.h>
++//#include <sys/inotify.h>
+ 
+ #define  int8   char                                                       //  number types
+ #define  int16  short

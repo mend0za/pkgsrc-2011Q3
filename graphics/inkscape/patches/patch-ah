@@ -1,0 +1,13 @@
+$NetBSD: patch-ah,v 1.5 2011/02/05 07:57:15 adam Exp $
+
+--- packaging/macosx/Resources/bin/inkscape.orig	2009-11-16 18:29:06.000000000 +0100
++++ packaging/macosx/Resources/bin/inkscape
+@@ -113,7 +113,7 @@ fi
+ # If the AppleCollationOrder preference doesn't exist, we fall back to using
+ # the AppleLocale preference.
+ LANGSTR=`defaults read .GlobalPreferences AppleCollationOrder 2>/dev/null`
+-if [ "x$LANGSTR" == "x" ]
++if [ "x$LANGSTR" = "x" ]
+ then
+     echo "Warning: AppleCollationOrder setting not found, using AppleLocale." 1>&2
+     LANGSTR=`defaults read .GlobalPreferences AppleLocale 2>/dev/null | \

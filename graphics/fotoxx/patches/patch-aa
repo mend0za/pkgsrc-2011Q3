@@ -1,0 +1,14 @@
+$NetBSD: patch-aa,v 1.5 2011/07/14 08:15:35 ryoon Exp $
+
+--- Makefile.orig	2011-07-01 17:05:59.000000000 +0000
++++ Makefile
+@@ -26,8 +26,7 @@ fotoxx: fotoxx.o fotoxx_area.o fotoxx_in
+         fotoxx_transform.o fotoxx_art.o fotoxx_comp.o zfuncs.o 
+ 	$(CXX) $(LDFLAGS) fotoxx.o fotoxx_area.o fotoxx_info.o fotoxx_retouch.o \
+           fotoxx_transform.o fotoxx_art.o fotoxx_comp.o zfuncs.o \
+-          $(LIBS) -ltiff -o fotoxx 
+-	@ ./dependencies.sh                             ## after the build
++          $(LIBS) -ltiff -o fotoxx -lcompat
+ 
+ fotoxx.o: $(VERSION) fotoxx.h
+ 	$(CXX) $(CFLAGS) -o fotoxx.o $(VERSION)

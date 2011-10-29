@@ -1,0 +1,39 @@
+$NetBSD: patch-ab,v 1.4 2010/09/19 06:11:04 obache Exp $
+
+* YACC and LEX are passwd as full path.
+* static linking is not supported on MacOS X.  PR#39058.
+
+--- configure.orig	2010-09-10 17:48:04.000000000 +0000
++++ configure
+@@ -4231,10 +4231,6 @@ fi
+ done
+ test -n "$YACC" || YACC="yacc"
+ 
+-if test "x${YACC}" != "xbison -y"; then
+-        echo "AIDE requires GNU bison"
+-        exit 5
+-fi
+ 
+ 
+ for ac_prog in flex lex
+@@ -4394,10 +4390,6 @@ fi
+ rm -f conftest.l $LEX_OUTPUT_ROOT.c
+ 
+ fi
+-if test "x${LEX}" != "xflex"; then
+-        echo "AIDE requires GNU flex"
+-        exit 5
+-fi
+ for ac_prog in ld
+ do
+   # Extract the first word of "$ac_prog", so it can be a program name with args.
+@@ -4539,6 +4531,9 @@ if test $ac_cv_c_compiler_gnu = yes; the
+ 	## pic_flag=-Kconform_pic
+ 	## fi
+ 	;;
++    darwin*)
++	LD_STATIC_FLAG=''
++	;;
+     *)
+ 	## pic_flag='-fPIC'
+ 	;;

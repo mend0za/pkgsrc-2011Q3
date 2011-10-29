@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2010/12/19 03:00:52 taca Exp $
+
+SHA1 (php-memcache/memcache-2.2.6.tgz) = be0b12fa09ed127dc35c0da29a576a9112be1bde
+RMD160 (php-memcache/memcache-2.2.6.tgz) = 72e940339c644c801577c8fce861f012e9e71a2d
+Size (php-memcache/memcache-2.2.6.tgz) = 35957 bytes

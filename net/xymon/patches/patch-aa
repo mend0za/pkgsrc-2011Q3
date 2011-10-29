@@ -1,0 +1,14 @@
+$NetBSD: patch-aa,v 1.2 2011/04/22 14:52:18 spz Exp $
+
+--- configure.server.orig	2011-03-08 17:20:28.000000000 +0000
++++ configure.server
+@@ -507,6 +507,9 @@ fi
+ if test "$INSTALLETCDIR" != ""; then
+ 	echo "INSTALLETCDIR = $INSTALLETCDIR"   >>Makefile
+ fi
++if test "$INSTALLEXADIR" != ""; then
++	echo "INSTALLEXADIR = $INSTALLEXADIR"   >>Makefile
++fi
+ if test "$INSTALLEXTDIR" != ""; then
+ 	echo "INSTALLEXTDIR = $INSTALLEXTDIR"   >>Makefile
+ fi

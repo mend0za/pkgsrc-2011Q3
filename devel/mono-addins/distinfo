@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.5 2011/04/25 14:02:30 kefren Exp $
+
+SHA1 (mono-addins-0.6.1.tar.bz2) = 2e13998a42c49a45d74d15eb364d73d1935f0bae
+RMD160 (mono-addins-0.6.1.tar.bz2) = 6a3f65c67b8c88daac3347c4f2e81b2151bfe4d0
+Size (mono-addins-0.6.1.tar.bz2) = 345641 bytes

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2010/09/01 20:58:08 sno Exp $
+
+SHA1 (NetPacket-0.43.1.tar.gz) = b75f134e20d7e3daedda0343057c39c4ed0d6291
+RMD160 (NetPacket-0.43.1.tar.gz) = 5b319b902c27009835544e279c00d10a49c19129
+Size (NetPacket-0.43.1.tar.gz) = 23428 bytes

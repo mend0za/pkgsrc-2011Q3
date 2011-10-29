@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2011/09/01 07:57:30 adam Exp $
+
+SHA1 (squidclamav-6.4.tar.gz) = 8953c45572a08d36d2d5b86eb7cb88062c179f8a
+RMD160 (squidclamav-6.4.tar.gz) = 5aa714479aa84db2cd959acab630998f2d46e0ac
+Size (squidclamav-6.4.tar.gz) = 840856 bytes
+SHA1 (patch-etc_Makefile.in) = 23a87a5ee484ab7ef7c50a5716f436b83f7e7449

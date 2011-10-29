@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.8 2011/03/02 06:31:35 wiz Exp $
+
+SHA1 (libsamplerate-0.1.7-repack/libsamplerate-0.1.7.tar.gz) = f3f803ec5feae5a3fdb0fa3937277669e854386e
+RMD160 (libsamplerate-0.1.7-repack/libsamplerate-0.1.7.tar.gz) = a00f12571098fd6c50a8b9f8867cdcc3f36c1f60
+Size (libsamplerate-0.1.7-repack/libsamplerate-0.1.7.tar.gz) = 4340619 bytes

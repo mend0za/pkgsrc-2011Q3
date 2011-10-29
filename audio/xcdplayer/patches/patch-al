@@ -1,0 +1,55 @@
+$NetBSD: patch-al,v 1.5 2011/09/04 22:05:39 dholland Exp $
+
+- needs stdlib.h
+- needs time.h
+- use malloc properly
+- support BSD cdrom interface
+- use the right debug on/off flag
+
+--- shuffle.c.orig	1993-01-12 18:59:38.000000000 +0000
++++ shuffle.c
+@@ -15,9 +15,14 @@
+ 
+ # include <X11/Intrinsic.h>
+ # include <stdio.h>
++# include <stdlib.h>
++# include <time.h>
+ 
+ # include "debug.h"
+ # include "cdrom_globs.h"
++#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__)
++# include "cdrom_freebsd.h"
++#endif
+ #ifdef sun
+ # include "cdrom_sun.h"
+ #endif
+@@ -29,9 +34,10 @@
+ 
+ static unsigned char	*random_tracks;
+ 
++extern AppData app_data;
++
+ void
+ shuffle_setup() {
+-	extern char	*malloc();
+ #ifdef sgi
+ 	extern time_t	time(time_t *);
+ #else
+@@ -63,7 +69,7 @@ shuffle_setup() {
+ 		random_tracks = NULL;
+ 	}
+ 
+-	if ((random_tracks = (unsigned char *) malloc(cdi.ntracks)) == NULL) {
++	if ((random_tracks = malloc(cdi.ntracks)) == NULL) {
+ 		perror("malloc");
+ 		exit(1);
+ 	}
+@@ -97,7 +103,7 @@ shuffle_setup() {
+ 		random_tracks[i] = try;
+ 	}
+ 
+-	if (debug == True) {
++	if (app_data.debug == True) {
+ 		debug_printf(1, "shuffle_setup: ");
+ 		for (i = 0; i < cdi.ntracks; i++)
+ 			debug_printf(1, "%d ", random_tracks[i]);

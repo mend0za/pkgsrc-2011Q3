@@ -1,0 +1,13 @@
+$NetBSD: patch-da,v 1.5 2011/01/19 16:43:38 jmmv Exp $
+
+--- configure.orig	2010-09-28 09:37:06.000000000 +0000
++++ configure
+@@ -12094,7 +12094,7 @@ $as_echo "$libgtop_sysdeps_dir" >&6; }
+ 
+ 
+ 	case "$host_os" in
+-	*bsd*)
++	*bsd*|dragonfly*)
+ 		case "$host_os" in
+ 		*kfreebsd*)
+ 		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for kvm_open in -lkvm" >&5

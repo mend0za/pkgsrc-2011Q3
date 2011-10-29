@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.13 2010/12/25 13:39:54 mef Exp $
+
+SHA1 (xlog-2.0.4.tar.gz) = 48ef247e09abbc194361dd6c8fee666e947b82dd
+RMD160 (xlog-2.0.4.tar.gz) = 16ceebc75a3c5b993db9da77eda3ffad9b8fc484
+Size (xlog-2.0.4.tar.gz) = 11146213 bytes
+SHA1 (patch-aa) = ae23e56971d16454791dca298756c65654bfc961

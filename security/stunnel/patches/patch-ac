@@ -1,0 +1,15 @@
+$NetBSD: patch-ac,v 1.14 2011/08/31 08:26:16 jym Exp $
+
+Change pid file location.
+
+--- src/Makefile.in.orig	2011-08-17 12:15:27.000000000 +0100
++++ src/Makefile.in	2011-08-24 18:49:46.000000000 +0100
+@@ -254,7 +254,7 @@
+ INCLUDES = -I/usr/kerberos/include
+ 
+ # Additional compiler flags
+-AM_CPPFLAGS = -DLIBDIR='"$(pkglibdir)"' -DCONFDIR='"$(sysconfdir)/stunnel"' -DPIDFILE='"$(localstatedir)/run/stunnel/stunnel.pid"'
++AM_CPPFLAGS = -DLIBDIR='"$(pkglibdir)"' -DCONFDIR='"$(sysconfdir)"' -DPIDFILE='"$(localstatedir)/run/stunnel.pid"'
+ 
+ # Win32 executable
+ EXTRA_DIST = stunnel.exe make.bat mingw.mak makece.bat evc.mak vc.mak makew32.bat nogui.c os2.mak

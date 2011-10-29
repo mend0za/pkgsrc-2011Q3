@@ -1,0 +1,5 @@
+@comment $NetBSD: PLIST,v 1.8 2009/10/21 16:51:46 tnn Exp $
+bin/zile
+man/man1/zile.1
+share/zile/FAQ
+share/zile/dotzile.sample

@@ -1,0 +1,21 @@
+$NetBSD: patch-aj,v 1.5 2011/01/15 10:32:08 adam Exp $
+
+--- src/Makefile.in.orig	2010-12-22 05:47:54.000000000 +0000
++++ src/Makefile.in
+@@ -4616,14 +4616,14 @@ info: info-recursive
+ 
+ info-am:
+ 
+-install-data-am: install-data-local install-dataDATA
++install-data-am: install-dataDATA
+ 
+ install-dvi: install-dvi-recursive
+ 
+ install-dvi-am:
+ 
+ install-exec-am: install-binPROGRAMS install-libexecPROGRAMS \
+-	install-sbinPROGRAMS install-sysconfDATA
++	install-sbinPROGRAMS
+ 
+ install-html: install-html-recursive
+ 

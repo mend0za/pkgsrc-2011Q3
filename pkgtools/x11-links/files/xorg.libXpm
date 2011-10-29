@@ -1,0 +1,15 @@
+# $NetBSD: xorg.libXpm,v 1.3 2011/09/09 09:08:07 abs Exp $
+#
+include/X11/xpm.h
+lib/libXpm.a
+lib/libXpm.so
+lib/libXpm.so.4
+lib/libXpm.so.4.11
+lib/libXpm.so.5
+lib/libXpm.so.5.0
+lib/libXpm.so.8.0
+lib/libXpm.dylib
+lib/libXpm.4.dylib
+lib/libXpm.4.11.dylib
+lib/libXpm.4.11.0.dylib
+lib/pkgconfig/xpm.pc

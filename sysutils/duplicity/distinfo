@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.11 2009/09/05 22:11:50 tnn Exp $
+
+SHA1 (duplicity-0.5.20.tar.gz) = 7666991bb163e1126c2a2baf451090439dcae069
+RMD160 (duplicity-0.5.20.tar.gz) = 7c691739df0d43688b6fbd200cdc763b7644edd3
+Size (duplicity-0.5.20.tar.gz) = 217742 bytes

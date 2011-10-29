@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.13 2011/09/12 17:43:07 drochner Exp $
+
+SHA1 (rssyl-0.31.tar.gz) = 072309dd976208f410d3cf2c9309298de8a862bb
+RMD160 (rssyl-0.31.tar.gz) = 5a8d8d5c42512b69486c75691a06af3986eb6e38
+Size (rssyl-0.31.tar.gz) = 482749 bytes

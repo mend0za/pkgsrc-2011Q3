@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.7 2011/01/11 11:53:13 drochner Exp $
+
+SHA1 (nickle-2.70.tar.gz) = b967e09816146e2f356c97b4fc5170a33bad2f29
+RMD160 (nickle-2.70.tar.gz) = 567028075e57c17a015253d4544a12f140aebb79
+Size (nickle-2.70.tar.gz) = 488081 bytes
+SHA1 (patch-aa) = 0b1e03f3e42ea088c5a81109e9534c77efe30659

@@ -1,0 +1,20 @@
+/bsd.plist.mk/1.2/Thu Oct 25 18:27:05 2007//Tpkgsrc-2011Q3
+/common-dirs.mtree/1.15/Wed May 20 08:24:29 2009//Tpkgsrc-2011Q3
+/doc-compress/1.3/Thu Jan 19 17:22:26 2006//Tpkgsrc-2011Q3
+/libtool-expand/1.4/Mon Apr 24 01:31:04 2006//Tpkgsrc-2011Q3
+/plist-default.awk/1.1/Thu Jan 12 23:43:57 2006//Tpkgsrc-2011Q3
+/plist-functions.awk/1.2/Wed Oct 31 21:09:03 2007//Tpkgsrc-2011Q3
+/plist-info.awk/1.17/Sun Jun 14 23:10:39 2009//Tpkgsrc-2011Q3
+/plist-libtool.awk/1.4/Sat Apr 15 04:25:17 2006//Tpkgsrc-2011Q3
+/plist-locale.awk/1.3/Sun Jun 14 23:10:39 2009//Tpkgsrc-2011Q3
+/plist-macros.awk/1.2/Sat Jan  5 17:03:04 2008//Tpkgsrc-2011Q3
+/plist-man.awk/1.8/Sat Feb 20 07:05:52 2010//Tpkgsrc-2011Q3
+/plist-subst.awk/1.3/Tue May  2 14:32:35 2006//Tpkgsrc-2011Q3
+/plist.mk/1.40/Thu Sep  8 20:17:16 2011//Tpkgsrc-2011Q3
+/print-plist.mk/1.19/Tue Aug 30 11:19:51 2011//Tpkgsrc-2011Q3
+/shlib-aout.awk/1.3/Tue Feb  7 18:42:38 2006//Tpkgsrc-2011Q3
+/shlib-dylib.awk/1.3/Tue Feb  7 18:42:38 2006//Tpkgsrc-2011Q3
+/shlib-elf.awk/1.1/Thu Jan 12 23:43:57 2006//Tpkgsrc-2011Q3
+/shlib-none.awk/1.1/Thu Jan 12 23:43:57 2006//Tpkgsrc-2011Q3
+/shlib-som.awk/1.3/Sun Apr 22 19:54:44 2007//Tpkgsrc-2011Q3
+D

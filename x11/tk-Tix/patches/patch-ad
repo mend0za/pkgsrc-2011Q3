@@ -1,0 +1,15 @@
+$NetBSD: patch-ad,v 1.2 2011/07/02 18:06:50 dholland Exp $
+
+Dragonfly support.
+
+--- generic/tixAppInit.c.orig	2005-12-12 15:40:13.000000000 +0000
++++ generic/tixAppInit.c
+@@ -31,7 +31,7 @@
+ #undef WIN32_LEAN_AND_MEAN
+ #endif
+ 
+-#if !defined(__WIN32__) && !defined(MAC_TCL) /* UNIX */
++#if !defined(__WIN32__) && !defined(MAC_TCL) && !defined(__DragonFly__) /* UNIX */
+ 
+ /*
+  * The following variable is a special hack that is needed in order for

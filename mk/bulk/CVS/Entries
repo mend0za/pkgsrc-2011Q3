@@ -1,0 +1,19 @@
+/TODO/1.6/Mon Dec  5 22:16:13 2005//Tpkgsrc-2011Q3
+/bsd.bulk-pkg.mk/1.152/Thu Sep  8 20:17:15 2011//Tpkgsrc-2011Q3
+/build/1.106/Thu Jul  9 12:46:49 2009//Tpkgsrc-2011Q3
+/build.conf-example/1.39/Fri Apr 22 09:03:52 2011//Tpkgsrc-2011Q3
+/do-sandbox-build/1.12/Wed Jul 13 22:07:46 2005//Tpkgsrc-2011Q3
+/do-sandbox-upload/1.5/Wed Jul 13 22:07:46 2005//Tpkgsrc-2011Q3
+/environment.txt/1.5/Fri Dec 15 13:15:06 2006//Tpkgsrc-2011Q3
+/mksandbox/1.52/Sun Sep 20 10:24:00 2009//Tpkgsrc-2011Q3
+/parallel.txt/1.7/Fri Dec 15 12:46:24 2006//Tpkgsrc-2011Q3
+/post-build/1.71/Fri Jun 13 21:52:16 2008//Tpkgsrc-2011Q3
+/post-build-conf/1.14/Tue Mar  6 10:57:11 2007//Tpkgsrc-2011Q3
+/pre-build/1.76/Tue May 11 18:36:15 2010//Tpkgsrc-2011Q3
+/printdepends/1.25/Fri Jan  4 15:49:08 2008//Tpkgsrc-2011Q3
+/printindex/1.32/Tue Apr 29 05:46:09 2008//Tpkgsrc-2011Q3
+/printindex.1/1.8/Sat Dec 23 08:11:30 2006//Tpkgsrc-2011Q3
+/sort-packages/1.16/Thu Aug  4 14:39:33 2011//Tpkgsrc-2011Q3
+/tflat/1.15/Wed Oct 26 16:54:04 2005//Tpkgsrc-2011Q3
+/upload/1.48/Sat Apr 10 21:44:44 2010//Tpkgsrc-2011Q3
+D

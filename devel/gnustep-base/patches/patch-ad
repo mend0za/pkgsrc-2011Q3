@@ -1,0 +1,13 @@
+$NetBSD: patch-ad,v 1.6 2011/04/07 01:55:15 rh Exp $
+
+--- Source/GNUmakefile.orig	2010-05-29 09:09:53.000000000 +0000
++++ Source/GNUmakefile
+@@ -91,7 +91,7 @@ GNU_MFILES = \
+ GSLocale.m \
+ preface.m
+ 
+-ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
++ifeq ($(findstring bsd, $(GNUSTEP_TARGET_OS)), bsd)
+   OBJC_LIBS += -lpthread
+ endif
+ 

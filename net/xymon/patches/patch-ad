@@ -1,0 +1,13 @@
+$NetBSD: patch-ad,v 1.2 2011/04/22 14:52:18 spz Exp $
+
+--- build/Makefile.NetBSD.orig	2011-03-08 17:20:28.000000000 +0000
++++ build/Makefile.NetBSD
+@@ -1,7 +1,7 @@
+ # Xymon compile-time settings for NetBSD systems
+ # From Emmanuel Dreyfus.
+ #
+-OSDEF = -DBSD
++OSDEF = -DBSD -DHAVE_STDINT_H
+ 
+ # NETLIBS: None needed
+ NETLIBS =

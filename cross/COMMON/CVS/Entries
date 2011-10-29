@@ -1,0 +1,15 @@
+/PLIST-binutils/1.2/Mon Jan  4 22:37:30 1999//Tpkgsrc-2011Q3
+/PLIST-egcs/1.5/Sun Jun 14 18:34:00 2009//Tpkgsrc-2011Q3
+/PLIST-egcs-cxx/1.1/Wed Jan  6 01:14:20 1999//Tpkgsrc-2011Q3
+/PLIST-egcs-cxx-runtime/1.2/Sun Jun 14 17:39:52 2009//Tpkgsrc-2011Q3
+/PLIST-egcs-f77/1.1/Wed Jan  6 01:14:20 1999//Tpkgsrc-2011Q3
+/PLIST-egcs-f77-runtime/1.1/Wed Jan  6 01:14:20 1999//Tpkgsrc-2011Q3
+/PLIST-egcs-objc/1.1/Wed Jan  6 01:14:20 1999//Tpkgsrc-2011Q3
+/PLIST-egcs-objc-runtime/1.2/Sun Jun 14 17:39:52 2009//Tpkgsrc-2011Q3
+/buwrapper.c/1.2/Mon Jan  4 22:51:53 1999//Tpkgsrc-2011Q3
+/cross.mk/1.40/Sun Jun 14 22:57:58 2009//Tpkgsrc-2011Q3
+/exclude/1.1/Mon Jan  4 22:37:30 1999//Tpkgsrc-2011Q3
+/netbsd.mk/1.2/Wed Aug 12 18:58:09 1998//Tpkgsrc-2011Q3
+D/patches-binutils////
+D/patches-egcs////
+D

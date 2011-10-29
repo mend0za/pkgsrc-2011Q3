@@ -1,0 +1,14 @@
+$NetBSD: patch-ae,v 1.11 2010/11/25 13:18:39 drochner Exp $
+
+--- doc/examples/Makefile.in.orig	2010-11-04 17:28:16.000000000 +0000
++++ doc/examples/Makefile.in
+@@ -791,7 +791,8 @@ index.html: examples.xml examples.xsl
+ 
+ install-data-local: 
+ 	@MKDIR_P@ $(DESTDIR)$(HTML_DIR)
+-	-@INSTALL@ -m 0644 $(srcdir)/*.html $(srcdir)/*.c $(srcdir)/*.xml $(srcdir)/*.xsl $(srcdir)/*.res $(DESTDIR)$(HTML_DIR)
++	-@INSTALL@ -m 0644 $(srcdir)/*.c $(srcdir)/*.xml $(srcdir)/*.xsl $(srcdir)/*.res $(DESTDIR)$(HTML_DIR)
++	-@INSTALL@ -m 0644 $(srcdir)/*.html $(DESTDIR)$(HTML_DIR)
+ 
+ valgrind: 
+ 	$(MAKE) CHECKER='valgrind' tests

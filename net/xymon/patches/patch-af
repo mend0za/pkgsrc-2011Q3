@@ -1,0 +1,12 @@
+$NetBSD: patch-af,v 1.2 2011/04/22 14:52:18 spz Exp $
+
+--- xymond/etcfiles/tasks.cfg.DIST.orig	2011-03-08 17:20:28.000000000 +0000
++++ xymond/etcfiles/tasks.cfg.DIST
+@@ -180,6 +180,7 @@
+ # Xymon server ?), but there's no need to have two xymonlaunch instances
+ # running at the same time. So we'll just run it from here.
+ [xymonclient]
++	DISABLED
+ 	ENVFILE @XYMONTOPDIR@/client/etc/xymonclient.cfg
+ 	NEEDS xymond
+ 	CMD @XYMONTOPDIR@/client/bin/xymonclient.sh

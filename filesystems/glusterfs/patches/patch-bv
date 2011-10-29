@@ -1,0 +1,14 @@
+--- config.h.in.orig	2011-08-23 14:31:46.000000000 +0200
++++ config.h.in	2011-09-17 15:45:30.000000000 +0200
+@@ -38,8 +38,11 @@
+ 
+ /* define if found malloc_stats */
+ #undef HAVE_MALLOC_STATS
+ 
++/* define if found linkat */
++#undef HAVE_LINKAT
++
+ /* Define to 1 if you have the <memory.h> header file. */
+ #undef HAVE_MEMORY_H
+ 
+ /* readline enabled CLI */

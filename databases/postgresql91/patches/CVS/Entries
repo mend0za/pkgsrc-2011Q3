@@ -1,0 +1,12 @@
+/patch-config_perl.m4/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-configure/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-contrib_dblink_Makefile/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-contrib_dblink_dblink.c/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_Makefile.shlib/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_backend_Makefile/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_pl_plperl_GNUmakefile/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_timezone_localtime.c/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_timezone_private.h/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_timezone_strftime.c/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+/patch-src_timezone_zic.c/1.1.1.1/Thu Sep 15 08:27:39 2011//Tpkgsrc-2011Q3
+D

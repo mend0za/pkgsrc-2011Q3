@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.10 2011/07/29 15:11:40 bouyer Exp $
+
+--- conf/Makefile.in.orig	2011-06-27 14:45:05.000000000 +0200
++++ conf/Makefile.in	2011-06-27 14:49:32.000000000 +0200
+@@ -109,7 +109,7 @@
+ CC = @CC@
+ CCDEPMODE = @CCDEPMODE@
+ CFLAGS = @CFLAGS@
+-CONFPATH = @CONFPATH@
++CONFPATH = $(DESTDIR)@prefix@/share/examples/nut
+ CPP = @CPP@
+ CPPFLAGS = @CPPFLAGS@
+ CYGPATH_W = @CYGPATH_W@

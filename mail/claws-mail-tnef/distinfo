@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.9 2011/09/12 17:43:07 drochner Exp $
+
+SHA1 (tnef_parse-0.3.11.tar.gz) = ed7a63e2e6e4148c9c6aba9c2fc15e85c352f6cb
+RMD160 (tnef_parse-0.3.11.tar.gz) = d77e3ddfc5913152f2f495cac3bc0d76021b3d09
+Size (tnef_parse-0.3.11.tar.gz) = 388704 bytes

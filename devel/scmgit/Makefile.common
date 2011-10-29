@@ -1,0 +1,34 @@
+# $NetBSD: Makefile.common,v 1.20 2011/09/13 17:58:58 gdt Exp $
+#
+# used by devel/scmgit-base/Makefile
+# used by devel/scmgit-docs/Makefile
+
+.include "../../devel/scmgit/Makefile.version"
+
+DISTNAME=	git-${GIT_VERSION}
+CATEGORIES=	devel scm
+MASTER_SITES?=	http://www.kernel.org/pub/software/scm/git/  http://git-core.googlecode.com/files/
+# Historically .tar.bz2 has been available, but 1.7.6.3 is only .tar.gz
+#EXTRACT_SUFX=	.tar.bz2
+
+MAINTAINER?=	pkgsrc-users@NetBSD.org
+HOMEPAGE?=	http://git.or.cz/
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "../../mk/bsd.fast.prefs.mk"
+
+PATCHDIR=	${.CURDIR}/../../devel/scmgit-base/patches
+DISTINFO_FILE=	${.CURDIR}/../../devel/scmgit-base/distinfo
+
+USE_TOOLS+=		gmake tar perl sh
+
+PKG_SYSCONFSUBDIR=	git
+
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--with-perl=${PERL5:Q}
+CONFIGURE_ARGS+=	--with-shell=${SH:Q}
+CONFIGURE_ARGS+=	--with-tar=${TAR:Q}
+CONFIGURE_ARGS+=	--mandir=${${PREFIX}/${PKGMANDIR}:L:Q}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}

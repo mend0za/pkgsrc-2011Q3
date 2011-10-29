@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2010/01/22 13:45:57 obache Exp $
+
+SHA1 (GeoIP-Python-1.2.4.tar.gz) = 53db51c86cff1c0106cbaa02ad32bd589a150bfc
+RMD160 (GeoIP-Python-1.2.4.tar.gz) = 9504be23b9abc4939893076e766beb70f78cb00b
+Size (GeoIP-Python-1.2.4.tar.gz) = 14530 bytes

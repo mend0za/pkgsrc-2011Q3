@@ -1,0 +1,14 @@
+/blk_netbsd.c/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/blktapctrl_netbsd.c/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/block-nbsd/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/hvm-nbsd/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/netbsd1-nbsd/1.2/Mon Feb 23 11:23:24 2009//Tpkgsrc-2011Q3
+/qemu-ifup-nbsd/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/vif-bridge-nbsd/1.2/Wed Jan 12 00:12:14 2011//Tpkgsrc-2011Q3
+/vif-ip-nbsd/1.2/Wed Jan 12 00:12:14 2011//Tpkgsrc-2011Q3
+/xen-subr-nbsd/1.1/Wed Jan 12 00:12:14 2011//Tpkgsrc-2011Q3
+/xenbackendd.c/1.1.1.1/Thu Aug  7 20:26:57 2008//Tpkgsrc-2011Q3
+/xenbackendd.sh/1.1.1.1/Thu Aug  7 20:26:58 2008//Tpkgsrc-2011Q3
+/xend.sh/1.2/Sat Jan 17 12:31:10 2009//Tpkgsrc-2011Q3
+/xendomains.sh/1.1.1.1/Thu Aug  7 20:26:58 2008//Tpkgsrc-2011Q3
+D

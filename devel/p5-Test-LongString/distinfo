@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.3 2010/02/23 10:55:06 sno Exp $
+
+SHA1 (Test-LongString-0.13.tar.gz) = 2d57d768b26d48a3f60519e09a9251a9bdea6904
+RMD160 (Test-LongString-0.13.tar.gz) = 08e1544e47e7ded9c611a47ffc4a544039cdc24f
+Size (Test-LongString-0.13.tar.gz) = 7783 bytes

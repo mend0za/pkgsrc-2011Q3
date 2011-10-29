@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.5 2011/09/09 22:02:19 cheusov Exp $
+
+SHA1 (pkgnih-0.9.1.tar.gz) = ceac96353fe93d8fca9fc946357d5702af61de31
+RMD160 (pkgnih-0.9.1.tar.gz) = 17f7452f0a67df09987efd3df5029e3db010a83c
+Size (pkgnih-0.9.1.tar.gz) = 48950 bytes

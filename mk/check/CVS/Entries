@@ -1,0 +1,19 @@
+/bsd.check-vars.mk/1.7/Sun Jul 26 05:32:43 2009//Tpkgsrc-2011Q3
+/bsd.check.mk/1.8/Wed Feb 13 15:02:20 2008//Tpkgsrc-2011Q3
+/check-fakehome.mk/1.3/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-files.mk/1.27/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-headers.mk/1.6/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-headers.sh/1.10/Mon Jan 21 06:11:09 2008//Tpkgsrc-2011Q3
+/check-interpreter.mk/1.27/Tue Apr 19 15:31:45 2011//Tpkgsrc-2011Q3
+/check-perms.mk/1.13/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-portability.awk/1.4/Mon Nov 13 23:21:53 2006//Tpkgsrc-2011Q3
+/check-portability.mk/1.7/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-portability.sh/1.8/Tue Nov 18 21:58:22 2008//Tpkgsrc-2011Q3
+/check-shlibs-elf.awk/1.3/Tue Feb  2 23:35:36 2010//Tpkgsrc-2011Q3
+/check-shlibs.mk/1.19/Thu Sep  8 20:17:15 2011//Tpkgsrc-2011Q3
+/check-stripped.mk/1.4/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+/check-subr.awk/1.3/Sun Dec 31 13:35:10 2006//Tpkgsrc-2011Q3
+/check-subr.sh/1.5/Tue Jan  2 17:58:11 2007//Tpkgsrc-2011Q3
+/check-vulnerable.mk/1.4/Fri Mar  9 00:39:54 2007//Tpkgsrc-2011Q3
+/check-wrkref.mk/1.21/Tue Aug 24 19:08:29 2010//Tpkgsrc-2011Q3
+D

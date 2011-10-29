@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.8 2011/08/16 23:04:17 wiz Exp $
+
+SHA1 (Perl-Tidy-20101217.tar.gz) = d9efd9bd29403fcda7d6f1667b0b0bdd62d8d744
+RMD160 (Perl-Tidy-20101217.tar.gz) = bd28763749424456598135e877890c97fdf594cc
+Size (Perl-Tidy-20101217.tar.gz) = 387834 bytes

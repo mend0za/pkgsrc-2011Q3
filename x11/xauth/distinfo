@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.3 2009/11/09 19:19:47 tnn Exp $
+
+SHA1 (xauth-1.0.4.tar.bz2) = 90d32f28bb61ca6d831dcc35429a5ad53be73283
+RMD160 (xauth-1.0.4.tar.bz2) = 4ca09d02f6623715423c70bef41f93c4b4486988
+Size (xauth-1.0.4.tar.bz2) = 119274 bytes

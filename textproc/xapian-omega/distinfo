@@ -1,0 +1,7 @@
+$NetBSD: distinfo,v 1.9 2010/02/16 14:53:13 wiz Exp $
+
+SHA1 (xapian-omega-1.0.18.tar.gz) = 713fe78f840942147eda31c681212b3a2f5d815d
+RMD160 (xapian-omega-1.0.18.tar.gz) = 2645e40ce7884d8f9cba8431f0e134f8b970f926
+Size (xapian-omega-1.0.18.tar.gz) = 515518 bytes
+SHA1 (patch-aa) = a95ffd453b84c39d1b2b912aefd90af6929e2f1d
+SHA1 (patch-ab) = 6e845f6a61d7e36715b4a1bde217ff31ea0999e5

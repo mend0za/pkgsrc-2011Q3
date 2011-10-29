@@ -1,0 +1,3 @@
+# $NetBSD: Makefile.vers,v 1.14 2011/09/12 17:43:05 drochner Exp $
+#
+CLAWS_VERSION=	3.7.10
