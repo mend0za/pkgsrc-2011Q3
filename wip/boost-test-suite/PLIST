@@ -1,7 +1,0 @@
-@comment $NetBSD$
-libdata/boost-test-suite/comment.html.in
-libdata/boost-test-suite/patch_boost
-libdata/boost-test-suite/patches/index
-libdata/boost-test-suite/patches/patch-aa
-man/man1/boost-test-suite.1
-sbin/boost-test-suite

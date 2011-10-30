@@ -1,3 +1,0 @@
-@comment $NetBSD$
-${PYSITELIB}/_pyStem.so
-${PYSITELIB}/Stem.py

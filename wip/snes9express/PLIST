@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/snes9express
-share/snes9express/snes.s9xskin
-share/snes9express/snsp.s9xskin

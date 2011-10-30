@@ -1,3 +1,0 @@
-@comment $NetBSD$
-${EMACS_LISPPREFIX}/mic-paren.el
-${EMACS_LISPPREFIX}/mic-paren.elc

@@ -1,4 +1,0 @@
-This is a collection of NIS client tools for Linux.
-
-This package contains ypcat, ypmatch, ypset, ypwhich, yppasswd,
-domainname, nisdomainname and ypdomainname.

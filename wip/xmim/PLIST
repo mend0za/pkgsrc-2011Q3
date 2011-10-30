@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/mim
-bin/xmim
-man/man1/xmim.1.gz

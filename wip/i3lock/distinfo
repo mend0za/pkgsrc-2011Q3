@@ -1,6 +1,0 @@
-$NetBSD$
-
-SHA1 (i3lock-2.1.tar.gz) = e3dad64bc2d94057f2434bc95bb85907a946b6c4
-RMD160 (i3lock-2.1.tar.gz) = 5a4c4b080e665dc04350bea180339fea5ee58603
-Size (i3lock-2.1.tar.gz) = 26530 bytes
-SHA1 (patch-Makefile) = 127e0ee0c88476acabb1a9164f6b5bf442b8f398

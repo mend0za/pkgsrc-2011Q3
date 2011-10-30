@@ -1,6 +1,0 @@
-- Rewrite the do-install target to use make's .for structures instead of
-  shell ones.
-
-- Does it really require ncurses? Check if it works with NetBSD's curses.
-
-- Use libtool?

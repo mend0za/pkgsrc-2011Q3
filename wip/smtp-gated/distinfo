@@ -1,6 +1,0 @@
-$NetBSD$
-
-SHA1 (smtp-gated-1.4.16.2.tar.gz) = a9c5faa7c70fd1ecd75ac5e6c80764a8ffb1cc93
-RMD160 (smtp-gated-1.4.16.2.tar.gz) = 047b0b953ce7f320115c4f5d854fc1874c81efbc
-Size (smtp-gated-1.4.16.2.tar.gz) = 364265 bytes
-SHA1 (patch-ab) = b0c65a2233679a98f80eb467d4040a4d900d0aba

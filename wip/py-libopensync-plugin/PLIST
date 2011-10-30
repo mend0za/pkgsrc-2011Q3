@@ -1,3 +1,0 @@
-@comment $NetBSD$
-lib/opensync/plugins/python_module.la
-lib/opensync/python-plugins/sample.py

@@ -1,5 +1,0 @@
-@comment $NetBSD$
-include/xc.h
-include/xc_config.h
-include/xc_funcs.h
-lib/libxc.a

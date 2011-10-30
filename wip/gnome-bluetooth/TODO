@@ -1,3 +1,0 @@
-use MASTER_SITE_GNOME
-still not working. seems that the python/bluetooth/gnome
-subsystem is broken. (libbtctl is updated...so it must work)

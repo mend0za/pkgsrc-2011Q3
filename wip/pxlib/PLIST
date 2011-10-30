@@ -1,6 +1,0 @@
-@comment $NetBSD$
-include/paradox.h
-include/paradox-gsf.h
-include/pxversion.h
-lib/libpx.la
-lib/pkgconfig/pxlib.pc

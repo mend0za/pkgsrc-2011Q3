@@ -1,8 +1,0 @@
-@comment $NetBSD$
-sbin/dnsd
-${PYSITELIB}/bindparse.py
-${PYSITELIB}/bindparse.pyc
-${PYSITELIB}/bindparse.pyo
-${PYSITELIB}/nameserver.py
-${PYSITELIB}/nameserver.pyc
-${PYSITELIB}/nameserver.pyo

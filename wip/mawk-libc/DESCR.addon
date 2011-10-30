@@ -1,2 +1,0 @@
-Unlike original mawk, mawk-libc
-uses libc's regexp implementation.

@@ -1,3 +1,0 @@
-$NetBSD$
-
-Add options for Qt and snmp using pkg.options framework.

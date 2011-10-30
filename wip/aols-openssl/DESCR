@@ -1,3 +1,0 @@
-$NetBSD$
-nsopenssl is a module allowing https (secure) access to
-aolserver using the OpenSSL library.

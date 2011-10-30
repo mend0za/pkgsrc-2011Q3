@@ -1,3 +1,0 @@
-showfont displays data about a font from an X font server.
-The information shown includes font information, font properties,
-character metrics, and character bitmaps.

@@ -1,4 +1,0 @@
-@comment $NetBSD$
-share/doc/emacs-session/README
-${EMACS_LISPPREFIX}/session.el
-${EMACS_LISPPREFIX}/session.elc

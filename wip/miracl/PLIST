@@ -1,4 +1,0 @@
-@comment $NetBSD$
-include/${DISTNAME}/miracl.h
-include/${DISTNAME}/mirdef.h
-lib/libmiracl.a

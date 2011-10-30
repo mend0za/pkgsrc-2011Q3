@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/yafray
-lib/libyafraycore.so
-share/doc/yafray/doc.html
-share/yafray/gram.yafray

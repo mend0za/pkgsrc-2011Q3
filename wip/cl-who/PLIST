@@ -1,5 +1,0 @@
-@comment $NetBSD$
-${PLIST.ecl}${ECL_PATH}cl-who.asd
-${PLIST.ecl}${ECL_PATH}cl-who.fas
-share/doc/${LISP}-who/CHANGELOG
-share/doc/${LISP}-who/index.html

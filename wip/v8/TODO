@@ -1,5 +1,0 @@
-only the build works so far.
-
-snapshot mode is not working on x86_64, probably
-because of libexecinfo
-

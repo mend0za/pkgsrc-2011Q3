@@ -1,6 +1,0 @@
-@comment $NetBSD$
-bin/class.x
-bin/cws.x
-bin/nef.x
-bin/poly.x
-share/doc/palp/palp.pdf

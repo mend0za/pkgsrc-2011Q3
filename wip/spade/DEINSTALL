@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# $NetBSD$
-
-case ${STAGE} in
-DEINSTALL)
-	${RM} -f -r ${PREFIX}/etc/spade
-	;;
-esac

@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/orange
-include/liborange.h
-lib/liborange.la

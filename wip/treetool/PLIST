@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/treetool
-share/doc/treetool/README
-share/doc/treetool/user.manual
-share/misc/treetool/font_map

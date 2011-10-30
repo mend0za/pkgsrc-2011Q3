@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/tenshi
-man/man8/tenshi.8
-share/examples/tenshi/tenshi.conf

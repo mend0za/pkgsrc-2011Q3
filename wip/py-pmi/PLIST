@@ -1,4 +1,0 @@
-@comment $NetBSD$
-${PYSITELIB}/pmi.py
-${PYSITELIB}/pmi.pyc
-${PYSITELIB}/pmi.pyo

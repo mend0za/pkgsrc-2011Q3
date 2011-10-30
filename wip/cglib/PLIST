@@ -1,3 +1,0 @@
-@comment $NetBSD$
-lib/java/${PKGNAME}.jar
-lib/java/cglib.jar

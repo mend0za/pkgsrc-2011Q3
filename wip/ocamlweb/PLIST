@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/ocamlweb
-man/man1/ocamlweb.1
-share/texmf/tex/latex/misc/ocamlweb.sty

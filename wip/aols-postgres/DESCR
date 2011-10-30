@@ -1,3 +1,0 @@
-$NetBSD$
-nspostgres is a module allowing direct access to postgresql databases
-from aolserver.

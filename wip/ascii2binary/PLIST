@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/ascii2binary
-bin/binary2ascii
-man/man1/ascii2binary.1
-man/man1/binary2ascii.1

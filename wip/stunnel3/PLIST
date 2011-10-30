@@ -1,6 +1,0 @@
-@comment $NetBSD$
-lib/stunnel.so
-man/man8/stunnel.8
-sbin/stunnel
-share/doc/stunnel3/VNC_StunnelHOWTO.html
-share/doc/stunnel3/transproxy.txt

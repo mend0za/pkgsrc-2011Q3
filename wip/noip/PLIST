@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/noip2
-share/doc/noip/COPYING
-share/doc/noip/README.FIRST
-share/examples/rc.d/noip

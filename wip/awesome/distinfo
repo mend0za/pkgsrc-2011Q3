@@ -1,7 +1,0 @@
-$NetBSD$
-
-SHA1 (awesome-3.4.9.tar.xz) = 8c51d531caf51695aec2e3c563205dcc2c719580
-RMD160 (awesome-3.4.9.tar.xz) = 58b992288efbe6a27b3afe9a5a348b77068c102c
-Size (awesome-3.4.9.tar.xz) = 710136 bytes
-SHA1 (patch-CMakeLists.txt) = dd5a758c1abed0ab2380a0643c0b4f170f4ba81b
-SHA1 (patch-awesomeConfig.cmake) = 8486944d347279847cb2f5b9ab0dd789c49b4570

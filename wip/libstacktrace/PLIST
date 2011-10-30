@@ -1,5 +1,0 @@
-@comment $NetBSD$
-include/stacktrace.h
-lib/libstacktrace.a
-lib/libstacktrace_p.a
-lib/libstacktrace_pic.a

@@ -1,7 +1,0 @@
-$NetBSD$
-
-SHA1 (zabbix-1.8.5.tar.gz) = 655f5c7381139ec97d23df4cce0469e1e032c54d
-RMD160 (zabbix-1.8.5.tar.gz) = 200e1cdddb0f7149c7cfb62237a46a563054f95e
-Size (zabbix-1.8.5.tar.gz) = 4184672 bytes
-SHA1 (patch-aa) = 2ee589f4bcc86fbe019e6fcb9ee213009cee062d
-SHA1 (patch-ab) = 9330885f80f003319db9fb4e17b5a34bc91fdafc

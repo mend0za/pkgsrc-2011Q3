@@ -1,8 +1,0 @@
-@comment $NetBSD$
-bin/deforaos-cpp
-include/cpp.h
-lib/libcpp.a
-lib/libcpp.so
-lib/libcpp.so.0
-lib/libcpp.so.0.0
-lib/pkgconfig/cpp.pc

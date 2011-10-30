@@ -1,3 +1,0 @@
-@comment $NetBSD$
-bin/fstobdf
-man/man1/fstobdf.1

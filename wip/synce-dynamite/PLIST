@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/dynamite
-include/libdynamite.h
-lib/libdynamite.la
-share/aclocal/dynamite.m4

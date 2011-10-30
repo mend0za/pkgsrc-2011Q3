@@ -1,6 +1,0 @@
-$NetBSD$
-
-SHA1 (rsyslog-5.8.6.tar.gz) = 1afe39077253dc9f636f676e8374d09a101a9c94
-RMD160 (rsyslog-5.8.6.tar.gz) = 96beddd94eea0c635c41409f92c897d3620182c0
-Size (rsyslog-5.8.6.tar.gz) = 2373078 bytes
-SHA1 (patch-rsyslog.conf) = dc2bdbe23a1b4b2c72031ea29a2980c47b3be89a

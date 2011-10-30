@@ -1,2 +1,0 @@
-This is same as ../../devel/py-kqueue with minor modifications to work with
-Twisted reactor.

@@ -1,3 +1,0 @@
-@comment $NetBSD$
-bin/bt-applet
-etc/xdg/autostart/bt-applet.desktop

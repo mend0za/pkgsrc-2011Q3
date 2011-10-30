@@ -1,8 +1,0 @@
-# this had curses.h hard-coded; patch hard-codes ncurses instead
-
-# need to force ncurses requirement with USE_NCURSES=
-#  or patch code more
-
-# todo: submit patch to maintainer
-
-# todo: need to test without glibc

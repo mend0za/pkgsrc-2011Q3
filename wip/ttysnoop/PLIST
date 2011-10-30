@@ -1,4 +1,0 @@
-@comment $NetBSD$
-sbin/ttysnoop
-sbin/ttysnoops
-man/man8/ttysnoop.8

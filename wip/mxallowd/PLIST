@@ -1,5 +1,0 @@
-@comment $NetBSD$
-man/man1/mxallowd.1
-sbin/mxallowd
-share/doc/mxallowd/samples/mxallowd.conf
-share/examples/rc.d/mxallowd

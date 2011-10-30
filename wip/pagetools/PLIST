@@ -1,3 +1,0 @@
-@comment $NetBSD$
-bin/pbm_findskew
-bin/tiff_findskew

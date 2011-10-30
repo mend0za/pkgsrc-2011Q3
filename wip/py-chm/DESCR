@@ -1,3 +1,0 @@
-PyCHM contains a Python package named chm to manipulate CHM
-archive. It uses the functionality implemented in chmlib, a C-based
-library written by Jed Wing.

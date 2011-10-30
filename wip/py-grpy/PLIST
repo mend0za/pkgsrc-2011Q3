@@ -1,4 +1,0 @@
-@comment $NetBSD$
-${PYSITELIB}/Christoffel.py
-${PYSITELIB}/Riemann.py
-${PYSITELIB}/Tensor.py

@@ -1,5 +1,0 @@
-@comment $NetBSD$
-lib/io/addons/Thread/_build/dll/libIoThread.so
-lib/io/addons/Thread/_build/lib/libIoThread.a
-lib/io/addons/Thread/build.io
-lib/io/addons/Thread/depends

@@ -1,3 +1,0 @@
-This package installs the Linux kernel headers. These .h include files
-are generally required for building software under Linux-based operating
-systems.

@@ -1,5 +1,0 @@
-@comment $NetBSD$
-etc/btscanner.dtd
-etc/btscanner.xml
-bin/btscanner
-share/oui.txt

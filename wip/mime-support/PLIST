@@ -1,7 +1,0 @@
-@comment $NetBSD$
-bin/run-mailcap
-bin/mime-edit
-bin/mime-compose
-bin/mime-see
-bin/mime-print
-man/man1/run-mailcap.1

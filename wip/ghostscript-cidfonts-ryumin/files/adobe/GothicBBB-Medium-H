@@ -1,6 +1,0 @@
-%% $NetBSD$
-/GothicBBB-Medium-H
-/H /CMap
-findresource
-[/WadaMin-Bold /CIDFont findresource]
-composefont pop

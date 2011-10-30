@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/pgp6
-man/man1/pgp6.1
-share/doc/pgp6/LICENSE
-share/doc/pgp6/pgpcmdln.ps

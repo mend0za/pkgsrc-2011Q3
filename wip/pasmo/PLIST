@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/pasmo
-share/doc/pasmo/NEWS
-share/doc/pasmo/README
-share/doc/pasmo/pasmodoc.html

@@ -1,5 +1,0 @@
-%% $NetBSD$
-/Ryumin-Light-H
-/H /CMap findresource
-[/WadaMin-Regular /CIDFont findresource]
-composefont pop

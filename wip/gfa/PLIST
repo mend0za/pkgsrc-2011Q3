@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/gfa
-share/gfa/README
-share/gfa/pixmaps/person.png

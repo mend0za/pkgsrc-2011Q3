@@ -1,3 +1,0 @@
-@comment $NetBSD$
-bin/smproxy
-man/man1/smproxy.1

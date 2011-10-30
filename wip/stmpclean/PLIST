@@ -1,4 +1,0 @@
-@comment $NetBSD$
-man/man8/stmpclean.8
-sbin/stmpclean
-share/doc/stmpclean/FAQ

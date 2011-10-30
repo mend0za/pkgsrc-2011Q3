@@ -1,8 +1,0 @@
-$NetBSD$
-
-SHA1 (tde-5.1u.tar.gz) = 35a794f657ec5d615b1575268572d49f884e5dc9
-RMD160 (tde-5.1u.tar.gz) = 54482c0d1f895df1fd172d78c835d4a1ed1620ee
-Size (tde-5.1u.tar.gz) = 560352 bytes
-SHA1 (patch-aa) = 2488657fb92f702be402962a8e389018d5611a49
-SHA1 (patch-ab) = b9f703078dedc7d9f414e1c05f0105886bda9de7
-SHA1 (patch-ac) = 12b9ef77eb6fc888c12a1177e1fe2c14c5b96207

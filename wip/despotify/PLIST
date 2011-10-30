@@ -1,7 +1,0 @@
-@comment $NetBSD$
-bin/despotify
-bin/despotify-gateway
-bin/despotify-simple
-include/despotify.h
-lib/libdespotify.la
-lib/pkgconfig/despotify.pc

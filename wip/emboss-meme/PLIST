@@ -1,4 +1,0 @@
-@comment $NetBSD$
-bin/meme
-lib/libmeme.la
-share/EMBOSS/acd/meme.acd

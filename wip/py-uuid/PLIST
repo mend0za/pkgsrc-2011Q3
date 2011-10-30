@@ -1,4 +1,0 @@
-@comment $NetBSD$
-${PYSITELIB}/uuid.py
-${PYSITELIB}/uuid.pyc
-${PYSITELIB}/uuid.pyo

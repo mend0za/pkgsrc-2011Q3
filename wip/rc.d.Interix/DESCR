@@ -1,2 +1,0 @@
-NetBSD rc.d init for MS Interix embedding pkgsrc
-daemons into Interix's native rc system.

@@ -1,6 +1,0 @@
-@comment $NetBSD$
-bin/bunny-exec
-bin/bunny-flow
-bin/bunny-gcc
-bin/bunny-main
-bin/bunny-trace

@@ -1,6 +1,0 @@
-# $NetBSD$
-# used by wip/ghostscript/Makefile
-# used by wip/ghostscript-cidfonts/Makefile
-# used by wip/ghostscript-cidfonts-ryumin/Makefile
-
-GS_VERSION=	9.04

@@ -1,7 +1,0 @@
-@comment $NetBSD$
-bin/gobpack
-bin/jnbpack
-bin/jnbunpack
-bin/jumpnbump
-man/man6/jumpnbump.6
-share/jumpnbump/jumpbump.dat

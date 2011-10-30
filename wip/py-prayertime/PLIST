@@ -1,4 +1,0 @@
-@comment $NetBSD$
-${PYSITELIB}/prayertime.py
-${PYSITELIB}/prayertime.pyc
-${PYSITELIB}/prayertime.pyo

@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/modhex
-bin/ykdebug
-include/yubikey.h
-lib/libyubikey.la

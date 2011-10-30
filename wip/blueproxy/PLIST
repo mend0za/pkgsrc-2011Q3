@@ -1,5 +1,0 @@
-@comment $NetBSD$
-bin/bluelistener
-bin/bluepinger
-bin/blueproxy
-man/man1/blueproxy.1

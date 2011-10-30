@@ -1,4 +1,0 @@
-@comment $NetBSD$
-include/libzvbi.h
-lib/libzvbi.la
-lib/pkgconfig/zvbi-0.2.pc

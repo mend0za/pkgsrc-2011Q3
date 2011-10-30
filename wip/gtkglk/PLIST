@@ -1,7 +1,0 @@
-@comment $NetBSD$
-include/gtkglk/Make.gtkglk
-include/gtkglk/gi_blorb.h
-include/gtkglk/gi_dispa.h
-include/gtkglk/glk.h
-include/gtkglk/glkstart.h
-lib/libgtkglk.la

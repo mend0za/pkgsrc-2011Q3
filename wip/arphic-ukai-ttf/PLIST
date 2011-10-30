@@ -1,4 +1,0 @@
-@comment $NetBSD$
-lib/X11/fonts/TTF/ukai.ttc
-share/doc/${PKGBASE}/ARPHICPL.TXT
-share/doc/${PKGBASE}/FONTLOG

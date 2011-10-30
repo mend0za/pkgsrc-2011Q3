@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# $NetBSD$
-
-case ${STAGE} in
-POST-INSTALL)
-	${MKDIR} ${PREFIX}/etc/spade && configure.py
-	;;
-esac

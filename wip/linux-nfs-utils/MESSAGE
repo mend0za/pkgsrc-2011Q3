@@ -1,8 +1,0 @@
-===========================================================================
-$NetBSD$
-
-nhfsgraph uses nhfsnums' plot(5) output and produces a Postscript
-graph using graph(1). Install the graphics/plotutils package to
-use it.
-
-===========================================================================

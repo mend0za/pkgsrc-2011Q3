@@ -1,7 +1,0 @@
-$NetBSD$
-
-SHA1 (mpich2-trunk-r8760.tar.gz) = 2b2f51ea6708c18c61afe18a1e4c6168374e5410
-RMD160 (mpich2-trunk-r8760.tar.gz) = 744c8a4a52a4eb172165f0806fc60bcedae83659
-Size (mpich2-trunk-r8760.tar.gz) = 20175564 bytes
-SHA1 (patch-aa) = a6d995bc759f1d813af178fd4cba2ad86b98d935
-SHA1 (patch-ac) = b956a355ef381d759077288916c40e32b022f178
