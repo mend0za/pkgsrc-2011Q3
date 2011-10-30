@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- pa_tests/patest_wire.c.orig	Thu Apr 10 16:09:40 2003
++++ pa_tests/patest_wire.c
+@@ -74,9 +74,9 @@ static int wireCallback( void *inputBuff
+     SAMPLE *out = (SAMPLE*)outputBuffer;
+     SAMPLE *in = (SAMPLE*)inputBuffer;
+     unsigned int i;
+-    (void) outTime;
+     int samplesPerFrame;
+     int numSamples;
++    (void) outTime;
+     
+     samplesPerFrame = (int) userData;
+     numSamples =  framesPerBuffer * samplesPerFrame;

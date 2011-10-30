@@ -1,0 +1,16 @@
+===========================================================================
+$NetBSD$
+
+To use SLIME you need one of the many known-to-work Lisp implementations out
+there, such as lang/clisp or lang/sbcl. Add the following to your Emacs
+configuration file:
+
+;; load slime
+(setq inferior-lisp-program "the path to your Lisp binary")
+(add-to-list 'load-path "/usr/pkg/share/emacs/site-lisp")
+(require 'slime)
+(slime-setup)
+
+Start it with 'M-x slime'.
+
+===========================================================================

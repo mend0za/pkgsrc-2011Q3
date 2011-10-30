@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- screen.cpp.orig	2008-07-12 16:12:03.000000000 +0200
++++ screen.cpp	2008-07-12 16:12:07.000000000 +0200
+@@ -29,7 +29,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <signal.h>
+-#include <screen.hpp>
++#include "screen.hpp"
+ #include <errno.h>
+ #include <sys/time.h>
+ #include <sys/resource.h>

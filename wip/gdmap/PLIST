@@ -1,0 +1,13 @@
+@comment $NetBSD$
+bin/gdmap
+man/man1/gdmap.1
+share/applications/gdmap.desktop
+share/gdmap/pixmaps/gdmap_icon.png
+share/locale/bg/LC_MESSAGES/GdMap.mo
+share/locale/de/LC_MESSAGES/GdMap.mo
+share/locale/fr/LC_MESSAGES/GdMap.mo
+share/locale/he/LC_MESSAGES/GdMap.mo
+share/locale/hr/LC_MESSAGES/GdMap.mo
+share/locale/ru/LC_MESSAGES/GdMap.mo
+share/locale/tr/LC_MESSAGES/GdMap.mo
+share/pixmaps/gdmap_icon.png

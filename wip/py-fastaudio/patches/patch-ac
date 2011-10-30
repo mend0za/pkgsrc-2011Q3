@@ -1,0 +1,20 @@
+$NetBSD$
+
+--- pa_tests/patest_record.c.orig	Wed Apr 16 12:07:56 2003
++++ pa_tests/patest_record.c
+@@ -133,6 +133,7 @@ static int playCallback( void *inputBuff
+                          unsigned long framesPerBuffer,
+                          PaTimestamp outTime, void *userData )
+ {
++    int framesToPlay, samplesToPlay, samplesPerBuffer;
+     paTestData *data = (paTestData*)userData;
+     SAMPLE *rptr = &data->recordedSamples[data->frameIndex * NUM_CHANNELS];
+     SAMPLE *wptr = (SAMPLE*)outputBuffer;
+@@ -141,7 +142,6 @@ static int playCallback( void *inputBuff
+     unsigned int framesLeft = data->maxFrameIndex - data->frameIndex;
+     (void) inputBuffer; /* Prevent unused variable warnings. */
+     (void) outTime;
+-    int framesToPlay, samplesToPlay, samplesPerBuffer;
+ 
+     if( framesLeft < framesPerBuffer )
+     {

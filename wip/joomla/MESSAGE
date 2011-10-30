@@ -1,0 +1,30 @@
+===========================================================================
+$NetBSD$
+
+You will need to make joomla accessible through your HTTP server.
+If you are running Apache and ap-php, then you can add the following line
+to httpd.conf:
+
+        Include ${PKG_SYSCONFDIR}/joomla.conf
+
+to make joomla accessible through:
+
+	http://www.domain.com/joomla/
+
+Your Apache server must also be configured to support PHP, and PHP
+must be configured to support zlib and MySQL by including these two
+lines in php.ini:
+
+extension=zlib.so
+extension=mysql.so
+
+Create symlink to the installation directory before trying to perform
+the initial configuration with:
+
+cd ${PREFIX}/share/joomla && ln -s installation.disabled installation
+
+After configuration remove that link with:
+
+rm -f ${PREFIX}/share/joomla/installation
+
+===========================================================================

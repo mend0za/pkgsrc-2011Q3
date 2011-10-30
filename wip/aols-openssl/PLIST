@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/nsopenssl.so
+lib/libnsopenssl.so
+share/nsd/modules/tcl/https.tcl

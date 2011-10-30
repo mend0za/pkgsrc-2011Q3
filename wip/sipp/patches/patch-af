@@ -1,0 +1,24 @@
+$NetBSD$
+
+--- sipp.hpp.orig	2008-04-11 14:26:37.000000000 +0200
++++ sipp.hpp	2009-11-09 18:02:01.560006000 +0100
+@@ -25,6 +25,9 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#ifdef __sun
++#include <alloca.h>
++#endif
+ #include <string.h>
+ #include <pthread.h>
+ #include <sys/types.h>
+@@ -52,6 +55,9 @@
+ #else
+ #include <stdarg.h>
+ #endif
++#ifdef __NetBSD__
++#include <stdarg.h> /* for va_list */
++#endif
+ 
+ #if defined(__HPUX) || defined(__SUNOS)
+ #include <alloca.h>

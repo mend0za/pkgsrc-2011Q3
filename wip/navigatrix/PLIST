@@ -1,0 +1,16 @@
+@comment $NetBSD$
+bin/navigatrix
+include/giscoordinate.h
+include/gisdegrees.h
+include/gislocation.h
+lib/libgis.la
+share/icons/hicolor/16x16/actions/crosshairs.png
+share/icons/hicolor/16x16/actions/track.png
+share/icons/hicolor/16x16/apps/navigatrix.png
+share/icons/hicolor/22x22/actions/crosshairs.png
+share/icons/hicolor/22x22/actions/track.png
+share/icons/hicolor/32x32/actions/crosshairs.png
+share/icons/hicolor/32x32/actions/track.png
+share/icons/hicolor/48x48/actions/track.png
+share/kde/applnk/Applications/navigatrix.desktop
+share/kde/apps/navigatrix/navigatrixui.rc

@@ -1,0 +1,19 @@
+$NetBSD$
+
+--- console/linphonec.c.orig	2011-03-06 15:19:30.000000000 +0100
++++ console/linphonec.c	2011-03-06 15:19:36.000000000 +0100
+@@ -1435,12 +1435,12 @@
+ 	char *iptr;
+ 
+ 	/* Find first non-blank */
+-	while(*input && isspace(*input)) ++input;
++	while(*input && isspace((unsigned char)*input)) ++input;
+ 
+ 	/* Find last non-blank */
+ 	iptr=input+strlen(input);
+ 	if (iptr > input) {
+-		while(isspace(*--iptr));
++		while(isspace((unsigned char)*--iptr));
+ 		*(iptr+1)='\0';
+ 	}
+ 

@@ -1,0 +1,4 @@
+@comment $NetBSD$
+${EMACS_LISPPREFIX}/camldebug.el
+${EMACS_LISPPREFIX}/sym-lock.el
+${EMACS_LISPPREFIX}/tuareg.el

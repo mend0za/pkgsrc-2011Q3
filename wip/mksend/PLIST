@@ -1,0 +1,9 @@
+@comment $NetBSD$
+bin/mksend
+share/mksend/db/arp.xml
+share/mksend/db/ethernet.xml
+share/mksend/db/icmp.xml
+share/mksend/db/ipv4.xml
+share/mksend/db/tcp.xml
+share/mksend/db/vlan.xml
+share/mksend/scripts/troute

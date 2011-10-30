@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/mse
+lib/libckit.la
+share/EMBOSS/acd/mse.acd

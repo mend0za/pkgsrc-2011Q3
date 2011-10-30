@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- guicast/thread.C.orig	2010-05-29 22:59:12.000000000 +0000
++++ guicast/thread.C
+@@ -237,7 +237,7 @@ int Thread::get_realtime()
+ 	return realtime;
+ }
+ 
+-int Thread::get_tid()
++pthread_t Thread::get_tid()
+ {
+ 	return tid;
+ }

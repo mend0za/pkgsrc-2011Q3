@@ -1,0 +1,15 @@
+$NetBSD$
+
+# fix bash-isms..
+
+--- configure.orig	2010-10-04 17:56:37.000000000 +0000
++++ configure
+@@ -28585,7 +28585,7 @@ fi
+ 
+ # Check whether --with-xsltproc-flags was given.
+ if test "${with_xsltproc_flags+set}" = set; then
+-  withval=$with_xsltproc_flags;  if test "x$withval" == "xno"; then
++  withval=$with_xsltproc_flags;  if test "x$withval" = "xno"; then
+ 	XSLTPROC_FLAGS=''
+     else
+ 	if test "x$withval" != "xyes"; then

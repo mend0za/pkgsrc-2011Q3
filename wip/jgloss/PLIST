@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/jgloss
+libexec/jgloss/jgloss.jar
+share/doc/jgloss/README.txt
+share/doc/jgloss/jgloss.pdf

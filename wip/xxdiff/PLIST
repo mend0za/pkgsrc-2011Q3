@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/xxdiff
+man/man1/xxdiff.1
+share/doc/xxdiff/doc.html

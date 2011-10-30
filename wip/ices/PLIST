@@ -1,0 +1,7 @@
+@comment $NetBSD$
+bin/ices
+etc/ices.conf.dist
+etc/modules/ices.pm.dist
+etc/modules/ices.py.dist
+man/man1/ices.1
+share/doc/ices/icesmanual.html

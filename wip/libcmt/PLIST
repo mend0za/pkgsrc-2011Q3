@@ -1,0 +1,6 @@
+@comment $NetBSD$
+include/cmt/cmt.h
+include/cmt/gtransaction.h
+lib/libcmt.la
+lib/pkgconfig/libcmt-sharp.pc
+lib/pkgconfig/libcmt.pc

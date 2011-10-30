@@ -1,0 +1,5 @@
+@comment $NetBSD$
+libexec/idled
+man/man5/idled.cf.5
+man/man8/idled.8
+share/examples/idled/idled.cf.template

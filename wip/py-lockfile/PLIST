@@ -1,0 +1,4 @@
+@comment $NetBSD$
+${PYSITELIB}/lockfile.py
+${PYSITELIB}/lockfile.pyc
+${PYSITELIB}/lockfile.pyo

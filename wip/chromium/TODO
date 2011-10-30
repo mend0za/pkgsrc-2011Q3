@@ -1,0 +1,5 @@
+$NetBSD$
+
+* debug
+* test on Linux/FreeBSD/OpenBSD
+* use libtool

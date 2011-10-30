@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- configure.orig	2009-11-23 22:44:37.000000000 +0100
++++ configure
+@@ -32124,7 +32124,7 @@ else
+ fi
+ 
+ 
+-if test "x$with_logsoracle" == "xyes"; then
++if test "x$with_logsoracle" = "xyes"; then
+ 
+ 
+                 if test "x$have_pthread" = "xyes"; then

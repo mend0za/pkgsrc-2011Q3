@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- Makefile.orig	2010-02-02 17:50:14.000000000 +0000
++++ Makefile
+@@ -5,8 +5,8 @@
+ 
+ export
+ 
+-CFLAGS = -Wall -Wextra -ggdb -std=gnu99
+-LDFLAGS = -lz -lvorbisfile
++CFLAGS += -Wall -Wextra -ggdb -std=gnu99
++LDFLAGS += -lz -lvorbisfile
+ 
+ LD = $(CC)
+ 

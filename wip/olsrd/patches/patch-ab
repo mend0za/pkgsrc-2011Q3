@@ -1,0 +1,21 @@
+$NetBSD$
+
+--- Makefile.inc.orig	2010-06-08 12:49:01.000000000 +0000
++++ Makefile.inc
+@@ -48,11 +48,12 @@ TAGCMD ?=	etags
+ 
+ # target directories and names
+ DESTDIR ?=
+-SBINDIR ?= $(DESTDIR)/usr/sbin
++PREFIX  ?= /usr
++SBINDIR ?= $(DESTDIR)$(PREFIX)/sbin
+ ETCDIR  ?= $(DESTDIR)/etc
+-LIBDIR  ?= $(DESTDIR)/usr/lib
+-DOCDIR  ?= $(DESTDIR)/usr/share/doc
+-MANDIR  ?= $(DESTDIR)/usr/share/man
++LIBDIR  ?= $(DESTDIR)$(PREFIX)/lib
++DOCDIR  ?= $(DESTDIR)$(PREFIX)/share/doc
++MANDIR  ?= $(DESTDIR)$(PREFIX)/man
+ EXENAME ?= olsrd
+ CFGNAME ?= $(EXENAME).conf
+ CFGFILE ?= $(ETCDIR)/$(CFGNAME)

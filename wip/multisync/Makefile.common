@@ -1,0 +1,27 @@
+# $NetBSD$
+#
+# used by wip/multisync/Makefile
+# used by wip/multisync-backup/Makefile
+# used by wip/multisync-ldap/Makefile
+# used by wip/multisync-opie/Makefile
+# used by wip/multisync-palm/Makefile
+# used by wip/multisync-syncml/Makefile
+# used by wip/multisync-syncml-moto/Makefile
+
+DISTNAME=		multisync-0.82-1
+PKGREVISION=		1
+CATEGORIES=		comms
+MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=multisync/}
+EXTRACT_SUFX=		.tar.bz2
+
+MAINTAINER=		ola@mrEriksson.net
+HOMEPAGE=		http://multisync.sourceforge.net/
+
+USE_PKGLOCALEDIR=	yes
+USE_LIBTOOL=		yes
+USE_X11=		yes
+LIBTOOL_OVERRIDE=	${WRKSRC}/libtool
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		automake pkg-config
+
+.include "../../mk/bsd.pkg.mk"

@@ -1,0 +1,10 @@
+# $NetBSD$
+#
+
+DEPENDS+=	mplayer-share>=${MPLAYER_PKG_VERSION}:../../wip/mplayer-share
+
+.if ${OPSYS} == "NetBSD"
+.  include "../../devel/binutils/buildlink3.mk"
+.endif
+.include "../../converters/libiconv/buildlink3.mk"
+.include "../../mk/x11.buildlink3.mk"

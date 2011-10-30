@@ -1,0 +1,39 @@
+$NetBSD$
+
+Install configuration files into example directory.
+
+--- orte/etc/Makefile.in.orig	2011-02-06 05:04:52.000000000 +0300
++++ orte/etc/Makefile.in	2011-02-11 12:30:52.000000000 +0300
+@@ -1051,6 +1051,7 @@
+ sharedstatedir = @sharedstatedir@
+ srcdir = @srcdir@
+ sysconfdir = @sysconfdir@
++exampledir = $(pkgdatadir)/examples
+ sysinfo_solaris_CFLAGS = @sysinfo_solaris_CFLAGS@
+ sysinfo_solaris_CPPFLAGS = @sysinfo_solaris_CPPFLAGS@
+ sysinfo_solaris_LDFLAGS = @sysinfo_solaris_LDFLAGS@
+@@ -1264,19 +1265,19 @@
+ # details why the mkdir is in install-data-local.
+ 
+ install-data-local:
+-	$(mkdir_p) $(DESTDIR)$(sysconfdir)
++	$(mkdir_p) $(DESTDIR)$(exampledir)
+ 	@ p="$(orte_config_files)"; \
+ 	for file in $$p; do \
+-	  if test -f $(DESTDIR)$(sysconfdir)/$$file; then \
++	  if test -f $(DESTDIR)$(exampledir)/$$file; then \
+ 	    echo "******************************* WARNING ************************************"; \
+ 	    echo "*** Not installing new $$file over existing file in:"; \
+-	    echo "***   $(DESTDIR)$(sysconfdir)/$$file"; \
++	    echo "***   $(DESTDIR)$(exampledir)/$$file"; \
+ 	    echo "******************************* WARNING ************************************"; \
+ 	  else \
+ 	    if test -f "$$file"; then d=; else d="$(srcdir)/"; fi; \
+ 	    f="`echo $$file | sed -e 's|^.*/||'`"; \
+-	    echo " $(INSTALL_DATA) $$d$$file $(DESTDIR)$(sysconfdir)/$$f"; \
+-	    $(INSTALL_DATA) $$d$$file $(DESTDIR)$(sysconfdir)/$$f; \
++	    echo " $(INSTALL_DATA) $$d$$file $(DESTDIR)$(exampledir)/$$f"; \
++	    $(INSTALL_DATA) $$d$$file $(DESTDIR)$(exampledir)/$$f; \
+ 	  fi; \
+ 	done
+ 

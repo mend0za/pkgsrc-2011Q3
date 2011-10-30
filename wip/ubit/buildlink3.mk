@@ -1,0 +1,12 @@
+# $NetBSD$
+
+BUILDLINK_TREE+=	ubit
+
+.if !defined(UBIT_BUILDLINK3_MK)
+UBIT_BUILDLINK3_MK:=
+
+BUILDLINK_API_DEPENDS.ubit+=		ubit>=5.0.0
+BUILDLINK_PKGSRCDIR.ubit?=		../../wip/ubit
+.endif # UBIT_BUILDLINK3_MK
+
+BUILDLINK_TREE+=	-ubit

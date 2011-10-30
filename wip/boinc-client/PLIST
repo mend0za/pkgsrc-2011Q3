@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/boinc_client
+bin/boinc_gui
+bin/switcher
+share/examples/rc.d/boinc

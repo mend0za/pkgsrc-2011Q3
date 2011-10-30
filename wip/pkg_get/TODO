@@ -1,0 +1,7 @@
+rename to pkg instead of pkg_get
+or "pkgup" as the name?
+
+have it check if libraries are installed before installing
+
+have install check dependencies are up-to-date first (instead
+of having pkg_add handle that).

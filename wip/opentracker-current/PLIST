@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/opentracker
+share/doc/opentracker/README
+share/doc/opentracker/README_v6

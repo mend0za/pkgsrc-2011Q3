@@ -1,0 +1,3 @@
+@comment $NetBSD$
+${PLIST.emacs-w3m-current}/${EMACS_LISPPREFIX}/wl/elmo-shimbun.el
+${PLIST.emacs-w3m-current}/${EMACS_LISPPREFIX}/wl/elmo-shimbun.elc

@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.13 2004/01/21 22:19:30 heinz Exp $
+share/doc/html/spamassassin/ninjabutton.png
+share/examples/rc.d/spamd
+share/examples/spamassassin/local.cf
+share/examples/spamassassin/netbsd_lists.cf
+share/examples/spamassassin/procmailrc.example
+share/spamassassin/languages
+share/spamassassin/triplets.txt
+share/spamassassin/user_prefs.template

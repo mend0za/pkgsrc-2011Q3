@@ -1,0 +1,11 @@
+# $NetBSD$
+# used by wip/bluez-hcidump/Makefile
+# used by wip/bluez-utils/Makefile
+# used by wip/java-jbluez/Makefile
+
+ONLY_FOR_PLATFORM=	Linux-*-*
+
+DEPENDS+=		bluez-libs>=3.19:../../wip/bluez-libs
+USE_TOOLS+=	pkg-config
+
+.include "../../wip/bluez-libs/buildlink3.mk"

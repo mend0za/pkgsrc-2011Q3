@@ -1,0 +1,6 @@
+@comment $NetBSD$
+bin/ile.pl
+share/doc/ile/COPYING
+share/doc/ile/README.html
+share/doc/ile/style.css
+share/examples/ile/ile.xml

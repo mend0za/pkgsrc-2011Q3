@@ -1,0 +1,12 @@
+$NetBSD$
+--- Makefile.in.orig	2005-05-01 06:59:55.000000000 +0200
++++ Makefile.in
+@@ -198,7 +198,7 @@ INCLUDES = \
+ 
+ 
+ # doc directory
+-pkgdocdir = $(prefix)/doc/@PACKAGE@
++pkgdocdir = $(prefix)/share/doc/@PACKAGE@
+ 
+ SUBDIRS = \
+ 	src \

@@ -1,0 +1,12 @@
+# $NetBSD$
+
+BUILDLINK_TREE+=	crfpp
+
+.if !defined(CRFPP_BUILDLINK3_MK)
+CRFPP_BUILDLINK3_MK:=
+
+BUILDLINK_API_DEPENDS.crfpp+=	crfpp>=0.50
+BUILDLINK_PKGSRCDIR.crfpp?=	../../wip/crfpp
+.endif # CRFPP_BUILDLINK3_MK
+
+BUILDLINK_TREE+=	-crfpp

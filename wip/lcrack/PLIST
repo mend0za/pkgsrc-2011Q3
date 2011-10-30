@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/lcrack
+bin/mktbl
+bin/mkword
+bin/regex

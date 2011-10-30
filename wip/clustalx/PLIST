@@ -1,0 +1,7 @@
+@comment $NetBSD$
+bin/clustalx
+libexec/clustalx/clustalx
+libexec/clustalx/clustalx.hlp
+libexec/clustalx/coldna.xml
+libexec/clustalx/colprint.xml
+libexec/clustalx/colprot.xml

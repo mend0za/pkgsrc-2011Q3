@@ -1,0 +1,7 @@
+@comment $NetBSD$
+bin/winwrangler
+share/icons/hicolor/16x16/apps/winwrangler.png
+share/icons/hicolor/22x22/apps/winwrangler.png
+share/icons/hicolor/32x32/apps/winwrangler.png
+share/icons/hicolor/scalable/apps/winwrangler.svg
+share/winwrangler/art/winwrangler.png

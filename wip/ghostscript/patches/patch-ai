@@ -1,0 +1,14 @@
+$NetBSD$
+
+
+--- work/ghostscript-9.04/base/mkromfs.c.orig	2011-08-05 20:12:20.000000000 +0900
++++ base/mkromfs.c	2011-08-22 19:15:32.000000000 +0900
+@@ -1033,7 +1033,7 @@
+ #endif
+     fprintf(out,"\n#include \"stdint_.h\"\n");
+     fprintf(out,"\n#include \"time_.h\"\n\n");
+-    fprintf(out,"    time_t gs_romfs_buildtime = %ld;\n\n", time(NULL));
++    fprintf(out,"    time_t gs_romfs_buildtime = %lld;\n\n", (long long)time(NULL));
+ 
+     /* process the remaining arguments (options interspersed with paths) */
+     for (; atarg < argc; atarg++) {

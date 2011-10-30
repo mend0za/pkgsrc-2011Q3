@@ -1,0 +1,13 @@
+===========================================================================
+$NetBSD$
+
+In order to use this module in your Apache installation, you need to
+add the following to your httpd.conf file:
+
+	LoadModule auth_pam_module lib/httpd/mod_auth_pam.so
+
+For more information, see
+
+	${PREFIX}/share/doc/html/mod_auth_pam/configure.html
+
+===========================================================================

@@ -1,0 +1,21 @@
+@comment $NetBSD$
+include/asm/axisflashmap.h
+include/asm/eshlibld.h
+include/asm/ethernet.h
+include/asm/etraxgpio.h
+include/asm/etraxi2c.h
+include/asm/etraxvirtex.h
+include/asm/fasttimer.h
+include/asm/ipc.h
+include/asm/locks.h
+include/asm/rs485.h
+include/asm/rtc.h
+include/asm/semaphore-helper.h
+include/asm/setup.h
+include/asm/smp.h
+include/asm/smp_lock.h
+include/asm/sv_addr.agh
+include/asm/sv_addr_ag.h
+include/asm/svinto.h
+include/asm/sync_serial.h
+include/asm/ucontext.h

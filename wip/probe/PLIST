@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/probe
+share/doc/probe/Licence
+share/doc/probe/README

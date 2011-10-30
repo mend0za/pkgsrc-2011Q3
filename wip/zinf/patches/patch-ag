@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- ui/corba/corbaUI.cpp.orig	2004-01-08 19:33:44.000000000 +0000
++++ ui/corba/corbaUI.cpp
+@@ -44,7 +44,7 @@ using namespace std;
+ #include "eventdata.h"
+ 
+ #include "MusicPlayer.h"
+-#include <orb/orbit.h>
++#include <orbit/orbit.h>
+ 
+ 
+ /** The server name */

@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/wtf
+man/man6/wtf.6
+share/wtf/acronyms
+share/wtf/acronyms.comp

@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/dpic
+share/doc/dpic/Examples.txt
+share/doc/dpic/dpic_man.txt

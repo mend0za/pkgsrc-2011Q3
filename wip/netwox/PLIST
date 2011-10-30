@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/netwox
+bin/netwox535
+man/man1/netwox.1
+man/man1/netwox535.1

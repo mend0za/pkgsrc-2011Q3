@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- pop3.c.orig	2007-01-15 18:35:59.000000000 +0100
++++ pop3.c
+@@ -37,7 +37,7 @@
+ #include <netinet/in.h>
+ #include <syslog.h>
+ #include <time.h>
+-#include <wait.h>
++#include <sys/wait.h>
+ 
+ #if defined (__linux__)
+ #  include <linux/netfilter_ipv4.h>

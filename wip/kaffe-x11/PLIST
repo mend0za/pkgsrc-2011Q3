@@ -1,0 +1,4 @@
+@comment $NetBSD$
+java/kaffe/jre/lib/${MACHINE_ARCH}/libgtkpeer.la
+java/kaffe/jre/lib/${MACHINE_ARCH}/libjawtgnu.la
+java/kaffe/jre/lib/${MACHINE_ARCH}/libxawt.la

@@ -1,0 +1,8 @@
+@comment $NetBSD$
+bin/vee
+share/vee/sample-config/dot.veerc
+share/vee/sample-custom-format/vee-custom.sh
+share/vee/sample-filters/vee-filtermanager.pl
+share/vee/sample-filters/vee-filter.sh
+share/vee/sample-filters/vee-filter.pl
+share/vee/INSTALL

@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- Jamroot.orig
++++ Jamroot
+@@ -253,6 +253,10 @@
+        ECHO "error: both --with-<library> and --without-<library> specified" ;
+        EXIT ;
+    }
++   if $(without-parameter) && $(without-parameter) = "*"
++   {
++       without-parameter = $(existing-libraries) ;
++   }
+ 
+    local wrong = [ set.difference $(with-parameter) : $(existing-libraries) ] ;
+    if $(wrong)

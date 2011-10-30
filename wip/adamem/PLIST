@@ -1,0 +1,12 @@
+@comment $NetBSD$
+bin/adam
+bin/adamem
+bin/coleco
+bin/cvem
+bin/snapedit
+bin/z80dasm
+share/adamem/EOS.rom
+share/adamem/OS7.rom
+share/adamem/WP.rom
+share/adamem/adamem.snd
+share/adamem/adamem.txt

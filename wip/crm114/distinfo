@@ -1,0 +1,12 @@
+$NetBSD$
+
+SHA1 (crm114-20070810-BlameTheSegfault.src.tar.gz) = 51fb06c8524d3581860aea27d071ee9353daffe3
+RMD160 (crm114-20070810-BlameTheSegfault.src.tar.gz) = f855ae7e63715d961d58fd84e3fa3d313c2befd8
+Size (crm114-20070810-BlameTheSegfault.src.tar.gz) = 562532 bytes
+SHA1 (patch-aa) = f400a7a886ba57a9ac85bf0a266750de86a1eb05
+SHA1 (patch-ac) = 135c02fcca86c3e1c166aac6509f944113e510ff
+SHA1 (patch-ad) = ab4f922d5c3a3c15e7f684f7cb05c0af21eac638
+SHA1 (patch-ah) = 94f51e5a856970b1024be84873e3c4a8fbaeec99
+SHA1 (patch-ba) = 85cf916fb09b1890a5f4c47e1decb605ac05d08e
+SHA1 (patch-bb) = 2e13dee48f21a6fa66ba6988bee9d613a2be318d
+SHA1 (patch-bc) = f595d9bf7cb61b1e5c95e014680414988f542297

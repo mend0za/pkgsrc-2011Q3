@@ -1,0 +1,2 @@
+@comment $NetBSD$
+lib/multisync/libbackup_plugin.la

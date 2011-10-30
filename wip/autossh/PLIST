@@ -1,0 +1,7 @@
+@comment $NetBSD$
+bin/autossh
+man/man1/autossh.1
+share/doc/${PKGBASE}/CHANGES
+share/doc/${PKGBASE}/README
+share/examples/${PKGBASE}/autossh.host
+share/examples/${PKGBASE}/rscreen

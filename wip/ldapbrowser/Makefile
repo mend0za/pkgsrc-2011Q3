@@ -1,0 +1,33 @@
+# $NetBSD$
+#
+
+DISTNAME=		Browser282b2
+PKGNAME=		ldapbrowser-2.8.2b2
+WRKSRC=			${WRKDIR}/ldapbrowser
+CATEGORIES=		sysutils
+MASTER_SITES=		http://www-unix.mcs.anl.gov/~gawor/ldapcommon/bin/
+
+MAINTAINER=		pkgsrc-users@NetBSD.org
+HOMEPAGE=		http://www-unix.mcs.anl.gov/~gawor/ldap/
+COMMENT=		Java based LDAP browser and editor
+
+NO_CONFIGURE=		yes
+USE_JAVA=		run
+USE_JAVA2=		yes
+USE_TOOLS+=		pax
+
+LBE_DIR=		${PREFIX}/lib/ldapbrowser
+
+do-build:
+	${SED} s%DESTINATION%${LBE_DIR}% ${WRKSRC}/lbe.sh \
+		> ${WRKSRC}/lbe.sh.x
+	${MV} ${WRKSRC}/lbe.sh.x ${WRKSRC}/lbe.sh
+	${CHMOD} a+x ${WRKSRC}/lbe.sh
+
+do-install:
+	${INSTALL_PROGRAM_DIR} ${LBE_DIR}
+	cd ${WRKSRC} && pax -rwp ma . ${LBE_DIR}
+	${LN} -s ${LBE_DIR}/lbe.sh ${PREFIX}/bin/lbe
+
+.include "../../mk/java-vm.mk"
+.include "../../mk/bsd.pkg.mk"

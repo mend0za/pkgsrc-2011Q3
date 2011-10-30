@@ -1,0 +1,10 @@
+fix hard-coded paths in manual pages?
+
+what about conflicting /var/run/syslogd.pid?
+
+what about making /var/log directory and /var/log/* files?
+
+README.1st suggests that old .pid files shouold be removed at startup
+
+check sysklogd-1.4.1-querymod.patch from
+http://www.linuxfromscratch.org/patches/downloads/sysklogd/

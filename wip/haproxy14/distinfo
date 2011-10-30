@@ -1,0 +1,6 @@
+$NetBSD$
+
+SHA1 (haproxy-1.4.13.tar.gz) = e89316f5e5190301969fe1d4f4c2aca1c6b71377
+RMD160 (haproxy-1.4.13.tar.gz) = 45a02812bc94ad81ac39d3a66898278bf75ed945
+Size (haproxy-1.4.13.tar.gz) = 811771 bytes
+SHA1 (patch-aa) = 6012886156a54054cebf7f184d69a0cd0b1ad17b

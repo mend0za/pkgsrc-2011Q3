@@ -1,0 +1,5 @@
+@comment $NetBSD$
+lib/pcsc-lite/drivers/slbCryptoflex.bundle/Contents/Info.plist
+lib/pcsc-lite/drivers/slbCryptoflex.bundle/Contents/${OPSYS}/libcryptoflex.la
+lib/pcsc-lite/drivers/slbCryptoflex.bundle/Contents/PkgInfo
+lib/pcsc-lite/drivers/slbCryptoflex.bundle/Contents/Resources/English.lproj/InfoPlist.strings

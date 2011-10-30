@@ -1,0 +1,10 @@
+@comment $NetBSD$
+bin/pmars
+man/man6/pmars.6
+share/pmars/CONTRIB
+share/pmars/README
+share/pmars/warriors/aeka.red
+share/pmars/warriors/flashpaper.red
+share/pmars/warriors/pspace.red
+share/pmars/warriors/rave.red
+share/pmars/warriors/validate.red

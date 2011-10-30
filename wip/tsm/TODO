@@ -1,0 +1,9 @@
+- Get some testing.
+
+- Work out installation on rpm-native platforms (Linux, Solaris, AIX)
+
+- http://secunia.com/advisories/42639/
+
+- v5.2.x is no longer supported. Unfortunately, it is the last version
+  with a native X11 GUI, and the Java GUI shipped with later versions
+  blows up. A CLI only package might be worth while, though.

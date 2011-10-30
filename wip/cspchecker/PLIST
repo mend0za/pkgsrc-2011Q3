@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/cspchecker
+share/doc/README
+@exec ${MKDIR} %D/share/doc/cspchecker

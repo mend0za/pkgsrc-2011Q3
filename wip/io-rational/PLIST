@@ -1,0 +1,6 @@
+@comment $NetBSD$
+lib/io/addons/Rational/_build/dll/libIoRational.so
+lib/io/addons/Rational/_build/lib/libIoRational.a
+lib/io/addons/Rational/build.io
+lib/io/addons/Rational/depends
+lib/io/addons/Rational/io/Rational.io

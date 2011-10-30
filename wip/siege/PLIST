@@ -1,0 +1,13 @@
+@comment $NetBSD$
+bin/bombardment
+bin/siege
+bin/siege.config
+bin/siege2csv.pl
+man/man1/bombardment.1
+man/man1/siege.1
+man/man1/siege.config.1
+man/man1/siege2csv.1
+man/man5/urls_txt.5
+man/man7/layingsiege.7
+share/examples/siege/urls.txt
+share/examples/siege/siegerc

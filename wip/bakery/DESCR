@@ -1,0 +1,2 @@
+A C++ Framework for Document-based GNOME applications, using gtkmm. It allows
+use of the Document/View architecture

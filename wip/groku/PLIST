@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/groku
+share/applications/groku.desktop
+share/groku/groku.glade
+share/pixmaps/groku.png

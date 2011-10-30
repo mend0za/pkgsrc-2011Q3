@@ -1,0 +1,16 @@
+@comment $NetBSD$
+include/asm/cayman.h
+include/asm/hardware.h
+include/asm/hw_irq.h
+include/asm/init.h
+include/asm/ipc.h
+include/asm/keyboard.h
+include/asm/linux_logo.h
+include/asm/mc146818rtc.h
+include/asm/platform.h
+include/asm/registers.h
+include/asm/semaphore-helper.h
+include/asm/serial.h
+include/asm/smp.h
+include/asm/spinlock.h
+include/asm/ucontext.h

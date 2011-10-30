@@ -1,0 +1,4 @@
+@comment $NetBSD$
+bin/plod
+man/man1/plod.1
+share/doc/plod/README

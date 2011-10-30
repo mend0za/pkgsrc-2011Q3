@@ -1,0 +1,6 @@
+@comment $NetBSD$
+lib/java/jalview.jar
+lib/java/jalview_1.8.jar
+share/jalview/examples/1hdc.pfam
+share/jalview/README
+share/jalview/jalview.sh

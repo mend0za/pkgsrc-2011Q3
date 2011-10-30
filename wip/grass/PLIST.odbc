@@ -1,0 +1,2 @@
+@comment $NetBSD$
+${PKGNAME}/driver/db/odbc

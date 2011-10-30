@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/smtpscan
+man/man1/smtpscan.1
+share/smtpscan/fingerprints
+share/smtpscan/tests

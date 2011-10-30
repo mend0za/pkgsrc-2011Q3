@@ -1,0 +1,6 @@
+@comment $NetBSD$
+man/man5/yp.conf.5
+man/man8/ypbind.8
+sbin/ypbind
+share/examples/rc.d/ypbind
+share/locale/de/LC_MESSAGES/ypbind-mt.mo

@@ -1,0 +1,24 @@
+# $NetBSD$
+#
+
+DISTNAME=	py-1.0.2.tar
+PKGNAME=	${PYPKGPREFIX}-lib-1.0.2
+CATEGORIES=	devel python
+MASTER_SITES=	http://pypi.python.org/packages/source/p/py/
+EXTRACT_SUFX=	.gz#md5=d64444015bac78e0c73ac285f9423750
+
+MAINTAINER=	kamelderouiche@yahoo.com
+HOMEPAGE=	http://pylib.org/
+COMMENT=	Agile development and test support library
+LICENSE=	mit
+
+DEPENDS+=	${PYPKGPREFIX}-docutils>=0.5:../../textproc/py-docutils
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+WRKSRC=		${WRKDIR}/py-1.0.2
+USE_LANGUAGES=	# none
+
+.include "../../devel/py-ctypes/buildlink3.mk"
+.include "../../lang/python/egg.mk"
+.include "../../mk/bsd.pkg.mk"

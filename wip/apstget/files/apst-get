@@ -1,0 +1,801 @@
+#!/bin/sh
+#
+# APST-GET : Yet Another PkgSrc Tool to manage packages.
+#
+# AUTHOR: pancake < pancake@phreaker.net >
+# DATE: 2006/04/10
+#
+# depends: pkg_find, pkg_tarup, awk, pkglint, pkg_chk
+#
+#
+
+if [ -e "_etc_/apstget.conf" ]; then
+. _etc_/apstget.conf
+fi
+
+# apstget.conf looks like:
+#
+# 
+# CLEAN_BUILD="1"     # clean before and after every build
+# PACKAGE_BUILD="0"   # build packages
+# INTERACTIVE="1"     # wait user for confirmations
+# QUITE="1"           # Be silent in builds
+# SKIP_LICENSES="0"   # Ignore LICENSES
+# IGNORE_ERRORS="0"   # Don't stop on failed build
+# UPDATE_METHOD="cvs" # cvsync|cvs|sup|cvsup
+# UPDATE_ARGS=""      # UPDATE_METHOD flags
+# GET_FIRST="0"       # Always get first pkg on dup packages found
+# PREFERED=""         # space-separated list of prefered packages (for dup)
+
+#----->8--------------#
+VERSION=20060410
+MAKEFLAG="PKG_RESUME_TRANSFERS=YES" # make this as default
+PREFIX=_pfx_
+MAKE=_makebin_
+PKGFIND=${PREFIX}/bin/pkgfind
+PKGCHK=${PREFIX}/sbin/pkg_chk
+PKGSRC_DIR=_psd_
+PKG_DBDIR=_dbd_
+DEFAULT_TARGETS="${DEFAULT_TARGETS}"
+CVS_RSH=ssh
+
+if [ "${CLEAN_BUILD}" = "" ]; then
+	CLEAN_BUILD="1"
+fi
+if [ "${INTERACTIVE}" = "" ]; then
+	INTERACTIVE="1"
+fi
+if [ "${IGNORE_ERRORS}" = "" ]; then
+	IGNORE_ERRORS="0"
+fi
+if [ "${UPDATE_METHOD}" = "" ]; then
+	UPDATE_METHOD="cvs"
+fi
+if [ "${GET_FIRST}" = "" ]; then
+	GET_FIRST="0"
+fi
+if [ "${UPDATE_METHOD}" = "cvs" ]; then
+	if [ "${UPDATE_ARGS}" = "" ]; then
+	UPDATE_ARGS="-z 3"
+	fi
+fi
+WRAPPER=_pfx_/libexec/apstget-wrapper
+
+if [ ! -e "/dev/stdin" ]; then
+	echo "/dev/stdin doesn't exist. Please create the device first."
+fi
+if [ ! -e "/dev/stderr" ]; then
+	echo "/dev/stderr doesn't exist. Please create the device first."
+fi
+
+do_make_clean () {
+	if [ "${CLEAN_BUILD}" = "1" ]; then
+		echo "==> Cleaning..."
+		${MAKE} clean
+	fi
+}
+
+do_make_package () {
+	if [ "${PACKAGE_BUILD}" = "1" ]; then
+		echo "==> Generating package..."
+		env PACKAGE_NOINSTALL=YES ${MAKE} ${MAKEFLAG} package
+	fi
+}
+
+process_failed () {
+	if [ "${IGNORE_ERRORS}" = "0" ]; then
+		exit 1;
+	fi
+}
+
+press_any_key () {
+	if [ "${INTERACTIVE}" = "1" ]; then
+		echo "==> Press Ctrl-C to cancel, any other key to proceed."
+		read me
+	fi
+}
+
+do_usage() {
+	echo "Usage: $1 [action] [pkgtargets...]"
+	echo ""
+	echo "Actions:"
+	echo "  install      - install/update selected packages."
+	echo "  upgrade      - update the selected packages and solves dependencies."
+	echo "  dist-upgrade - update the entire system."
+	echo "  whereis      - returns the package containing a file."
+	echo "  remove       - remove the selected packages."
+	echo "  update       - update the pkgsrc/-wip tree."
+	echo "  relink       - try to solve all broken libs."
+	echo "  clean        - clean all build directories."
+	echo "  autoclean    - remove all outdated distfiles."
+	echo "  orphan       - list orphaned packages."
+	echo "  show         - show DESCR of target package."
+	echo "  check        - Checks MD5s of pkg files."
+	echo ""
+	echo "Variables (environ|_etc_/apstget.conf):"
+	echo "  CLEAN_BUILD=1, INTERACTIVE=1, QUITE=0, IGNORE_ERRORS=0"
+	echo "  UPDATE_METHOD=cvs, UPDATE_ARGS, GET_FIRST=0, PREFERED"
+	echo "  BUILD_PACKAGES=0, SKIP_LICENSES=0"
+	echo ""
+	echo "VERSION=${VERSION}"
+}
+
+check_version() {
+	cPKG=$1
+	cDIR=$1
+	if [ -n "${cDIR}" ]; then
+	if [ "`echo $cPKG | grep /`" = "" ]; then
+		cDIR=`${PKGFIND} -qx $cPKG`
+	else
+		cPKG=`echo $cPKG | awk -F / '{ print $2 }'`
+	fi
+		cd ${PKGSRC_DIR}/${cDIR}/
+		cPKG=`${MAKE} show-var VARNAME=PKGNAME | awk -F '([.\-]*)-[0-9]' '{print $1 }'`
+		IVER=`pkg_info -e $cPKG`
+		if [ "$?" = "1" ]; then
+			echo "missing"
+		else
+			cd ${PKGSRC_DIR}/${cDIR}
+			DVER=`${MAKE} show-var VARNAME=PKGNAME 2> /dev/null`
+			if [ ! "${DVER}" = "${IVER}" ]; then
+				echo "from ${IVER} to ${DVER}"
+			fi
+		fi
+
+	fi
+}
+
+do_relink() {
+	if [ "$1" = "" ]; then
+	echo "==> Looking for broken libs on ${PREFIX}[/bin|/sbin|/lib]"
+		FILES=`find ${PREFIX}/bin ${PREFIX}/sbin ${PREFIX}/lib -type f`
+	else
+		lPKG=$1
+		if [ !  "`echo $1 |grep /`" = "" ]; then
+			cd ${PKGSRC_DIR}/$1
+			lPKG="`${MAKE} show-var VARNAME=PKGNAME`"
+		fi
+
+		echo "==> Looking for unlinked binaries in package ${lPKG}"
+		FILES=`pkg_info -L $lPKG 2> /dev/null | grep -e bin -e lib`
+		if [ "$?" = "1" ]; then
+			# pkgname not found, find by dirname
+			echo "==> pkgname mismatch, walking thru the tree..."
+			##
+			DIR=${lPKG}
+			if [ -z "`echo $lPKG | grep /`" ]; then
+				DIR=`${PKGFIND} -qx $lPKG`
+			fi
+			# checks
+			if [ -z "${DIR}" ]; then
+				echo "==> Package not found"
+				return
+			fi
+			if [ ! -d "${PKGSRC_DIR}/${DIR}" ]; then
+				echo "==> Directory not found"
+				return
+			fi
+			cd ${PKGSRC_DIR}/${DIR}
+			lPKG="`${MAKE} show-var VARNAME=PKGBASE`"
+			echo "==> Using ${lPKG}"
+			##
+			FILES=`pkg_info -L $lPKG 2> /dev/null | grep -e bin -e lib`
+			if [ "$?" = "1" ]; then
+				echo "==> Package ${lPKG} is not installed."
+				return
+			fi
+		fi
+	fi
+	X11_TYPE=`grep -e X11_TYPE /etc/mk.conf | awk -F = '{ print $2; }'`
+	if [ "${X11_TYPE}" = "" ]; then X11_TYPE=XxZzYy; fi # invalid directory
+
+	for A in ${FILES}; do
+		LIB=`ldd ${A} 2>/dev/null |grep found|awk -F = '{ print $1 }'`
+		for B in ${LIB}; do
+		#--
+		OK="1"
+		for C in ${UNRESOLVED} ; do
+			if [ "${C}" = "${B}" ]; then
+				OK="0"
+			fi
+		done
+		if [ "${OK}" = "1" ]; then
+		echo "==> Relinking ${B}..."
+		COW="`echo ${B} |awk -F so '{ print $1 }'`so"
+		RESOLVED=0
+		for RELINKDIR in ${PREFIX}/lib ${PREFIX}/${X11_TYPE}/lib /lib /usr/lib ; do
+		if [ ! -d "${RELINKDIR}" ]; then continue; fi
+		TARGET="`ls -l ${RELINKDIR}/${COW}.* 2>/dev/null | grep -e ^- `"
+		if [ "${TARGET}" = "" ]; then
+			continue;
+		else
+			RESOLVED=1
+			TARGET=`echo ${TARGET} | awk '{ print $9 }'`
+			ln -s ${TARGET} ${RELINKDIR}/$B
+			break;
+		fi
+		done # for RELINKDIR
+		if [ "${RESOLVED}" = "1" ]; then
+			echo " * Solved against ${TARGET}"
+		else
+			echo " * Unable to be resolved"
+			UNRESOLVED="${UNRESOLVED} ${B}"
+		fi
+		#--		
+		fi
+		done # for A in ${files}
+	done
+}
+
+required_deps() {
+	STEP=1
+	for A in `${MAKE} show-installed-depends` ; do
+	case ${STEP} in
+	"1")
+		PKG="`echo $A | awk -F '>' '{print $1 }'`"
+		STEP=2
+		;;
+	"2")
+		STEP=3
+		;;
+	"3")
+		STEP=1
+		if [ -z "`echo ${A} | grep -e '-' `" ]; then
+			if [ -n "`pkg_info ${A} 2> /dev/null`" ]; then
+			echo ${PKG} ;
+			fi
+		PKG=${A}
+		STEP=2
+		fi
+		;;
+	esac
+	done
+
+	if [ "${A}" = "=>" ]; then
+		echo ${PKG}
+	fi
+}
+
+do_auto_relink() {
+	rPKG=$1
+	if [ ! "`echo $1| grep /`" = "" ]; then
+		rPKG=`echo $1 | awk -F / '{ print $2 }'`
+	fi
+	rPKGS=`pkg_info -qR ${rPKG}`
+	echo "==> Doing automatic relink for inverse deps of ${rPKG}"
+	for A in ${rPKGS} ; do
+		do_relink ${A}
+	done
+}
+
+do_install() {
+	PKG=$1
+	DIR=$1
+	UPD=$2 # Update flag
+	if [ -z "`echo $PKG | grep /`" ]; then
+		DIR=`${PKGFIND} -qx $PKG`
+		if [ "${DIR}" = "" ]; then
+			DIR=NOTFOUND
+		fi
+	else
+		PKG=`echo $PKG | awk -F / '{ print $2 }'`
+	fi
+
+	if [ "${GET_FIRST}" = "1" ]; then
+		DIR=`echo ${DIR} | awk '{print $1}'`
+	else 
+		for A in `echo ${PREFERED}`; do
+			for B in ${DIR} ; do
+			if [ "${A}" = "${B}" ]; then
+				DIR=${A}
+				echo "==> Using prefered ${A}"
+				break;
+			fi
+			done
+		done
+	fi
+
+	if [ ! -e "${PKGSRC_DIR}/${DIR}" ]; then
+		if [ "`echo ${DIR}|awk '{print $2}'`" = "" ]; then
+			echo "==> Error! The package $PKG was not found!"
+		else
+			echo "==> ${PKG} is in more than one category. Specify it:"
+			echo "==> You can also use GET_FIRST or PREFERED"
+			echo "==> Found at: `echo ${DIR}`"
+		fi
+	else
+
+	STAT="`check_version $DIR`"
+	if [ -z "${STAT}" ]; then
+		echo "==> Package ${DIR} is at the latest version"
+	else
+	echo "==> Preparing installation for $DIR"
+	cd ${PKGSRC_DIR}/${DIR}
+
+	# Clean-UP
+	REPLACE=""
+	INSTALL=""
+
+	# Get per-version dependencies
+	BDEP="`required_deps`"
+	REQUIRED=""
+	for A in ${BDEP} ; do
+		REQUIRED="${REQUIRED} `${PKGFIND} -qx ${A}`"
+	done
+
+	# Get all dependencies
+	DEPS="`${MAKE} ${MAKEFLAG} show-depends-dirs`"
+	for A in ${DEPS} ; do
+		cd ${PKGSRC_DIR}/${DIR}
+		DEPS2="${DEPS} `${MAKE} ${MAKEFLAG} show-depends-dirs`"
+	done
+	for A in ${DEPS2} ; do
+		FOUND=0
+		for B in ${DEPS}; do
+			if [ "$A" = "$B" ]; then
+				FOUND=1
+			fi
+		done
+		if [ "${FOUND}" = "0" ]; then
+			DEPS="${DEPS} ${A}"
+		fi
+	done
+	DEPS="${DEPS} ${DIR}"
+	for A in ${DEPS} ; do
+		if [ -n "`echo ${REQUIRED} | grep ${A}`" ]; then
+			IS_INSTALLED="`pkg_info ${A} 2> /dev/null`"
+			if [ -z "${IS_INSTALLED}" ]; then
+				CHK="preinstall"
+			else
+				CHK="required"
+			fi
+		else
+			CHK=`check_version ${A}`
+			if [ -n "`echo ${CHK} | grep missing`" ]; then
+				CHK=missing;
+			fi
+		fi
+
+		cd ${PKGSRC_DIR}/${A}/
+
+		# package options
+		PVAR=`${MAKE} show-var VARNAME=PKG_OPTIONS_VAR`
+		if [ -z "${PVAR}" ]; then
+			SPOP=""
+			POPT=""
+		else
+			SPOP=`${MAKE} show-var VARNAME=${PVAR}`
+			POPT="`${MAKE} show-var VARNAME=PKG_SUPPORTED_OPTIONS`"
+			for X in ${POPT}; do
+				WITH=1
+				for Y in ${SPOP}; do
+					case "${Y}" in
+					"${X}")
+						WITH=1
+						break
+						;;
+					"-${X}")
+						WITH=0;
+						break;
+						;;
+					esac
+				done
+				if [ "${WITH}" = "1" ]; then
+					PKGO="${PKGO} ${X}"
+				else
+					PKGO="${PKGO} -${X}"
+				fi
+			done
+		fi
+
+		# check actions for each package
+		case "${CHK}" in
+		"")
+			# nothing to do here :)
+			;;
+		"preinstall")
+			echo " [r] Required install for ${A}"
+			PREINSTALL="${PREINSTALL} ${A}"
+			if [ -n "${POPT}" ]; then echo "   <options> ${PKGO}"; fi
+			;;
+		"required")
+			echo " [r] Required upgrade for ${A}"
+			REPLACE="${A} ${REPLACE}"
+			if [ -n "${POPT}" ]; then echo "   <options> ${PKGO}"; fi
+			;;
+		"missing")
+			echo " [i] Enqueueing for install ${A}"
+			INSTALL="${INSTALL} ${A}"
+			if [ -n "${POPT}" ]; then echo "   <options> ${PKGO}" ; fi
+			;;
+		*)
+			if [ -n "`echo ${CHK}| grep from`" ]; then
+				echo " [u] Need to update ${A} ${CHK}"
+				if [ ! "${POPT}" = "" ]; then
+					echo "   <options> ${PKGO}"
+				fi
+				if [ "${UPD}" = "1" ]; then
+					REPLACE="${REPLACE} ${A}"
+				else
+					if [ "${A}" = "${DIR}" ]; then
+						REPLACE="${REPLACE} ${A}"
+					fi
+				fi
+			fi
+			;;
+		esac
+		# Add new deps
+		cd ${PKGSRC_DIR}/${A}
+		if [ "${SKIP_LICENSES}" = "1" ]; then
+		ACCEPTABLE_LICENSES="`cat Makefile | grep LICENSE \
+			| awk -F = '{ print $2 }' | awk '{ print $1 }'`"
+		if [ -n "${ACCEPTABLE_LICENSES}" ]; then
+			MAKEFLAG="${MAKEFLAG} \
+			ACCEPTABLE_LICENSES=${ACCEPTABLE_LICENSES}"
+			echo "==> Skipping license: ${ACCEPTABLE_LICENSES}"
+			fi
+		fi
+		DEPS2=`${MAKE} ${MAKEFLAG} show-depends-dirs`
+		for B in ${DEPS2} ; do
+			if [ "`echo ${DEPS} | grep ${B}`" = "" ]; then
+				DEPS="${DEPS} ${B}"
+			fi
+		done
+	done
+	fi
+
+	press_any_key
+
+	# required install
+	if [ -n "${PREINSTALL}" ]; then
+	for A in ${PREINSTALL}; do
+		echo "==> Preinstalling ${A}"
+		cd ${PKGSRC_DIR}/${A}
+		${MAKE} ${MAKEFLAG} fetch
+		do_make_clean
+		${MAKE} ${MAKEFLAG} install ${UD_TARGETS} | ${WRAPPER} 2>&1
+		do_make_package
+		do_make_clean
+		if [ ! "$?" = "0" ]; then
+			echo "==> Error occurred at ${DIR}."
+			process_failed
+		else
+			echo "==> Process finished."
+		fi
+	done
+	fi
+
+	# replace list
+	if [ -n "${REPLACE}" ]; then
+	for A in ${REPLACE}; do
+		echo "==> Upgrading ${A}..."
+		cd ${PKGSRC_DIR}/${A}
+		${MAKE} ${MAKEFLAG} fetch
+		do_make_clean
+		${MAKE} ${MAKEFLAG} replace ${UD_TARGETS} | ${WRAPPER} 2>&1
+		do_make_package
+		do_make_clean
+		if [ ! "$?" = "0" ]; then
+			echo "==> Error occurred at ${DIR}."
+			process_failed
+		else
+			echo "==> Process finished."
+			do_auto_relink ${A}
+		fi
+	done
+	fi
+
+	# install list
+	if [ -n "${INSTALL}" ]; then
+	for A in ${INSTALL}; do
+		echo "==> Installing ${A}"
+		cd ${PKGSRC_DIR}/${A}
+		${MAKE} ${MAKEFLAG} fetch
+		do_make_clean
+		${MAKE} ${MAKEFLAG} install ${UD_TARGETS} | ${WRAPPER} 2>&1
+		do_make_package
+		do_make_clean
+		if [ ! "$?" = "0" ]; then
+			echo "==> Error occurred at ${DIR}."
+			process_failed
+		else
+			echo "==> Process finished."
+		fi
+	done
+	fi
+
+	fi # check installed
+}
+
+do_remove() {
+	PKG=$1
+	DIR=$1
+	if [ "`echo $PKG | grep /`" = "" ]; then
+		DIR=`${PKGFIND} -qx $PKG`
+	else
+		PKG=`echo $PKG | awk -F / '{ print $2 }'`
+	fi
+
+	FOUND="`pkg_info ${PKG} 2>/dev/null`"
+	if [ "${FOUND}" = "" ]; then
+	echo "==> Package $PKG not installed."
+	else
+		LIST="`pkg_delete -n ${PKG}`"
+		DEIN="`echo ${LIST} | grep DEINSTALL`"
+
+		pkg_delete -n ${PKG} | grep -v DEINSTALL | grep delete
+		echo ""
+		if [ ! "${DEIN}" = "" ]; then
+		echo "==> Use 'pkg_info -k ${PKG} | more' to see the DEINSTALL script"
+		fi
+
+		press_any_key
+
+		echo "==> Performing remove for $PKG..."
+		pkg_delete "${PKG}"
+	fi
+}
+
+do_update() {
+	PKS=""
+	WIP=""
+	for A in $1 $2 ; do
+		case $A in
+		"pkgsrc") PKS="1";;
+		"wip")    WIP="1";;
+		esac
+	done
+	if [ "${PKS}${WIP}" = "" ]; then
+		PKS="1"
+		WIP="1"
+	fi
+
+	if [ "$PKS" = "1" ]; then
+		CMD="${UPDATE_METHOD} ${UPDATE_ARGS}"
+		echo "==> Updating pkgsrc tree using ${CMD}..."
+		cd ${PKGSRC_DIR}
+		if [ "${UPDATE_METHOD}" = "cvs" ]; then
+			cvs ${UPDATE_ARGS} -q update -dP
+		else
+			${UPDATE_METHOD} ${UPDATE_ARGS}
+		fi
+	fi
+
+	if [ "$WIP" = "1" ]; then
+		if [ -e "${PKGSRC_DIR}/wip" ]; then
+		echo "==> Updating pkgsrc-wip tree..."
+		cd ${PKGSRC_DIR}/wip
+		cvs -z 3 -q update -dP
+		fi
+	fi
+}
+
+do_clean() {
+	WRKOBJDIR="`grep -e WRKOBJDIR /etc/mk.conf|awk -F = '{ print $2; }'`"
+	if [ -z "${WRKOBJDIR}" ]; then
+		echo "==> WRKOBJDIR not defined in mk.conf"
+		cd ${PKGSRC_DIR}
+		printf "==> Scanning pkgsrc tree for dirty dirs... "
+	PKGTOCLEAN=`find . | grep work | awk -F / '{print $2"/"$3; }'|uniq`
+		echo "DONE"
+	else
+		echo "Using WRKOBJDIR=${WRKOBJDIR}"
+		cd ${WRKOBJDIR}
+		PKGTOCLEAN=`echo */*`;
+	fi
+
+	echo "==> Cleaning all dirty builds..."
+	for A in ${PKGTOCLEAN} ; do
+		if [ ! -e ${PKGSRC_DIR}/${A} ]; then continue ; fi
+		cd ${PKGSRC_DIR}/${A}
+		printf "${A}   "
+		${MAKE} clean > /dev/null 2>&1
+		echo "OK"
+	done
+	echo "DONE"
+
+}
+
+do_whereis() {
+	keyword=$1
+
+	cd ${PKG_DBDIR}
+	for A in * ; do 
+		for B in `pkg_info -L $A 2>/dev/null`; do
+			case $B in
+			*${keyword}*)
+				echo $A : $B
+				;;
+			esac
+		done
+	done
+}
+
+# Main procedure
+
+case "$1" in
+"")
+	do_usage $0
+	;;
+"install"|"upgrade")
+	FLAG=0
+	if [ "${2}" = "" ]; then
+		echo "You must give me at least one package"
+		exit 1
+	fi
+	if [ "$1" = "upgrade" ]; then
+		FLAG=1
+	fi
+	while : ; do
+		do_install $2 ${FLAG}
+		shift
+		if [ "$2" = "" ]; then
+		break;
+		fi
+	done
+	;;
+"whereis")
+	if [ -z "${2}" ]; then
+		echo "You must give me something to find"
+		exit 1
+	fi
+	do_whereis ${2}
+	;;
+"remove")
+	if [ "${2}" = "" ]; then
+		echo "You must give me at least one package"
+		exit 1
+	fi
+	while : ; do
+		do_remove $2
+		shift;
+		if [ "$2" = "" ]; then
+		break;
+		fi
+	done
+	;;
+"update")
+	do_update $1 $2
+	;;
+"dist-upgrade")
+	echo "==> Generating the update list..."
+	LIST=`${PKGCHK} -i`
+
+	if [ "$?" = "1" ]; then
+		echo ""
+		echo "WARNING: Your pkgsrc seems to be broken."
+		echo "WARNING: Please check this manually."
+		echo "WARNING: Not all packages will be showed here :("
+		echo ""
+	fi
+
+	NAME=""
+	OLDNAME=""
+	LIST2=""
+	for A in ${LIST}; do
+		NAME=`echo ${A} | awk -F '([.\-]*)-[0-9]' '{print $1 }'`
+		case ${NAME} in
+		"version"|"mismatch"|"-"|"(binary"|"available)"|"package") 
+			NAME="" ; ;;
+		*)
+
+		if [ "${NAME}" = "${OLDNAME}" ]; then
+			LIST2="${LIST2} ${NAME}"
+			NAME=""
+		fi
+		OLDNAME=${NAME}
+		;;
+		esac
+	done
+	LIST=${LIST2}
+
+	if [ "${LIST}" = "" ]; then
+		echo "Your system is completely updated"
+	else
+		echo "Upgrade list:"
+		echo ${LIST}
+
+		press_any_key
+
+		for A in ${LIST}; do
+			echo "==> Updating ${A}..."
+			do_install ${A} 1
+		done
+	fi
+	;;
+"clean")
+	if [ "$2" = "" ]; then
+		do_clean
+	else
+		while : ; do
+		PKG=$2
+		if [ "`echo $PKG | grep /`" = "" ]; then
+			DIR=`${PKGFIND} -qx $PKG`
+			if [ "${DIR}" = "" ]; then
+				DIR=NOTFOUND
+			fi
+		else
+			PKG=`echo $PKG | awk -F / '{ print $2 }'`
+		fi
+		if [ -d "${PKGSRC_DIR}/${DIR}" ]; then
+			cd ${PKGSRC_DIR}/${DIR}
+			${MAKE} clean
+		else
+			echo "Directory for $2 not found."
+		fi
+		# next one
+		shift;
+		if [ "$2" = "" ]; then break; fi
+		done
+	fi
+	;;
+"autoclean")
+	lintpkgsrc -r
+	;;
+"relink")
+	while : ; do
+		do_relink $2
+		shift;
+		if [ "$2" = "" ]; then break; fi
+	done
+	;;
+"orphan")
+	PKG=`pkg_info -a| awk '{ print $1 }' | grep -e lib `
+	for A in $PKG ; do
+		COW=`pkg_delete -nRr ${A}| grep deinstalling`
+		if [ "${COW}" = "" ]; then
+			echo $A
+		fi
+	done
+	;;
+"show")
+	PKG=$2
+	DIR=$2
+	if [ "`echo $PKG | grep /`" = "" ]; then
+		DIR=`${PKGFIND} -qx $PKG`
+		if [ "${DIR}" = "" ]; then
+			echo "Package $1 not found."
+			exit 1
+		fi
+	fi
+
+	if [ ! -d "${PKGSRC_DIR}/${DIR}" ]; then
+		echo "Package ${PKGSRC_DIR}/${DIR} does not exist."
+		exit 1
+	fi
+
+	cd ${PKGSRC_DIR}/${DIR}
+	PKGNAM=`${MAKE} show-var VARNAME=PKGNAME`
+	PKGOPT=`${MAKE} show-var VARNAME=PKG_SUPPORTED_OPTIONS`
+	HOMEPAGE=`${MAKE} show-var VARNAME=HOMEPAGE`
+	COMMENT=`${MAKE} show-var VARNAME=COMMENT`
+	PKGDEP=`${MAKE} show-depends-dirs`
+	echo ">> PKGNAME: ${PKGNAM}"
+	echo ">> HOMEPAGE: ${HOMEPAGE}"
+	echo ">> COMMENT: ${COMMENT}"
+	if [ ! "${PKGOPT}" = "" ]; then
+	echo ">> OPTIONS: ${PKGOPT}"
+	fi
+	echo ">> DESCRIPTION:"
+	cat DESCR
+	;;
+"check")
+	if [ "${2}" = "" ]; then # Check ALL packages
+		echo "==> Checking all packages..."
+		pkg_admin check | grep failed
+	else
+	while : ; do
+		echo "==> Checking md5 of $2"
+		pkg_admin check $2 | grep failed
+		shift;
+		if [ "$2" = "" ]; then
+		break;
+		fi
+	done
+	fi
+	;;
+*)
+	do_usage $0
+	;;
+esac
+

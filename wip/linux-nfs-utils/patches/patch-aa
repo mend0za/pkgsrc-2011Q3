@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- utils/exportfs/Makefile.orig	2003-07-02 23:09:23.000000000 -0700
++++ utils/exportfs/Makefile
+@@ -2,6 +2,7 @@
+ # dummy Makefile
+ #
+ 
++PREFIX =
+ PROGRAM	= exportfs
+ OBJS	= exportfs.o
+ LIBDEPS	= $(TOP)support/lib/libexport.a $(TOP)/support/lib/libnfs.a

@@ -1,0 +1,5 @@
+@comment $NetBSD$
+bin/cryptcat
+share/doc/cryptcat/Credits
+share/doc/cryptcat/README
+share/doc/cryptcat/README.cryptcat

@@ -1,0 +1,5 @@
+- overall testing (new features in 3.00!)
+- test MySQL support
+- automate tests for sqled autowhitelist/bayes support
+- add OpenLDAP support, test OpenLDAP support
+- update DEINSTALL (awl/bayes in sql)

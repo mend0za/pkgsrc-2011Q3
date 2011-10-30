@@ -1,0 +1,13 @@
+# $NetBSD$
+
+BUILDLINK_TREE+=	aida
+
+.if !defined(AIDA_BUILDLINK3_MK)
+AIDA_BUILDLINK3_MK:=
+
+BUILDLINK_API_DEPENDS.aida+=	aida>=3.2.1
+BUILDLINK_PKGSRCDIR.aida?=	../../wip/aida
+BUILDLINK_DEPMETHOD.aida?=	build
+.endif # AIDA_BUILDLINK3_MK
+
+BUILDLINK_TREE+=	-aida

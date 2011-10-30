@@ -1,0 +1,12 @@
+# $NetBSD$
+
+BUILDLINK_TREE+=	libassa
+
+.if !defined(LIBASSA_BUILDLINK3_MK)
+LIBASSA_BUILDLINK3_MK:=
+
+BUILDLINK_API_DEPENDS.libassa+=	libassa>=3.5.0
+BUILDLINK_PKGSRCDIR.libassa?=	../../wip/libassa
+.endif # LIBASSA_BUILDLINK3_MK
+
+BUILDLINK_TREE+=	-libassa

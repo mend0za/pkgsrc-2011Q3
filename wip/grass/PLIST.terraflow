@@ -1,0 +1,7 @@
+@comment $NetBSD$
+${PKGNAME}/bin/r.terraflow
+${PKGNAME}/bin/r.terraflow.short
+${PKGNAME}/docs/html/r.terraflow.html
+${PKGNAME}/docs/html/rterraflow_dir2.png
+${PKGNAME}/docs/html/rterraflow_dir3.png
+${PKGNAME}/man/man1/r.terraflow.1

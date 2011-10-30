@@ -1,0 +1,14 @@
+# $NetBSD$
+# used by wip/smtprc-gui/Makefile
+
+DISTNAME=	smtprc-0.9.7
+PKGNAME=	smtprc-0.9.7b
+WRKSRC=		${WRKDIR}/smtprc
+CATEGORIES=	net mail
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=smtprc/}
+EXTRACT_SUFX=	.tgz
+
+MAINTAINER=	adrianp@stindustries.net
+HOMEPAGE=	http://irc.warg.co.uk/smtprc-website/index.html
+
+PKG_SYSCONFSUBDIR=	smtprc

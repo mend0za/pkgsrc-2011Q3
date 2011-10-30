@@ -1,0 +1,19 @@
+$NetBSD$
+
+--- configure.orig	2011-01-18 19:07:57.000000000 +0100
++++ configure	2011-01-18 19:08:45.000000000 +0100
+@@ -26,10 +26,10 @@
+ infodir='$(datadir)/info'
+ mandir='$(datadir)/man'
+ sysconfdir='$(prefix)/etc'
+-CXX=
+-CPPFLAGS=
+-CXXFLAGS='-Wall -W -O2'
+-LDFLAGS=
++#CXX=
++#CPPFLAGS=
++#CXXFLAGS='-Wall -W -O2'
++#LDFLAGS=
+ 
+ # Loop over all args
+ while [ -n "$1" ] ; do

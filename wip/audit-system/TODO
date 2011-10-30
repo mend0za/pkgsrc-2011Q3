@@ -1,0 +1,6 @@
+- Move scripts off to their own directory e.g. ${PREFIX}/share/audit-system ?
+- Merge all audit-get-* into one file and just .source it ?
+- Sign system-vulnerabilities file
+- Check signature on downloads system-vulnerabilities file
+- Merge in work from pkgsrccon '07
+- Lot's more . . . .

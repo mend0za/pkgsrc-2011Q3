@@ -1,0 +1,26 @@
+@comment $NetBSD$
+bin/ppserver2.6
+${PYSITELIB}/pp.py
+${PYSITELIB}/pp.pyc
+${PYSITELIB}/pp.pyo
+${PYSITELIB}/ppauto.py
+${PYSITELIB}/ppauto.pyc
+${PYSITELIB}/ppauto.pyo
+${PYSITELIB}/ppcommon.py
+${PYSITELIB}/ppcommon.pyc
+${PYSITELIB}/ppcommon.pyo
+${PYSITELIB}/pptransport.py
+${PYSITELIB}/pptransport.pyc
+${PYSITELIB}/pptransport.pyo
+${PYSITELIB}/ppworker.py
+${PYSITELIB}/ppworker.pyc
+${PYSITELIB}/ppworker.pyo
+man/man1/ppserver.1
+share/doc/py-pp/ppdoc.html
+share/examples/py-pp/auto_diff.py
+share/examples/py-pp/callback.py
+share/examples/py-pp/dynamic_ncpus.py
+share/examples/py-pp/quicksort.py
+share/examples/py-pp/reverse_md5.py
+share/examples/py-pp/sum_primes.py
+share/examples/py-pp/sum_primes_functor.py

@@ -1,0 +1,17 @@
+# $NetBSD$
+#
+
+DISTNAME=		SDL-doc-1.0
+CATEGORIES=		devel
+
+META_PACKAGE=		# empty
+
+MAINTAINER=		ianzag@mail.ru
+HOMEPAGE=		http://www.libsdl.org/docs.php
+COMMENT=		Simple DirectMedia Layer documentation
+
+# Note: fix wip to actuall location.
+DEPENDS+=		SDL-doc-html-1.0:../../wip/SDL-doc-html
+DEPENDS+=		SDL-doc-ps-1.0:../../wip/SDL-doc-ps
+
+.include "../../mk/bsd.pkg.mk"

@@ -1,0 +1,12 @@
+$NetBSD$
+--- Makefile.in.orig	2006-05-13 11:50:11.000000000 +0200
++++ Makefile.in
+@@ -465,7 +465,7 @@ $(dst):
+ 	mkdir -p $@
+ 
+ $(classes): $(dst)/%.class: $(src)/%.java
+-	$(JAVAC) $(JAVACFLAGS) -classpath $(ACTIVATION_CLASSPATH) -d $(dst) $<
++	$(JAVAC) $(JAVACFLAGS) -classpath $(ACTIVATION_CLASSPATH):${CLASSPATH} -d $(dst) $<
+ 
+ # Documentation
+ 

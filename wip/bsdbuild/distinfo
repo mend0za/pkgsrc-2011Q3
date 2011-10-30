@@ -1,0 +1,9 @@
+$NetBSD$
+
+SHA1 (bsdbuild-2.9.tar.gz) = 189191081cafe1d0cb7eb8c6591dbed1c207b811
+RMD160 (bsdbuild-2.9.tar.gz) = 7ceaeb29b24d9849bfb0ac34be09af40eaaeaabe
+Size (bsdbuild-2.9.tar.gz) = 213225 bytes
+SHA1 (patch-ab) = 00adbc03877e358901f29e37ab30625d4102419f
+SHA1 (patch-ad) = bb78496a31c3e6119ab3754a82cab5fbc91c20ef
+SHA1 (patch-ai) = de926b320f253b40e01ac246e30b10ebf25b6e32
+SHA1 (patch-ar) = ec46c99ca3c3478956e53ecf122c96b9db62af32

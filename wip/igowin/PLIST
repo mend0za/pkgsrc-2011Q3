@@ -1,0 +1,7 @@
+@comment $NetBSD$
+bin/igowin
+share/${PKGBASE}/grain.bmp
+share/${PKGBASE}/igowin.exe
+share/${PKGBASE}/igowin.hlp
+share/${PKGBASE}/readme.txt
+share/${PKGBASE}/tutor.hlp

@@ -1,0 +1,7 @@
+@comment $NetBSD$
+man/man5/ipfm.conf.5
+man/man8/ipfm.8
+sbin/ipfm
+share/examples/ipfm/ipfm.conf
+@exec ${MKDIR} %D/var/run
+@exec ${MKDIR} %D/var/log/ipfm

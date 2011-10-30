@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- src/aireplay-ng.c.orig	2009-07-22 21:45:51.000000000 +0200
++++ src/aireplay-ng.c
+@@ -726,7 +726,7 @@ int attack_check(uchar* bssid, char* ess
+         if(ap_chan != iface_chan)
+         {
+             PCT; printf("%s is on channel %d, but the AP uses channel %d\n", wi_get_ifname(wi), iface_chan, ap_chan);
+-            return -1;
++	    wi_set_channel(wi, ap_chan);
+         }
+     }
+ 

@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- base/include/queue.h.orig	2003-09-16 17:34:53.000000000 +0000
++++ base/include/queue.h
+@@ -26,6 +26,7 @@ ________________________________________
+ 
+ #include "config.h"
+ #include "mutex.h"
++#include <assert.h>
+ 
+ template<class T>
+ class Queue {

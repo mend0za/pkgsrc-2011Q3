@@ -1,0 +1,13 @@
+# $NetBSD$
+
+NO_CONFIGURE=		yes
+NO_BUILD=		yes
+USE_TOOLS+=		pax
+
+INSTALLATION_DIRS+=	share/dataset
+INSTALLATION_DIRS+=	share/dataset/geography
+INSTALLATION_DIRS+=	share/dataset/geography/${PKGNAME}
+
+do-install:
+	cd ${WRKSRC} &&							      \
+		pax -rw . ${PREFIX}/share/dataset/geography/${PKGNAME}/

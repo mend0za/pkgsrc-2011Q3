@@ -1,0 +1,22 @@
+$NetBSD$
+
+Teach it about NetBSD.
+
+--- CONFIG/include/atlconf.h.orig	2009-02-20 18:22:54.000000000 +0300
++++ CONFIG/include/atlconf.h	2009-02-21 20:30:30.000000000 +0300
+@@ -6,12 +6,12 @@
+ #include <string.h>
+ #include <assert.h>
+ 
+-#define NOS 13
++#define NOS 14
+ static char *osnam[NOS] =
+    {"UNKNOWN", "Linux", "SunOS", "SunOS4", "OSF1", "IRIX", "AIX",
+-    "Win9x", "WinNT", "WinSFU", "HPUX", "FreeBSD", "OSX"};
++    "Win9x", "WinNT", "WinSFU", "HPUX", "FreeBSD", "OSX", "NetBSD"};
+ enum OSTYPE {OSOther=0, OSLinux, OSSunOS, OSSunOS4, OSOSF1, OSIRIX, OSAIX,
+-             OSWin9x, OSWinNT, OSWinSFU, OSHPUX, OSFreeBSD, OSOSX};
++             OSWin9x, OSWinNT, OSWinSFU, OSHPUX, OSFreeBSD, OSOSX, OSNetBSD};
+ #define OSIsWin(OS_) ( ((OS_) == OSWinNT) || ((OS_) == OSWin9x) || \
+                        ((OS_) == OSWinSFU) )
+ 
